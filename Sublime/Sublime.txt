@@ -1,0 +1,10 @@
+﻿Dicas Sublime
+
+ctrl + f                   -> localizar texto;
+ctrl + h                   -> replace;
+ctrl + k e depois ctrl + k -> show sidebar;
+adicionar projeto          -> Project-Add Folder to Project;
+autocomplete               -> digite o início do código ou uma parte e pressione ctrl + space;
+identar código             -> ctrl + ` (recua) e ctrl + [ (avança);
+selecionar um texto igual  -> ctrl + d;
+criar comentário           -> ctrl + ;;

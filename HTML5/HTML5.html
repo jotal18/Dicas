@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Meu site</title>
+	<meta charset="utf-8">
+</head>
+<body>
+
+<!-- CABEÇALHOS ----------------- -->
+	
+	<!-- H1 é maior e H6 é o menor -->
+	<h1></h1>
+	<h2></h2>
+	<h3></h3>
+	<h4></h4>
+	<h5></h5>
+	<h6></h6>
+
+<!-- PARÁGRAFO ------------------ -->	
+	
+	<!-- A tag <p></p> possui um espaçamento posterior -->
+	<p>Parágrafo</p>
+
+<!-- LINHA -------------------- -->		
+	
+	<!-- Cria uma linha ______________________ -->		
+	<hr>
+
+<!-- QUEBRA DE LINHA -------------------- -->			
+	
+	<!-- Insere uma quebra de linha -->		
+	<br>
+
+<!-- FORMATAÇÃO DE TEXTO --------------- -->	
+	
+	<!-- Negrito -->	
+	<strong>Negrito</strong> <!-- Define algo de extrema importância na página,  isso irá chamar atenção do motor de buscas do Google -->
+		ou
+	<b>Negrito</b>  <!-- Destaca ao usuário uma determinada palavra/texto --> 	
+
+	<!-- Itálico -->
+	<em>Itálico</em>
+
+	<!-- Underline -->
+	<u>Undeline</u> <!-- Cria uma linha embaixo do texto -->
+
+	<!-- Tachado (texto errado) -->
+	<del>Texto errado</del> ou <s>Texto errado</s>
+
+<!-- LISTAS ORDENADAS E NÃO ORDENADAS -------------- -->
+
+	<!-- Lista não ordenada
+		 Atributos da tag <ul>:
+		 	type="": 
+			 	circle 
+			 	square
+			 	disc
+		 Obs: Padrão é disc. 
+	-->
+	<ul type="disc">
+		<li>Home</li>
+		<li>Quem somos</li>
+		<li>Contatos</li>
+	</ul>
+
+	<!-- Lista ordenada. 
+		 Atributos da tag <ol>:
+		 	type="": 
+			 	1 (numérico) 
+			 	A (alfabética maiúscula) 
+			 	a (alfabética minúscula)
+			 	I (algarismo romano maiúsculo
+			 	i (algarismo romano minúsculo)
+		 Obs: Padrão é 1.  
+	-->
+	<ol type="i">
+		<li>Comida favorita?</li>
+		<li>Carro favorito?</li>
+		<li>Série favorita?</li>
+	</ol>
+
+
+<!-- IMAGENS ---------------------------- -->
+
+	<!-- Atributos da tag <img>: 
+			width="" (largura)
+			height="" (altura) 
+			alt="" (seria uma descrição da imagem caso esta seja carregada corretamente)
+		Obs: É recomendado usar o CSS para usar esses atributos
+
+	Os atributos width e height podem ser definidos por pixels (ex: width="400") ou por porcentagem (ex: width="100%", neste caso a largura da imagem irá ser redimensionada ou ocupar 100% da área total do navegador ou o tamanho da div-pai)
+	-->
+
+	<!-- width em pixels (normal) -->
+	<img src="imagens/ferrari.jpg" width="400">
+	<!-- width com porcentagem -->
+	<img src="imagens/ferrari.jpg" width="100%">
+	<!-- src com link -->
+	<img src="https://auto.ndtvimg.com/car-images/big/ferrari/488-spider/ferrari-488-spider.jpg?v=7" width="400">
+
+
+<!-- LINK ------------------------- -->
+
+	<!-- Link básico -->
+	<a href="contato.html">Contato</a>
+	<!-- href vazio: o link enviará para a mesma página -->
+	<a href="">Contato</a>
+	<!-- href com link externo: o link deve estar completo, ou seja, com https:// ou http:// -->
+	<a href="https://www.google.com.br/">Google</a>
+
+
+<!-- TABELA ------------------------- -->	
+	
+	<!-- 
+		<table></table> -> inicia e fecha a tabela;
+		<tr></tr>       -> linhas da tabela (vertical);
+		<th></th>       -> serve para destacar a primeira linha da tabela, ela fica em negrito (horizontal);
+		<td></td>       -> são as células das linhas, ou colunas da tabela (horizontal);
+		<thead></thead> -> é o cabeçalho da tabela, se caso fosse impresso uma tabela com várias linhas, a tag <thead> seria impresso em cada página;
+		<tbody></tbody> -> é o corpo da tabela, nele aparece a função do scroll e não no <thead>;
+		<tfoot></tfoot> -> é o rodapé da tabela, como exemplo, poderia ser usado totalizadores;
+
+		Atributos da tag <table>: 
+			border="": define a espessura externa da tabela; o 0 (zero) não mostra borda
+			width="": define a largura da tabela. O valor do width pode ser definido em pixels (				ex: width="400") ou em porcentagem (ex: width="100%"), neste caso a tabela 				terá largura de 100% em relação à área do navegador
+			height="":
+			align="": alinha a tabela de acordo com os seguintes atributos
+				center (centro) 
+				left (esquerda)
+				right (direita)  
+
+		Atributos da tag <td>:	
+			colspan="": (mescla as células / linhas (<td>) na horizontal)
+			rowspan="": (mescla células / colunas (<td>) na vertical) 
+			align="": alinha os dados da célula de acordo com os seguintes atributos
+				center (centro) 
+				left (esquerda)
+				right (direita)
+			width="": largura
+			height="": altura
+	-->	
+
+	<table border="1" width="100%"><!-- Inicia a tabela -->
+		<tr> <!-- Linhas da tabela -->
+			<th>Código</th> <!-- Células da primeira linha da tabela -->
+			<th>Produto</th> <!-- Células da primeira linha da tabela -->
+			<th>Preço</th> <!-- Células da primeira linha da tabela -->
+		</tr>
+
+		<tr>
+			<td>001</td><!-- Células das linhas, ou colunas da tabela -->
+			<td>Notebook</td>
+			<td>R$ 2.500,99</td>
+		</tr>
+
+		<tr>
+			<td>002</td>
+			<td>Tablet</td>
+			<td>R$ 999,99</td>
+		</tr>
+
+		<tr>
+			<td rowspan="2">Desconto</td>
+			<td colspan="2">cupom 1 - R$ 10</td>
+		</tr>
+
+		<tr>
+			<td>Desconto</td>
+			<td colspan="2">cupom 2 - R$ 12</td>
+		</tr>
+
+		<tr>
+			<td>Total:</td>
+			<td colspan="2">R$ 3.478,98</td>
+		</tr>
+	</table>	
+
+
+<!-- FORMULÁRIOS ------------------------- -->
+	
+	<!-- TIPOS
+		<form>
+			<input></input>
+			<select></select>
+				<option></option>
+			<textarea></textarea>	
+			<button></button>
+		</form>	
+	-->
+
+	<!-- Atributos da tag <input>: 
+			type="":
+				text                     -> caixa de texto;
+				password                 ->"criptografa" as senhas;
+				submit                   -> enviar/processar o formulário;
+				button                   -> funciona como um botão;
+				radio                    -> o usuário somente poderá selecionar uma das opções disponíeis (o atributo name="" deve ser igual para todos, o que irá diferenciar um do outro será o atributo value="");
+				checkbox                  -> o usuário poderá selecionar mais de uma opção ao mesmo tempo (o atributo name="": deve ser igual para todos, o que irá diferenciar um do outro será o atributo value="");
+				range(html5)              -> cria uma espécie de slide;(usado junto com "min"/"max"/"value")
+				email(html5)              -> cria um campo que só será aceito se tiver @;
+				number(html5)             -> cria um campo que só aceita números; (usado junto com "min"/"max"/"step")
+				url(html5)                -> cria um campo que só aceita url (http://www.google.com);
+				search(html5)             -> cria um campo de pesquisa que possui um "x" que limpa os dados;
+				date(html5)               -> cria um campo formatado como data;
+				color(html5)              -> cria um campo para pesquisar cor;
+				
+			name="":
+				nome da variável ($_POST['name'] / $_GET['name']) que será processada pelo scrip;
+			value="":
+				No caso do type="range", determina a posição inicial do slide;
+				No caso do type="submit", o value é o nome do botão que ficará visível;
+			id="":
+				Usado para associar um input a tag <label>;
+
+			placeholder="":
+				Utilizado como uma dica para o preenchimento do campo do formulário;
+
+			min="":
+				Usado com o atributo range/number para especificar o valor mínimo do slide/numeração;
+
+			max="":
+				Usado com o atributo range/number para especificar o valor máximo do slide/numeração;
+
+			step="":
+				pula a numeração setada em min/max de acordo com o valor;
+
+			required="required" (html5)
+				Exige que o usuário preencha o campo input que tiver esse atributo;
+
+			autofocus="autofocus" (html5)
+				Aplica um foco (contorno azul) ao redor do elemento form (caixa de texto);
+
+		Atributos da tag <form>:
+			action="":
+				informa o script que será processado ao clicar o botão de envio do formulário
+
+		Atributos da tag <select>:
+			name="":
+				define o nome da variável que será enviada pelo script e deve ser igual para todos, o que irá diferenciar um do outro será o atributo value="" da tag <option value="">
+		
+		Atributos da tag <option>:	
+			value="":	
+				define o valor de cada <option> que será processado pelo script
+
+		Atributos da tag <textarea>:				
+			name="":
+				define o nome da variável que será enviada pelo script
+			rows="":
+				define a altura do textarea
+			cols="":
+				define a largura do textarea
+
+		Atributos da tag <label>
+			for="":
+				usado para associar a tag <label> (rótulo) a tag <input>
+
+
+		Obs: 
+			A tag <button type="submit"></button> por padrão já possui o value submit. É recomendado usar essa tag no lugar do <input type="submit" value="submit">
+
+			A tag <label> pode ser usada assim: 
+				<label>Login:
+					<input type="text" name="login" id="login">
+				</label>
+				 	ou
+				<label for="login">Login:</label>
+				<input type="text" name="login" id="login"><br>
+
+	-->
+	<h2>Login</h2>
+	<form action="processa.php">
+		<label for="login">Login:</label>
+		<input type="text" name="login" id="login" placeholder="Digite o nome de usuário"><br>
+		<label for="senha">Senha:</label>
+		<input type="password" name="senha" id="senha" placeholder="Digite a sua senha"><br>
+		<input type="email" name="email" placeholder="Digite o e-mail" required="required"><br>
+		<input type="number" name="number" min="5" max="20" step="5">
+		<input type="url" name="url"><br>
+		<input type="search" name="search"><br>
+		<input type="range" name="range" min="1" max="3" value="2"><br>
+		<input type="submit" value="Logar"><br>
+		<input type="date" name="date"><br>
+		<input type="color" name="color">
+	</form>
+
+	<h2>Cadastre-se</h2>
+	<form>
+		Login:<br>
+		<input type="text" name="login"><br>
+		Sexo:<br>
+		<input type="radio" name="sexo" value="M">Masculino<br>
+		<input type="radio" name="sexo" value="F">Feminino<br>
+
+		Interesses <br>
+		<input type="checkbox" name="interesses" value="futebol">Futebol<br>
+		<input type="checkbox" name="interesses" value="cursos">Cursos<br>
+		<input type="checkbox" name="interesses" value="moda">Moda<br>
+
+		Estado <br>
+		<select name="estado">
+		<option value="rj">RJ</option>
+		<option value="mg">MG</option>
+		</select> <br> <br>
+
+		Observações:<br>
+		<textarea name="observacao">Digite o texto aqui</textarea> <br>
+
+		<label for="range">Range</label>
+		<input type="range" name="range" id="range" min="1" max="5">
+
+		<input type="submit" value="Cadastrar">
+	</form>
+
+<!-- Ícones ------------- -->
+	<!-- Utilizado para criar ícones ------------- -->
+	<i class="oi oi-arrow-right"></i>
+
+<!-- CARACTERES ESPECIAIS ------------- -->
+
+	<!-- No link abaixo poderá ser verificado os caracteres especiais -->
+	https://www.w3schools.com/html/html_entities.asp
+
+
+<!-- FIELDSET ------------------------->
+	<!-- Utilizado para agrupar conteúdos -->
+	<fieldset>
+		<legend>Legenda do campo</legend>
+	</fieldset>
+
+<!-- HEADER, SECTION ------------------------------->
+	<!-- Tag utilizada para indicar um cabeçalho de uma área, como as tag <nav>, <ul>, etc...É como se fosse uma <div id="cabecalho"></div>, por exemplo -->
+	<header></header>
+
+	<!-- Tag utilizada para indicar a área de links de navegação (menu de navegação) e pode ser colocada dentro de outras tags (header, footer, sidebars, etc...)-->
+	<nav></nav>
+
+	<!-- Tag define o conteúdo principal dentro do <body> e deve ser único na página, não pode ser filho dos elementos <article>, <aside>, <footer>, <header> ou <nav>; pode ser filho de uma ou mais divs-->
+	<main></main>
+
+	<!-- Tag usada para conteúdo independente próprio, ou seja, que faça sentido isoladamente. Nela pode coner tags <header>, <footer>, <section>, Ex. postagem, artigo, etc... -->
+	<article></article>
+
+	<!-- Tag cria seções genéricas dentro do contéudo e geralmente tem títulos-->
+	<section></section>
+
+	<!-- Tag dá mais significado à data/hota. Dentro da tag deve ser incluído datas/horas. -->
+	<time></time>
+
+	<!-- Tag cria áreas laterais como banners, menu lateral, informações variadas, etc...-->
+	<aside></aside>
+
+<!-- OUTROS ATRIBUTOS ----------------------- -->
+
+	background="imagens/ferrari.jpg" <!-- (Usado geralmente dentro da tag <body>. A imagem irá repetir tanto na horizontal quanto na vertical) -->
+
+
+
+</body>
+</html>

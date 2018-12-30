@@ -1,0 +1,995 @@
+
+Os arquivos "bootstrap.css" e "bootstrap.min.css" são quase iguais, a diferença são os espaçamentos que existem no arquivo "bootstrap.css" e não no "bootstrap.min.css". O arquivo "bootstrap.min.css é menor e mais rápido que o "bootstrap.css"
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	content="width=device-width -> será aproveitada toda a viewport initial-scale=1 -> refere-se à escala/zoom da página shrink-to-fit=no -> encolher para caber, o padrão é "não" porque haverá alguns elementos, como o "carousel", que não haverá necessidade de reduzir para mostrar na tela 
+
+<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	É interssante usar no atributo href="" o local da pasta onde estão localizados os arquivos do bootstrap, como no exemplo abaixo, em vez de utilizar link externo. A desvantagem é que, caso queira atualizar o bootstrap, deverá ser baixado o novo pacote do bootstrap.
+
+	integrity="" e crossorigin="anonymous" -> serve para que o browser saiba de onde está sendo carregado o arquivo, ou seja, se alterar o local do arquivo bootstrap, a página não carregará os efeitos do framework. Só deve ser utilizado quando for utilizado o bootstrap do link externo "CDN", caso esteja utilizando a pasta localmente, os atributos integrity e crossorigin podem ser retirados
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="js/bootstrap.min.js"></script>	
+
+	Esses scrips javascript (jquery -> framework; popper -> engine de localização de menus dropdown e outros) são opcionais. Entretanto, é recomendado que se mantenha esses scripts.
+
+
+As classes podem ser combinadas. Ex: <blockquote class="blockquote text-right"></blockquote>
+
+Formatando textos
+
+	As classes abaixo podem ser aplicadas em DIV, SPAN também.
+	Fontes monospace possuem a mesma largura e eram usadas pelas máquinas de escrever.
+
+	h1 / h2 / h3 / h4 / h5 / h6 -> aplica formatação de h1, por exemplo, em h2
+
+	display-1 / display-2 / display-3 / display-4  -> aumenta/dá destaque maior aos textos;
+
+	lead                   -> destaca mais o texto;
+	
+	font-weight-bold       -> negrito;
+	font-italic            -> itálico;
+	font-weight-normal     -> normal;
+	
+	text-monospace         -> aplica uma largura igual a todas as letras (parecido com máquina de escrever);
+	text-uppercase         -> todas as letras maiúsculas;
+	text-lowercase         -> todas as letras minúsculas;
+	text-capitalize        -> a primeira letra maiúscula;
+	text-right             -> alinha o texto à direita;
+	text-left              -> alinha o texto à esquerda;
+	text-center            -> alinha o texto ao centro;
+	text-justify           -> justifica o texto;
+	text-truncate          -> corta e mantém o texto somente em uma linha e caso o texto não caiba na linha, será criado "...";
+	
+	blockquote             -> citação;
+	blockquote-footer      -> formata um rodapé de uma citação, utilizado junto a uma tag <cite></cite>;
+	
+	list-unstyled          -> remove o estilo de lista (deve ser aplicado na tag <ul></ul>)
+	list-inline            -> deixa os links um ao lado do outro (deve ser aplicado na tag <ul></ul>)
+	list-inline-item       -> deve ser aplicado em conjunto com o list-inline, contudo, essa classe deve ser aplicada na tag <li></li>
+	
+	Alinhamento responsivo -> text-<tela>-<alinhamento>
+		tela: sm, md, lg, xl;
+        alinhamento: left, center, right;
+
+Display
+	d-inline       -> transforma o elemento em block para inline;
+	d-block        -> transforma o elemento inline para block;
+	d-inline-block -> transforma o elemento em inline-block;
+	d-flex         -> transforma o display em flexbox;
+	d-none         -> define quando o elemento não deve ser exibido e deve ser usado com a classe d-<sm/md/lg/xl>-<inline/ inline-block / block / etc...> para especificar em quais telas o elemento será ocultado;
+
+Elementos Flutuantes
+	float-left       -> desloca o objeto para a esquerda;
+	float-right      -> desloca o objeto para a direita;
+	float-none       -> caso queira que o elemento não flutue;
+	clearfix         -> corrige o fluxo do objeto, deve ser aplicado no container pai (parecido com clear: both;)
+	fixed-top        -> o elemento fica fixo no topo da tela;
+	fixed-bottom     -> o elemento fica fixo na parte de baixo da tela;
+	sticky-top       -> "cola" o elemento no topo da view;
+	Float responsivo -> float-<tela>-<direcao>
+            tela: sm, md, lg, xl
+            alinhamento: left, right
+
+Cores Texto (aplicadas nas tag <h>, <p>, <a>, etc...)
+	text-primary   -> azul;
+	text-secondary -> cinza;
+	text-success   -> verde;
+	text-info      -> azul claro;
+	text-warning   -> amarelo;
+	text-danger    -> vermelho;
+	text-light     -> quase branco (transparente);
+	text-dark      -> preto;
+	text-white     -> texto branco;
+	text-black-50  -> texto preto com opacidade;
+	text-white-50  -> texto branco com opacidade;
+	text-muted     -> cinza muito claro e usado para dicas em formulários;
+
+Cores Background
+	bg-primary     -> azul;
+	bg-secondary   -> cinza;
+	bg-success     -> verde;
+	bg-info        -> azul claro;
+	bg-warning     -> amarelo;
+	bg-danger      -> vermelho;
+	bg-light       -> quase branco (transparente);
+	bg-dark        -> preto;
+	bg-white       -> branco;
+	bg-trasnparent -> aplica fundo transparente;
+
+Cores Border (tag <border>)
+	border-primary     -> azul;
+	border-secondary   -> cinza;
+	border-success     -> verde;
+	border-info        -> azul claro;
+	border-warning     -> amarelo;
+	border-danger      -> vermelho;
+	border-light       -> quase branco (transparente);
+	border-dark        -> preto;
+	border-white       -> texto branco;	
+
+Cores Button (tag <button>)
+	btn-primary   -> botão azul;
+    btn-secondary -> botão cinza;
+    btn-success   -> botão verde;
+    btn-info      -> botão azul claro;
+    btn-warning   -> botão amarelo;
+    btn-danger    -> botão vermelho;  
+    btn-light     -> botão quase branco (cinza claro);
+    btn-dark      -> botão preto;
+    btn-link      -> botão em formato de link
+
+Cores Menu de navegação (tag <nav>)
+	navbar-light -> deve ser aplicado na tag <nav>; 
+	navbar-dark  -> deve ser aplicado na tag <nav>;    
+
+Cores Barra de navegação (tag <nav>)
+	bg-primary   -> fundo azul;
+    bg-secondary -> fundo cinza;
+    bg-success   -> fundo verde;
+    bg-info      -> fundo azul claro;
+    bg-warning   -> fundo amarelo;
+    bg-danger    -> fundo vermelho;  
+    bg-light     -> fundo quase branco (cinza claro);
+    bg-dark      -> fundo preto;
+
+Cores Listas (tag <li>)
+	list-group-item-primary   -> fundo azul;
+    list-group-item-secondary -> fundo cinza;
+    list-group-item-success   -> fundo verde;
+    list-group-item-info      -> fundo azul claro;
+    list-group-item-warning   -> fundo amarelo;
+    list-group-item-danger    -> fundo vermelho;  
+    list-group-item-light     -> fundo quase branco (cinza claro);
+    list-group-item-dark      -> fundo preto; 
+
+Cores Badge (tag <span>)
+	badge-primary   -> fundo azul;
+    badge-secondary -> fundo cinza;
+    badge-success   -> fundo verde;
+    badge-info      -> fundo azul claro;
+    badge-warning   -> fundo amarelo;
+    badge-danger    -> fundo vermelho;  
+    badge-light     -> fundo quase branco (cinza claro);
+    badge-dark      -> fundo preto; 
+
+Cores Alert (tag <div>)
+	alert-primary   -> caixa azul;
+	alert-secondary -> caixa cinza;
+	alert-success   -> caixa verde;
+	alert-danger    -> caixa vermelha;
+	alert-warning   -> caixa amarelo;
+	alert-info      -> caixa azul-claro;
+	alert-light     -> caixa quase branco (cinza claro);
+	alert-dark      -> caixa preta;	
+
+Cores Barra de progresso (tag <div>)
+	bg-primary   -> fundo azul;
+    bg-secondary -> fundo cinza;
+    bg-success   -> fundo verde;
+    bg-info      -> fundo azul claro;
+    bg-warning   -> fundo amarelo;
+    bg-danger    -> fundo vermelho;  
+    bg-light     -> fundo quase branco (cinza claro);
+    bg-dark      -> fundo preto; 
+
+Cores Tabela (tag <div>)
+	table-dark -> toda a tabela escura e deve ser aplicado na tag <table>;
+	thead-dark -> deixa escura somente a tag <thead> e deve ser aplicado na tag <thead>;
+
+Cores Linha (tag <tr>)
+	table-primary   -> fundo azul na linha;
+    table-secondary -> fundo cinza na linha;
+    table-success   -> fundo verde na linha;
+    table-info      -> fundo azul claro na linha;
+    table-warning   -> fundo amarelo na linha;
+    table-danger    -> fundo vermelho na linha;  
+    table-light     -> fundo quase branco (cinza claro) na linha;
+    table-dark      -> fundo preto na linha;
+
+Cores Card (tag <div>)
+	bg-primary   -> fundo azul;
+    bg-secondary -> fundo cinza;
+    bg-success   -> fundo verde;
+    bg-info      -> fundo azul claro;
+    bg-warning   -> fundo amarelo;
+    bg-danger    -> fundo vermelho;  
+    bg-light     -> fundo quase branco (cinza claro);
+    bg-dark      -> fundo preto;
+
+Margin (Valor a definir (0 até 5))
+	mt      -> Margin Top;
+    mb      -> Margin Bottom;
+    ml      -> Margin Left;
+    mr      -> Margin Right;
+    mx      -> Margin no eixo x (horizontal) esquerda/direita;
+    mx-auto -> centraliza horizontalmente;
+    my      -> Margin no eixo y (vertical) top/bottom;
+    m       -> Margin em todos os lados;
+    m-auto  -> centraliza o conteúdo horizontalmente;
+    
+
+Padding (Valor a definir (0 até 5))
+	pt -> Padding Top;
+    pb -> Padding Bottom;
+    pl -> Padding Left;
+    pr -> Padding Right;
+    px -> Padding no eixo x (horizontal) esquerda/direita;
+    py -> Padding no eixo y (vertical) top/bottom;
+    p  -> Padding em todos os lados;
+
+Width (largura)
+	w-25   -> 25% da largura total (pai);
+	w-50   -> 50% da largura total (pai);
+	w-75   -> 75% da largura total (pai);
+	w-100  -> 100% da largura total (pai);
+	w-auto -> ocupa o espaçamento de forma automática;
+	
+Height (altura)
+	h-25   -> 25% da altura total (pai);
+	h-50   -> 50% da altura total (pai);
+	h-75   -> 75% da altura total (pai);
+	h-100  -> 100% da altura total (pai);
+	h-auto -> ocupa o espaçamento de forma automática;
+
+Bordas
+	border        -> todas as bordas
+    border-top    -> borda superior
+    border-bottom -> borda inferior
+    border-right  -> bordar direita
+    border-left   -> borda esquerda
+
+    Cores de bordas
+    border-<cor>: primary, secondary, success, 
+        info, warning, danger, light, dark, white
+    border-primary   -> border com a cor azul;
+    border-secondary -> border com a cor cinza;
+    border-success   -> border com a cor verde;
+    border-info      -> border com a cor azul claro;
+    border-warning   -> border com a cor amarelo;
+    border-danger    -> border com a cor vermelho;  
+    border-light     -> border com a cor quase branco (transparente);
+    border-dark      -> border com a cor preto;
+    border-white     -> border com a cor branca;    	
+
+
+    Border Radius 
+    rounded        -> arredonda todos os cantos;
+    rounded-top    -> arredonda os cantos superiores;
+    rounded-bottom -> arredonda os cantos inferiores;
+    rounded-right  -> arredonda os cantos direitos;
+    rounded-left   -> arredonda os cantos esquerdos;
+    rounded-circle -> arredonda todo o elemento , transformando-o em um círculo;
+
+Media Types (define formatação de estilo conforme um determinado tipo de mídia)
+
+	No exemplo abaixo será aplicada uma formatação para visualização (media="screen") e outra para impressão (media="print")
+
+	<link rel="stylesheet" type="text/css"  media="screen" href="estilo.css">
+	<link rel="stylesheet" type="text/css" media="print" href="estilo-impressao.css">
+
+Media Queries (define a formatação de estilo conforme a resolução da tela. Os padrões abaixo são definidos pelo Bootstrap4, mas poderá você poderá criar outros breakpoints)
+
+	min-width: 576px  -> resoluções a partir de 576px aplica a formatação;
+	min-width: 768px  -> resoluções a partir de 768px aplica a formatação;
+	min-width: 992px  -> resoluções a partir de 992px aplica a formatação;
+	min-width: 1200px -> resoluções a partir de 1200px aplica a formatação;
+
+		Small devices - sm (celulares no modo paisagem, 576px e superior)
+	        @media (min-width: 576px) {...}
+
+	    Medium devices - md (tablets, 768px e superior)
+	        @media (min-width: 768px) {...}
+
+	    Large devices - lg (desktops, 992px e superior)
+	        @media (min-width: 992px) {...}
+
+	    Extra large devices - xl (large desktops, 1200px e superior)
+	        @media (min-width: 1200px) {...}
+
+    max-width: 575.98px  -> resoluções até 575.98px aplica a formatação;
+	max-width: 767.98px  -> resoluções até 767.98px aplica a formatação;
+	max-width: 991.98px  -> resoluções até 991.98px aplica a formatação;
+	max-width: 1199.98px -> resoluções até 1199.98px aplica a formatação;
+
+	    Extra small devices -  (celulares no modo retrato)
+	        @media (max-width: 575.98px) {...}
+
+	    Small devices - sm (celulares no modo paisagem)
+	        @media (max-width: 767.98px) {...}
+
+	    Medium devices - md (Tablets)
+	        @media (max-width: 991.98px) {...}
+
+	    Large devices - lg (Desktops)
+	        @media (max-width: 1199px) {...} 
+
+	max-width: 575.98px                           -> resoluções até 575.98px aplica a formatação;
+	(min-width: 576px) and (max-width: 767.98px)  -> resoluções a partir de 576px a 767.98px;
+	(min-width: 768px) and (max-width: 991.98px)  -> resoluções a partir de 768px a 991.98px;
+	(min-width: 992px) and (max-width: 1199.98px) -> resoluções a partir de 992px a 1199.98px;
+	min-width: 1200px                             -> resoluções a partir de 1200px;
+
+	Padrão de Media queries do Bootstrap4
+
+	    Extra small devices (celulares no modo retrato, menor que 576px)
+	        @media (max-width: 575.98px) { ... }
+
+	    Small devices - sm (celulares no modo paisagem, 576px e superior)
+	        @media (min-width: 576px) and (max-width: 767.98px) { ... }
+
+	    Medium devices - md (tablets, 768px e superior)
+	        @media (min-width: 768px) and (max-width: 991.98px) { ... }
+
+	    Large devices - lg (desktops, 992px and up)
+	        @media (min-width: 992px) and (max-width: 1199.98px) { ... }
+
+	    Extra large devices - xl (desktops grandes, 1200px e superior)
+	        @media (min-width: 1200px) { ... }  
+
+
+Botões (para formatar um botão, deve-se aplicar a classe btn antes e depois a cor -> btn-<cor>. A classe btn pode ser aplicada em outras tags como <a>, <input>)
+
+	btn           -> formatação padrão de um botão;
+
+	Cores e tipos de botões
+    btn-primary   -> botão azul;
+    btn-secondary -> botão cinza;
+    btn-success   -> botão verde;
+    btn-info      -> botão azul claro;
+    btn-warning   -> botão amarelo;
+    btn-danger    -> botão vermelho;  
+    btn-light     -> botão quase branco (transparente);
+    btn-dark      -> botão preto;
+    btn-link      -> botão em formato de link
+
+    Botoes com contorno
+    btn-outline-<formato>: primary, secondary, success, info, warning, danger, light, dark, link
+	btn-outline-primary   -> botão com contorno azul;
+    btn-outline-secondary -> botão com contorno cinza;
+    btn-outline-success   -> botão com contorno verde;
+    btn-outline-info      -> botão com contorno azul claro;
+    btn-outline-warning   -> botão com contorno amarelo;
+    btn-outline-danger    -> botão com contorno vermelho;  
+    btn-outline-light     -> botão com contorno quase branco (transparente);
+    btn-outline-dark      -> botão com contorno preto;
+    btn-outline-link      -> botão com contorno em formato de link; 
+
+    Tamanho dos botões
+    btn-lg    -> botão grande;
+    btn-sm    -> botão pequeno;
+    btn-block -> botão que ocupa toda a largura;
+
+    Estados dos botões
+    active               -> botão ativo;
+    disabled             -> botão desativado;
+    data-toggle="button" -> fica clicado ao apertar, não é aplicado dentro de class="" e sim fora;
+
+    Agrupamento de botões(deve ser aplicado na div-pai de todos os botões)
+    btn-group          -> cria um agrupamento de botões na horizontal;
+    btn-group-vertical -> cria um agrupamento de botões na vertical;
+
+    btn-group ou btn-group-vertical +
+    	btn btn-<cor> etc...
+
+    Exemplo de grupos de botões Horizontal
+    <div class="btn-group">
+    	<button class="btn btn-warning" type="button">Topo</button>
+        <button class="btn btn-warning" type="button">Meio</button>
+    </div>
+
+    Exemplo de grupos de botões Vertical
+    <div class="btn-group-vertical">
+    	<button class="btn btn-warning" type="button">Topo</button>
+        <button class="btn btn-warning" type="button">Meio</button>
+    </div>
+
+    Toolbar de botões (Agrupa grupos de botões e deve ser aplicado na div-pai dos grupos de botões)
+    btn-toolbar -> cria/une um vários grupos de botões;
+
+    btn-toolbar + 
+    	btn-group ou btn-group-vertical + 
+    		btn btn-<cor> etc... 
+
+    Exemplo de toolbar de botões 
+    <div class="btn-toolbar">
+        <div class="btn-group">
+           <button class="btn btn-primary" type="button">1</button>
+           <button class="btn btn-primary" type="button">2</button>
+           <button class="btn btn-primary" type="button">3</button>
+        </div>
+        <div btn-group>
+            <button class="btn btn-danger" type="button">4</button>
+            <button class="btn btn-danger" type="button">5</button>
+        </div>
+    </div>
+
+    Botões dropdown (ao clicar no botão deverá aparecer os links)
+
+    dropdown               -> deve ser aplicado na div que engloba a tag <button> e a div com os links;
+    dropdown-toggle        -> cria uma seta ao lado do nome do botão e deve aplicada na tag <button>;
+    data-toggle="dropdown" -> dever ser aplicado na tag button como atributo;
+    dropdown-menu          -> deve ser aplicado na div que engloba os links;
+    dropdown-item          -> deve ser aplicado nos links;
+    dropdown-divider       -> aplica uma linha entre os links, é interessante ser aplicado em uma div;
+
+    dropdown + 
+    	btn btn-<cor> / dropdown-toggle / data-toggle="dropdown" +
+    	dropdown-menu +
+    		dropdown-item
+
+    Exemplo de botões dropdown
+    <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" type="button">
+            Clique
+        </button>
+        <div class="dropdown-menu">
+            <a href="#" class="dropdown-item">Link 1</a>
+            <div class="divider"></div>
+            <a href="#" class="dropdown-item">Link 2</a>
+            <a href="#" class="dropdown-item">Link 3</a>
+        </div>
+    </div>
+
+Navegação simples / abas
+	nav      -> aplicado na tag <ul>;
+	nav-item -> aplicado na tag <li>;
+	nav-link -> aplicado na tag <a>;
+
+	active   -> deixa o link marcado e deve ser aplicada na tag <a>;
+	disabled -> deixa o link desativado e deve ser aplicado na tag <a>;
+
+	Tipos de navegação:
+    nav-pills -> aplica um arredondamento no link e deve ser aplicado na tag <ul>, mas deve ser aplicado em conjunto com a class active, aplicada na tag <a>, ou outra parecida
+    nav-tabs  -> navegação por abas e deve ser aplicada na tag <ul>
+    
+    Opções de alinhamento: 
+        justify-content-center -> alinha o menu ao centro e deve ser aplicada na tag <ul>;
+        justify-content-end    -> alinha o menu à esquerda e deve ser aplicada na tag <ul>;;
+        flex-column            -> deixa a navegação vertical e deve ser aplicada na tag <ul>;
+
+Barra de navegação simples
+	navbar          -> cria um barra de navegação e deve ser aplicada na tag <nav>;
+	navbar-brand    -> aplica uma formatação diferente para a "logo" da barra de navegação e deve ser aplicado na tag <a> que irá ser a logo e que fique fora da tag <ul>;
+	collapse        -> deve ser aplicada na tag <div> que engloba a tag <ul>;
+	navbar-collapse -> deve ser aplicada na tag <div> que engloba a tag <ul>;
+	navbar-nav      -> deve ser aplicado na tag <ul> e remove os marcadores da lista e aplica formatação de navagação padrão;
+	nav-item        -> deve ser aplicado na tag <li>;
+	nav-link        -> deve ser aplicada na tag <a>;
+
+	Tamanho
+	navbar-expand-sm -> deve ser aplicada na tag <nav>, dispositivos pequenos;
+	navbar-expand-md -> deve ser aplicada na tag <nav>, dispositivos médios;
+	navbar-expand-lg -> deve ser aplicada na tag <nav>, dispositivos desktops;
+	navbar-expand-xl -> deve ser aplicada na tag <nav>, dispositivos grandes;
+
+	Cor do menu (não altera o background, para isso deve ser usado em conjunto a class bg-<cor>, caso não seja usada nenhuma das classes abaixo, os links da barra de navegação ficará com a cor azul, que é a padrão)
+	navbar-light -> deve ser aplicado na tag <nav>; 
+	navbar-dark  -> deve ser aplicado na tag <nav>;
+
+	Colocar os links para a esquerda ou direita utiliza-se a class ml-auto ou mr-auto na tag <ul>
+
+Barra de navegação com menu responsivo (três tracinhos horizontais um em cima do outro e aparecerá conforme o tamanho da tela, definido pela class navbar-expand-<tamanho>, aplicada na tag <nav>)
+	navbar-toggler           -> cria o botão e deve ser aplicado na tag <button>;
+	data-target="#id"        -> o id deve ser o mesmo que foi aplicado na tag <div> que engloba a tag <ul> e o atributo deve ser usado na tag <button> e define o que será mostrado ao pressionar o botão;
+	data-toggle="collapse"   -> atributo que deve ser usado na tag <button> e usado para quando clicar no botão aparecer algum elemento;
+	navbar-toggler-icon      -> cria o ícone do botão(tracinhos) e deve ser aplicada na tag <span> que ficará dentro da tag <button>;
+	collapse                 -> deve ser aplicada na tag <div> que engloba a tag <ul> e serve para esconder os links dentro do menu hamburguer;
+	navbar-collapse          -> deve ser aplicada na tag <div> que engloba a tag <ul>;
+
+Barra de navegação com menu dropdown
+	dropdown-menu          -> deve ser aplicado na <div> que engloda os links;
+	dropdown               -> deve ser aplicado na tag <li>;
+	data-toggle="dropdown" -> usado para exibir um elemento na vertical e deve ser aplicado na tag <li>;
+	dropdowm-item          -> deve ser aplicado na tag <a> que está dentro da <div>;
+	dropdown-toggle        -> cria uma seta ao lado do link e deve ser aplicado na tag <a>;
+
+Cores Barra de navegação (deve ser aplicado na tag <nav>)
+	bg-primary   -> fundo azul;
+    bg-secondary -> fundo cinza;
+    bg-success   -> fundo verde;
+    bg-info      -> fundo azul claro;
+    bg-warning   -> fundo amarelo;
+    bg-danger    -> fundo vermelho;  
+    bg-light     -> fundo quase branco (cinza claro);
+    bg-dark      -> fundo preto;
+
+Alinhamento da Barra de navegação (deve ser aplicado na tag <nav>)
+    fixed-top            -> a barra de navegação fica fixa na parte de cima;
+    fixed-bottom         -> a barra de navegação fica fixa na parte embaixo;
+    sticky ou sticky-top -> a barra de navegação fica colada ao chegar na parte de cima;
+
+Listas
+	list-group       -> cria um retângulo ao redor dos itens e deve ser aplicado na tag <ul>;
+	list-group-flush -> cria uma linha em cima e embaixo dos itens e deve ser aplicado na tag <ul>;
+	list-group-item  -> deve ser aplicado nas tag <li> e <a>;
+	active           -> deixa o item ativo (azul) e deve ser aplicado na tag <a>;
+
+	Cores listas (deve ser aplicado na tag <li>)
+	list-group-item-primary   -> fundo azul;
+    list-group-item-secondary -> fundo cinza;
+    list-group-item-success   -> fundo verde;
+    list-group-item-info      -> fundo azul claro;
+    list-group-item-warning   -> fundo amarelo;
+    list-group-item-danger    -> fundo vermelho;  
+    list-group-item-light     -> fundo quase branco (cinza claro);
+    list-group-item-dark      -> fundo preto; 
+
+Badge (é interessane utilizar na tag <span>, notificação)
+	bagde           -> cria uma espécie de notificação;
+
+	Cor Badge
+	badge-primary   -> fundo azul;
+    badge-secondary -> fundo cinza;
+    badge-success   -> fundo verde;
+    badge-info      -> fundo azul claro;
+    badge-warning   -> fundo amarelo;
+    badge-danger    -> fundo vermelho;  
+    badge-light     -> fundo quase branco (cinza claro);
+    badge-dark      -> fundo preto; 	
+
+Breadcrumb (indica a página na qual o usuário está)
+	breadcrumb      -> deve ser aplicada na tag <ol>;
+	breadcrumb-item	-> deve ser aplicada na tag <li>;
+	active          -> deixa o link ativo e deve ser aplicado na tag <li>;
+
+Formulário
+	É interessante usar <div> para agrupar elementos input, etc..
+
+	form-group        -> deve ser utilizado na <div> que engloba o label e input para criar um espaçamento entre os outros elementos;
+	form-text         -> formata textos dentro de formulários;
+	form-control      -> aplica formatação do tamanho padrão nas tag <input>, <select> e <textarea>;
+	form-control-sm   -> aplica formatação pequena e pode se aplicada nas tag <input>, <select> e <textarea>;
+	form-control-lg   -> aplica formatação grande e deve ser aplicada na tag <input>, <select> e <textarea>;
+	
+	File input
+	form-control-file -> deve ser aplicado na tag <input> do file e deve ser usado junto com form-control da tag <div>;
+	
+	Custom File input	
+	custom-file       -> deve ser aplicado na tag <div>;
+	custom-file-input -> deve ser aplicado na tag <input>;
+	custom-file-label -> deve ser aplicado na tag <label>;
+	
+	Range
+	custom-range      -> deve ser alicado na tag <input> do range e deve ser usado junto com form-control da tag <div>;
+	
+	Botão
+	btn               -> pode ser aplicado no input do tipo submit;
+	btn-<cor>         -> cores dos botões;
+
+	Fomulário Inline
+	form-inline       -> deve ser aplicado na tag <div>;
+	form-control      -> deve ser aplicado na tag <input>;
+
+	Validação de formulário
+	is-valid          -> cria uma borda verde em torno da caixa de texto e deve ser aplicado na tag <input>;
+	is-invalid        -> cria uma borda vermelha em torno da caixa de texto e  e deve ser aplicado na tag <input>;
+	invalid-feedback  -> deixa o texto pequeno e aplica uma cor vermelha ao texto, indicando que os dados digitados na caixa de texto estão errados e deve ser aplicado na tag <input>;
+	valid-feedback    -> deixa o texto pequeno e aplica uma cor verde ao texto, indicando que os dados digitados na caixa de texto estão corretos e deve ser aplicado na tag <input>;
+
+Input Group (formulários com ícones ou botões ao lado)
+
+	Tamanho do Input Group
+	input-group-sm -> deixa o input pequeno e deve ser aplicado na tag <div> que engloba a tag <div>-inferior(<span>/<button>) e a tag <input>;
+	input-group-lg -> deixa o input grande e deve ser aplicado na tag <div> que engloba a tag <div>-inferior(<span>/<button>) e a tag <input>;
+
+
+	Group prepend (ícone/botão primeiro e depois a caixa de texto)
+	input-group         -> deve ser aplicado na tag <div> que engloba a <div> da tag <span>/<button> e a tag <input>;
+	input-group-prepend -> deve ser aplicado na tag <div> que engloba a tag <span>/<button>;
+	input-group-text    -> deve ser aplicado na tag <span>/<button>;
+	form-control        -> aplica formatação do tamanho padrão nas tag <input>, <select> e <textarea>;	
+
+	Group append  (primeiro a caixa de texto e depois o ícone/botão)
+	input-group         -> deve ser aplicado na tag <div> que engloba a <div> da tag <span>/<button> e a tag <input>;
+	input-group-append  -> deve ser aplicado na tag <div> que engloba a tag <span>/<button>;
+	input-group-text    -> deve ser aplicado na tag <span>/<button>;	
+	form-control        -> aplica formatação do tamanho padrão nas tag <input>, <select> e <textarea>;	
+
+Alertas
+	alert -> cria uma caixa de alerta;
+
+	Cores Alert
+	alert-primary   -> caixa azul;
+	alert-secondary -> caixa cinza;
+	alert-success   -> caixa verde;
+	alert-danger    -> caixa vermelha;
+	alert-warning   -> caixa amarelo;
+	alert-info      -> caixa azul-claro;
+	alert-light     -> caixa quase branco (cinza claro);
+	alert-dark      -> caixa preta;
+
+	Alerta com botão fechar
+	alert-dismissible   -> deve ser aplicado na tag <div> que engloba a tag <button> e o texto junto com alert e alert-<cor>;
+	close               -> deve ser aplicado na tag <button> que possui o ícone com o X (&times) e ser apenas para aplicar a formatação no botão;
+	data-dismiss="alert"	-> atributo que deve ser aplicado na tag <button> e usado para fechar a caixa de alerta;
+
+Barra de progresso
+	progress -> deve ser aplicado na tag <div> que engloba a outra <div>;
+	progress-bar -> deve ser aplicado na tag <div> inferior junto com as definições de width/largura (w-25, w-50, etc.., ou pode ser usado css - style="width: 25%;", por exemplo);
+
+	Cores Barra de progresso (tag <div>)
+	bg-primary   -> fundo azul;
+    bg-secondary -> fundo cinza;
+    bg-success   -> fundo verde;
+    bg-info      -> fundo azul claro;
+    bg-warning   -> fundo amarelo;
+    bg-danger    -> fundo vermelho;  
+    bg-light     -> fundo quase branco (cinza claro);
+    bg-dark      -> fundo preto; 
+
+    Tamanho do Progresso
+    w-<tamanhos> ou style="width: 20px;" -> deve ser aplicada na tag <div> inferior;
+
+    Altura
+    style="height: 50px;" -> aplicar formatação na tag <div> que engloba a outra tag <div>;
+
+    Barra listrada
+    progress-bar-striped  -> cria uma barra listrada e deve ser aplicada na tag <div> inferior;
+
+    Barra animada
+    progress-bar-animated -> cria uma barra animada e deve ser aplicada junto com progress-bar-striped na tag <div> inferior;
+
+Tabela
+	table -> aplica formatação de tabela e deve ser aplicado na tag <table>;
+
+	Cor Tabela
+	table-dark -> toda a tabela escura e deve ser aplicado na tag <table>;
+	thead-dark -> deixa escura somente a tag <thead> e deve ser aplicado na tag <thead>;
+
+	Cor Linha (tag <tr>)
+	table-primary   -> fundo azul na linha;
+    table-secondary -> fundo cinza na linha;
+    table-success   -> fundo verde na linha;
+    table-info      -> fundo azul claro na linha;
+    table-warning   -> fundo amarelo na linha;
+    table-danger    -> fundo vermelho na linha;  
+    table-light     -> fundo quase branco (cinza claro) na linha;
+    table-dark      -> fundo preto na linha;
+
+	Formatações
+	table-striped    -> deixa a tabela listrada, ou seja, cores alternadas, e deve ser aplicada na tag <table>;
+	table-bordered   -> aplica uma borda em toda a tabela e deve ser aplicado na tag <table>;
+	table-borderless -> remove as bordas e deve ser aplicada na tag <table>; 
+
+	Obs: table-striped e table-bordered podem ser combinadas e aplicadas na tag <table>. Assim, será aplicada uma tabela com linhas alternadas e com bordas;
+
+	Tamanho da Tabela
+	table-sm -> diminui a altura das linhas e deve ser aplicada na tag <table>;
+
+	Tabela responsiva
+	table-responsive -> a tabela se torna responsiva, ou seja, ela se ajusta à largura e deve ser aplicado na tag <div> que engloba a tag <table>;
+
+Paginação
+	pagination -> deve ser aplicada na tag <ul>;
+	page-item  -> deve ser aplicada na tag <li>;
+	page-link  -> deve ser aplicada na tag <a>;
+	active     -> deixa marcada a página que o usuário está acessando e deve ser aplicada na tag <li>;
+	disabled   -> disativa o link de uma página e deve ser aplicada na tag <li>;
+
+	Alinhamento (tag <ul>, padrão é esquerda)
+	justify-content-end    -> alinha a paginação na direita e deve ser aplicada na tag <ul>;
+	justify-content-center -> alinha a paginação no centro e deve ser aplicada na tag <ul>;
+
+	Tamanho (tag <ul>)
+	pagination-sm -> tamanho pequeno da paginação e deve ser aplicada na tag <ul>;
+	pagination-lg -> tamanho grande da paginação e deve ser aplicada na tag <ul>;
+
+	Setas
+	<span>&laquo</span> -> cria setas no sentido da esquerda (<<) e deve ser incluído dentro da tag <a>, que está dentro de uma tag <li>;
+	<span>&raquo</span> -> cria setas no sentido da direita (>>) e deve ser incluído dentro da tag <a>, que está dentro de uma tag <li>;
+
+Card
+	card            -> cria uma borda e deve ser aplicada na tag <div> que engloba a outra <div>;
+	card-body       -> deve ser aplicada na tag <div> inferior;
+	card-title      -> deve ser aplicada no título ou tag <h> e serve para controlar espaçamento;
+	card-subtitle   -> deve ser aplicada no subtítulo ou na tag <h> e serve para controlar espaçamento;
+	card-text       -> deve ser aplicada na tag <p>;
+	card-img  		-> aplica uma formatação na imagem dentro do card e deve ser aplicada na tag <img>;
+
+	Cartão com imagem
+	card-img-top    -> deve ser aplicada na tag <img> do card e aplica uma formatação diferenciada arredondando os cantos superiores e alinhando a base;
+ 	card-img-bottom -> deve ser aplicada na tag <img> do card e aplica uma formatação diferenciada arredondando os cantos inferiores e alinhando a base;
+
+ 	Cartão com imagem sobreposta
+ 	card-img         -> deve ser aplicada na tag <img>;
+ 	card-img-overlay -> deve ser aplicada na tag <div> que engloba os outros elementos do card;
+
+ 	Cartão com cabeçalho
+ 	card-header -> deve ser aplicado na tag <div> que engloba o título do card;
+ 	card-footer -> deve ser aplicado na tag <div> que engloba o rodapé do card;
+
+ 	Alinhamento dos textos dentro do cartão
+ 	text-center -> texto centro e deve ser aplicado nos elementos dentro do card;
+ 	text-left -> texto à esquerda e deve ser aplicado nos elementos dentro do card;
+ 	text-right -> texto à direita e deve ser aplicado nos elementos dentro do card;
+
+ 	Cartão com navegação
+ 	card-header-tabs -> deve ser aplicada na tag <ul> e faz com que as tag <li> se integem com o cartão, removendo uma linha que fica abaixo deles;
+ 	active -> deixa o link ativo e deve ser aplicado na tag <a>;
+ 	disabled -> deixa o link desativado e deve ser aplicado na tag <a>;
+ 
+ 	Cores Card (tag <div>)
+	bg-primary   -> fundo azul;
+    bg-secondary -> fundo cinza;
+    bg-success   -> fundo verde;
+    bg-info      -> fundo azul claro;
+    bg-warning   -> fundo amarelo;
+    bg-danger    -> fundo vermelho;  
+    bg-light     -> fundo quase branco (cinza claro);
+    bg-dark      -> fundo preto;
+
+    Bordas Cartão
+    border-primary   -> border com a cor azul;
+    border-secondary -> border com a cor cinza;
+    border-success   -> border com a cor verde;
+    border-info      -> border com a cor azul claro;
+    border-warning   -> border com a cor amarelo;
+    border-danger    -> border com a cor vermelho;  
+    border-light     -> border com a cor quase branco (transparente);
+    border-dark      -> border com a cor preto;
+    border-white     -> border com a cor branca; 
+
+    Colunas de Cartões
+    card-columns -> deve ser aplicado na tag <div> que engloba todos os cards;
+
+
+Jumbotron (área de destaque do site)
+	jumbotron -> cria uma área cinza de destaque e deve ser aplicada na tag <div> que enbloga os outros elementos;
+
+Alinhar imagens ao texto
+	media      -> deve ser aplicada na tag <div> que engloba todos os elementos, inclusive a tag <img>;
+	media-body -> deve ser aplicada na tag <div> que engloba a tags de texto (<h1>, <p>);
+
+	Alinhamento vertical da imagem em relação ao texto (tag <img>)
+	align-self-start  -> alinha a imagem verticalmente na mesma altura/topo do texto (padrão) e deve ser aplicado na tag <img>;
+	align-self-center -> alinha a imagem verticalmente no centro do texto (padrão) e deve ser aplicado na tag <img>;
+	align-self-end -> alinha a imagem verticalmente no fim do texto (padrão) e deve ser aplicado na tag <img>;
+
+	Listas com imagens
+	list-unstyled -> retira os marcadores;
+	media         -> pode ser aplicada na tag <li>;
+	media-body    -> deve ser aplicada na tag <div> que engloba a tags de texto (<h1>, <p>);
+
+
+Ícones (todos os ícones funcionam como se fossem uma fonte / texto, ou seja, para aumentá-los deve ser utilizado font-size, podem ter a sua cor alterada, etc..)
+	
+	https://useiconic.com/open#icons
+	https://fontawesome.com/
+
+	Para usar os ícones do site "useiconic" 
+		É preciso colar o link abaixo dentro da tag <head>, caso queira usar direto do site
+		<link href="/open-iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+		Se tiver realizado o download dos arquivos do site e baixado na mesma pasta dos outros arquivos, deve-se alterar a localização da pasta;
+		<link href="iconic/font/css/open-iconic-bootstrap.css" rel="stylesheet">
+
+		Para usar um ícone
+		Entre no site https://useiconic.com/open#icons e clique em cima de um ícone e copie o link referente ao "Bootstrap icon Font";
+
+		Pode ser utilizado a tag 
+		<span class="oi oi-arrow-right"></span> 
+		ou a tag
+		<i class="oi oi-arrow-right"></i>
+
+		Formatações do ícone
+		oi                       -> deve ser aplicado na tag <span> ou <i>;
+		oi-<nome-do-icone>       -> deve ser aplicado na tag <span> ou <i>;  
+		display-<1/2/3/4>        -> tamanho do ícone;
+		text-<cor>		         -> altera a cor do texto;
+		style="font-size: 80px;" -> altera o tamanho do ícone;
+
+	Para usar os ícones do site "font awesome"
+		É preciso colar o link abaixo dentro da tag <head>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+		Caso tenha realizado o download dos arquivos do site e baixado na mesma pasta dos outros arquivos, deve-se copia o link abaixo, alterando a pasta onde estão os arquivos;
+		<link rel="stylesheet" href="fontawesome/css/all.css">
+
+		Para usar im ícone, acesse o link https://fontawesome.com/icons, clique em cima do ícone, e ao abrir uma nova página, basta copiar a formatação que está com a tag <i>. Ressalte-se que poderá ser usado tanto a tag <i> quanto <span>, conforme o exemplo abaixo. 
+
+		Pode ser utilizado a tag 
+		<span class="fas/far/fab fa-stroopwafel"></span>
+		ou a tag
+		<i class="fas/far/fab fa-stroopwafel"></i>
+
+		Formatações do ícone
+		fas / fab / far          -> obrigatório e deve ser aplicado na tag <span> ou <i>;
+		fas-<nome-do-icone>      -> define o ícone e deve ser aplicado na tag <span> ou <i>; 
+		fa-<tamanho-do-icone>    -> tamanho do ícone e deve ser aplicado na tag <span> ou <i>;
+		display-<1/2/3/4>        -> tamanho do ícone;
+		text-<cor>		         -> altera a cor do texto;
+		style="font-size: 80px;" -> altera o tamanho do ícone;
+
+		Tamanho do ícone
+		No link abaixo há exemplos de como ajustar o tamanho dos ícones
+		https://fontawesome.com/how-to-use/on-the-web/styling/sizing-icons
+		fa-xs / fa-sm / fa-lg / fa-2x / fa-3x / fa-5x / fa-7x / fa-10x
+
+Sistemas de Grid
+
+	O bootstrap utiliza um total de 12 colunas;
+	
+	container      -> classe importante para determinar a largura da estrutura (sistema de grid) do site e deve ser aplicada na tag <div> principal. Conforme há alteração na largura, os breakpoints são ativados. Centraliza o conteúdo e deixa espaçamento lateral;
+
+	container-fluid -> parecido com a classe container, contudo, ocupa todo o espaçamento da tela; 
+
+	row       -> cria linhas (flex-box) para cada div aplicada e deve ser aplicada na tag <div> inferior à tag <div> que possui a classe container. Cada tag <div> dentro da tag <div> que possui a classe row é uma célula. Ocupa todo o espaçamento;
+
+	Breakpoints (definem como será a exibição para um determinado dispositivo. O somatório do tamanho deve ser doze para cada div com a classe row. Caso a soma não totalize 12, sobrará espaço e se a soma ultrapassar 12, a tag <div> que ultrapassar o valor pulará para próxima linha)
+	col-<tamanho de 1 a 12) extra small    -> define a largura quando o dispositivo for < 576px;
+	col-sm-<tamanho de 1 a 12) small       -> define a largura quando o dispositivo for ≥ 576px;
+	col-md-<tamanho de 1 a 12) medium      -> define a largura quando o dispositivo for ≥ 768px;
+	col-lg-<tamanho de 1 a 12) large       -> define a largura quando o dispositivo for ≥ 992px;
+	col-xl-<tamanho de 1 a 12) extra large -> define a largura quando o dispositivo for ≥ 1140px;
+
+Configurações de Grid
+	Largura Fixa
+	col                    -> deve ser aplicada na tag <div> que fica dentro da tag <div> que possui a classe row e é usada para dividir igualmente as colunas e não se ajusta ao tamanho do dispositivo, ou seja, o conteúdo não fica empilhado;
+
+	Largura automática
+	col-<tamanho de 1 a 12> -> não se ajusta ao tamanho do dispositivo e sim ao tamanho definido em col, ou seja, o conteído não fica empilhado;
+
+	Largura igual empilhada
+	col-<sm - md - lg - xl> -> quando a largura do dispositivo for sm, medium, large ou extra large, os elementos ficarão com larguras iguais e empilhados;
+
+	Ordenando largura
+	order-<1.2,3...> -> usado para ordernar a visualização da área de conteúdo e deve ser aplicada na tag <div> que possui a classe col que está dentro da tag <div> que possui a classe row;
+
+	Offset (espaçamento das grids)
+	offset-<sm, md, lg, xl>-<1 a 12> ou offset-<1 a 12> -> aplica espaçamento/centralização em ambos os lados da tag <div> que está dentro da tag <div> que possui a classe row, e é interessante ser utilizada junto a classe col-<sm, md, lg, xl>-<tamanho de 1 a 12>, ou seja, se for aplicada na tag <div> a classe col-md-6, caso queira centralizar a div, basta aplicar offset-md-3, isso porque 3 é a metade de 6;
+
+	Offset múltiplos
+	offset-<sm, md, lg, xl>-<1 a 12> ou offset-<1 a 12> -> pode ser aplicada em várias tag <div> que estão dentro da tag <div> que possui a classe row e é usada para espaçamento entre essas tag <div>;
+
+	Aninhamentos
+	Cada classe row é que define o grid de 12 colunas. No exemplo abaixo, a primeira tag <div>com a class col-md-6, mesmo com a largura de 6 colunas, define, para a segunda tag <div> que está dentro dela, um grid de 12 colunas com base na sua largura atual, ou seja, será utilizado um grid de 12 colunas em cima de 6 colunas da classe col-md-6 superior. 
+	<div class="row">
+        <div class="col-md-6" style="border: 1px solid blue;">
+            col-md-6
+            <div class="row">
+              <div class="col-md-6 marcador">
+              col-md-6
+              </div>
+            </div>
+        </div>
+      </div>
+
+Alinhamento vertical de Grid
+	align-items-start  -> alinha verticalmente a área ao topo do container e deve ser aplicada na tag <div> que possui a classe row;
+	align-items-center -> alinha verticalmente a área ao centro do container e deve ser aplicada na tag <div> que possui a classe row;
+	align-items-end    -> alinha verticalmente a área na parte de baixo do container e deve ser aplicada na tag <div> que possui a classe row;	
+
+Alinhamento vertical individual de Grid
+	align-self-start   -> alinha horizontalmente o flex-item ao lado esquerdo do container e deve ser aplicado na tag <div> que fica dentro da tag <div> que possui a classe row; 
+	align-self-center  -> alinha horizontalmente o flex-item ao lado center do container e deve ser aplicado na tag <div> que fica dentro da tag <div> que possui a classe row;
+	align-self-end     -> alinha horizontalmente o flex-item ao lado esquerdo do container e deve ser aplicado na tag <div> que fica dentro da tag <div> que possui a classe row;
+
+Alinhamento horizontal colunas de Grid
+	justify-content-start  -> alinha toda a área ao lado esquerdo do container e deve ser aplicado na tag <div> que possui a classe row;
+	justify-content-center -> alinha toda a área no centro do container e deve ser aplicado na tag <div> que possui a classe row;
+	justify-content-end    -> alinha toda a área ao lado direito do container e deve ser aplicado na tag <div> que possui a classe row;
+
+Distribuição de Grid
+	justify-content-around  -> distribui de forma uniforme o flex-item, aplicando espaço antes da primeira e da última área e deve ser aplicada na tag <div> que possui a class row;
+	justify-content-between -> distribui de forma uniforme o flex-item, contudo, não deixa espaços entre o primeiro e última área e deve ser aplicada na tag <div> que possui a class row;
+
+Removendo espaçamentos de Grid
+	no-gutters -> remove espaçamento das áreas e deve ser aplicado na tag <div> que possui a classe row;
+
+Classes de Flexbox (não precisa da classe row, pode ser aplicado em qualquer <div> ou outro elemento)
+	d-flex           -> cria um flex-container, parecida com a classe row e deve ser aplicada na tag <div>-pai;
+
+	flex-column      -> define a direção dos flex-itens, deixando os flex-itens empilhados e deve ser aplicada na tag <div>-pai;
+	flex-row         -> define a direção dos flex-itens, é o padrão caso não seja aplicada nenhuma dessas classes junto a d-flex, ou seja, deixa os flex-itens um ao lado do outro, começando da esquerda para direita e deve ser aplicada na tag <div>-pai;
+	flex-row-reverse -> define a direção dos flex-itens, deixa os flex-itens um ao lado do outro, começando da direita para esquerda, de trás para frente e deve ser aplicada na tag <div>-pai;
+
+	Alinhamento horizontal
+	justify-content-start   -> alinha o flex-container à esquerda e deve ser aplicada na tag <div>-pai;
+	justify-content-center  -> alinha o flex-container ao centro e deve ser aplicada na tag <div>-pai;
+	justify-content-end     -> alinha o flex-container à direita e deve ser aplicada na tag <div>-pai;
+	justify-content-around  -> distribui horizontalmente o flex-container de maneira uniforme, aplicando espaços no início antes do primeiro e último flex-item e deve ser aplicada na tag <div>-pai;
+	justify-content-between -> distribui de forma uniforme o flex-item, contudo, não deixa espaços entre o primeiro e última área e deve ser aplicada na tag <div>-pai;
+
+	Colunas
+	flex-column         -> define a direção dos flex-itens, deixando os flex-itens empilhados e deve ser aplicada na tag <div>-pai;
+	flex-column-reverse -> deixa os flex-itens emplilhados, no sentido de baixo para cima do container e do último para o primeiro e deve ser aplicada na tag <div>-pai;
+
+	Alinhamento vertical
+	align-items-start    -> alinha verticalmente a área ao topo do container e deve ser aplicada na tag <div>-pai;
+	align-items-center   -> alinha verticalmente a área ao centro do container e deve ser aplicada na tag <div>-pai;
+	align-items-end      -> alinha verticalmente a área na parte de baixo do container e deve ser aplicada na tag <div>-pai;
+	align-items-baseline -> alinha a área pelo conteúdo/texto e não pela caixa (espaçamento) e deve ser aplicada na tag <div>-pai;
+	align-items-stretch  -> é o padrão, estica os flex-item para que ocupem toda a altura da tag <div>-pai;	
+
+	Alinhamento vertical individual
+	align-self-start    -> alinha verticalmente o flex-item ao lado esquerdo do container e deve ser aplicado na tag <div> que fica dentro da tag <div>-pai; 
+	align-self-center   -> alinha verticalmente o flex-item ao lado center do container e deve ser aplicado na tag <div> que fica dentro da tag <div>-pai;
+	align-self-end      -> alinha verticalmente o flex-item ao lado esquerdo do container e deve ser aplicado na tag <div> que fica dentro da tag <div>-pai;
+	align-self-baseline -> alinha verticalmente o flex-item baseado no texto e deve ser aplicado na tag <div> que fica dentro da tag <div>-pai;	
+	align-self-stretch  -> ocupa todo o espaçamento e deve ser aplicado na tag <div> que fica dentro da tag <div>-pai;
+
+Margin de Grid
+	mr-auto -> aplica uma margem direita padrão ao flex-item e deve ser aplicada na tag <div>-filha;
+	ml-auto -> aplica uma margem esquerda padrão ao flex-item e deve ser aplicada na tag <div>-filha;
+	mt-auto -> aplica uma margem superior padrão ao flex-item e deve ser aplicada na tag <div>-filha;
+	mb-auto -> aplica uma margem inferior padrão ao flex-item e deve ser aplicada na tag <div>-filha; 	
+
+	Obs. Para centralizar horizontalmente: <div class="mr-auto ml-auto"></div> ou <div class="mx-auto"></div>; 
+		 Para centralizar verticalmente: <div class="mt-auto mb-auto"></div>;
+
+Wrap de Grid (quebra ou não para a próxima linha)
+	flex-nowrap -> é o padrão do sistema flexbox, ou seja, os flex-itens ficarão um ao lado do outro e deve ser aplicada na tag <div>-pai;
+	flex-wrap   -> os flex-itens serão "quebrados"/próxima linha para que possa se ajustar e deve ser aplicada na tag <div>-pai;
+
+Imagens
+	img-fluid     -> a imagem se adapta ao container e deve ser aplicada na tag <img>;
+	img-thumbnail -> redimensiona a imagem para o tamanho de thumbnail (200x200) e deve ser aplicada na tag <img>;
+
+	Arredondar os cantos da imagem
+	rounded        -> arredonda todos os cantos;
+    rounded-top    -> arredonda os cantos superiores;
+    rounded-bottom -> arredonda os cantos inferiores;
+    rounded-right  -> arredonda os cantos direitos;
+    rounded-left   -> arredonda os cantos esquerdos;
+    rounded-circle -> arredonda todo o elemento , transformando-o em um círculo;
+
+Carousel (slider)
+	
+	Slider simples (sem controles, as imagens alternam sozinhas)
+	carousel             -> deve ser aplicada na tag <div> que engloba os elementos do slide junto com a classe slide;
+	slide                ->	deve ser aplicada na tag <div> que engloba os elementos do slide junto com a classe carousel;
+	data-ride="carousel" -> o atributo deve ser aplicado na tag <div> que engloba os elementos do slide;
+	carousel-inner       -> deve ser aplicada na tag <div> inferior que enbloga os elementos;
+	carousel-item        -> deve ser aplicada na tag <div> que engloba o item que se deseja exibir;
+	active               -> indica qual imagem será exibida primeiro e deve ser aplicada na tag <div> que engloba o item que se deseja exibir junto com carousel-item;
+
+	Slider com controle (os controles (tag <a>) devem ficar abaixo, mas dentro da tag <div> com a classe carousel e slide)
+	carousel-control-prev      -> deve ser aplicada na tag <a> que engloba a tag <span>/<i>;
+	carousel-control-next      -> deve ser aplicada na tag <a> que engloba a tag <span>/<i>;
+	data-slide="prev"          -> atributo que indica que é o botão "anterior" (usado pelo jquery) e deve ser usado na tag <a> que engloba a tag <span>/<i>;
+	id="#nome-div"             -> nome do id aplicada na tag <div> que possui a classe carousel e slide e deve ser aplicado atributo href="" da tag <a>;
+	carousel-control-prev-icon -> cria o ícone do slider e deve ser aplicada na tag <span>/<i> que está dentro da tag <a>;
+	carousel-control-next-icon -> cria o ícone do slider e deve ser aplicada na tag <span>/<i> que está dentro da tag <a>;	
+
+	Slider com controles/indicadores (os indicadores (tag <ol><li>) devem ficar acima da tag <div> que possui a classe carousel-inner)
+	carousel-indicators       -> deve ser aplicada na tag <ol> que está abaixo da tag <div> que possui a classe carousel e slide;	
+	data-target="#id"         -> o id deve ser o mesmo da tag <div> que possui a classe carousel e slide e deve ser aplicada na tag <li> que está dentro da tag <ol>
+	data-slide-to="0,1,2,..." -> atributo que deve ser aplicado na tag <li> que está dentro da tag <ol> e a numeração deve ser igual a quantidade de imagens que contém o slider, a contagem começa do zero (0);
+	active                    -> indica qual a imagem será exibida primeiro e deve ser aplicada na tag <li> que está dentro da tag <ol>;
+
+	Slider com legenda
+	carousel-caption -> aplica legenda em uma imagem e deve ser aplicada na tag <div> que engloba o elemento que será a legenda (ex: <h1>) e que está dentro da tag <div> que possui a classe carousel-item;
+
+Favicon
+	Colar o link abaixo depois da tag <title>
+	<link rel="icon" href="pasta/nome-do-icone">
+
+Arquivos SVG
+	São arquivos vetoriais
+
+Sobrescrever formatações do Bootstrap
+	É necessário indicar no estilo css as classes/id até chegar a classe/id do elemento que se deseja aplicar a formatação. Um dica: basta clicar com o botão direito em cima do elemento no chrome e clicar em inspecionar. Caixa que abrir, na segunda linha, basta copiar o aninhamento das classes. 
+	.navbar-light .navbar-nav .nav-link {color:white;}
+	<nav class="navbar-light">
+		..
+		<ul class="navbar-nav">
+			..
+				<a></a>
+			..
+		</ul>
+		..
+	</nav>
+
+Converter Pixels para EM e vice-versa
+	https://www.w3schools.com/tags/ref_pxtoemconversion.asp
+
+Criar imagens randômicas/aleatórias
+	https://source.unsplash.com/
+
+
+Acessibilidade
+	sr-only -> o elemento que possui esta classe só aparecerá para leitores de tela;	
+ 

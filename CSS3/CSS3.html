@@ -1,0 +1,1016 @@
+<!-- Formas de utilização de CSS 3:
+	External style sheet <link rel="stylesheet" type="text/css" href=""> (Recomendação oficial)
+	Internal style sheet -> <style type="text/css"> </style>
+	Inline style -> style="propriedade: valor;"
+
+
+-- Comentários em css ---------------------------------------------------------------------
+
+/* */
+
+-- Internal style sheet ------------------------------------------------------------
+
+	Sintaxe
+		<style type="text/css">
+			
+			seletor(tag, classe, id){
+				propriedade: valor;
+			}
+
+		</style>
+	
+
+-- Inline style ------------------------------------------------------------
+
+	Sintaxe
+	style="propriedade: valor;" 
+	
+
+-- Class --------------------------------------------------------------------
+
+	Sintaxe
+.azul{
+	color: blue;
+}
+
+	Pode ser utilizada duas classes em uma mesma tag
+<li class="home primeiro"></li>
+	
+
+-- ID --------------------------------------------------------------------
+
+	Sintaxe
+	#principal{
+		color: blue;
+	}
+
+-- DIV e SPAN --------------------------------------------
+
+	DIV -elementos em bloco <div> </div>
+	SPAN - elemento inline, usado geralmente para formatar texto <span> </span>
+
+-- BORDER ---------------------
+	Sintaxe
+	border: 1px(espessura) solid (tipo de borda) red (cor da borda);
+
+	ou definir valores e tipos para cada uma três opções:
+
+	border: 1px(cima) 1px(direita) 1px(baixo) 1px(left) 
+			solid(cima) dashed dotted outsed red(cima) 
+			green(direita) blue(baixo) yellow(left)
+	
+	border-collapse: separate (aplica borda individual para cada célula - padrão) collapse (une as bordas das células, formando uma borda única);
+OBS: Deve ser aplicado na tag <table>
+
+	border-color: blue; (aplica uma cor azul na borda)
+
+	Arredonda os cantos de elementos, incluse imagens. O arredonamento dos cantos segue o seguinte sentido: canto superior esquerdo -> superior direito -> inferior direito -> inferior esquerdo. No caso de dois valores (ex: border-radius: 20px 10px;) o sentido é: 20px para os cantos superior esquerdo e inferior direito; 10px para os cantos superior direito e inferior esquerdo.
+
+	border-radius: 20px 10px;
+	border-radius: 10px 50px 80px 100px;
+	border-top-left-radius: 50px;
+	border-top-right-radius: 100px;
+	border-bottom-right-radius: 20px;
+	border-bottom-left-radius: 55px;
+
+	Alguns browsers não suportam o atributo border-radius e, para isso, é necessário utilizar os "prefixos". Os atributos com prefixos devem ficar em cima do atributo normal, como no exemplo abaixo
+	
+	-webkit-border-radius: 500px; (Chrome, Safari, versões mais recentes do Opera.)
+	-moz-border-radius: 500px; (Firefox)
+	border-radius: 500px;
+
+-- FONTES ----------------------
+
+font-size: 30px; (define o tamanho da fonte)
+font-family: "Times New Roman", Times, serif; (define o tipo de família a ser usada no projeto)
+Obs: 
+	Para Fontes que possuem mais de uma palavra deve ser utilizado as aspas duplas.
+	Pode se definido mais de uma fonte padrão, caso no PC não tenha a primeira fonte (Times New Roman), será utilizada a próxima fonte (Times), caso no PC não tenha nenhuma das duas, será utilizada uma outra fonte do tipo serif.
+
+Fontes Google
+Link: https://fonts.google.com/
+Basta clicar em cima do + ao lado da fonte,abrir a tela com a fonte selecionada e copiar o link da fonte e código css para dentro do arquivo
+
+Outros links para download de fontes
+https://www.dafont.com/pt/
+
+16px tamanho padrão dos navegadores
+
+px -> tamanho fixo
+% -> tamanho em porcentagem (100% equivale ao padrão que o navegador utiliza como referência, ou seja 16px)
+em -> tamanho relativo ao container pai (1em equivale ao tamanhao padrão do container pai)
+   -> pode ser expressa assim: 1em, 1.5em, 0.5em,etc...
+
+A preferência sempre será do filho em relação ao pai
+
+font-weight: bold; (negrito)
+ou
+font-weight: 100 a 900; (negrito)
+
+font-style: italic; (itálico)
+	
+	União dos atributos acima
+font: font-style font-variant font-weight font-size/line-height font-family (outras opções);
+
+O formato .otf não é usado para web. Assim, é necessário transformar esse formato para o formato padrão de fonte da web que é .woff (web open font format)
+Link para conversão: (utilizar a fonte no formato .woff e não a .wott2)
+https://transfonter.org/
+
+Utilizar fontes customizadas
+Customizando para utilização (deve ser feito o procedimento abaixo para cada fonte nova)
+	@font-face {
+		font-family: "Road Rage"; (você define o nome da fonte, para fontes com um nome não precisa das aspas. Ex: font-family: Road;)
+		src: url(fonts/RoadRage.woff); (local onde está a fonte)
+	}
+Para utilzar a fonte acima
+	h3 {
+		font-family: "Road Rage";
+	}
+
+-- TEXTO -------------------------
+
+color: red; (define a cor do texto)	
+
+text-decoration: none; (retira o underline dos links)
+text-decoration: underline; (aplica _____ no texto)
+text-decoration: overline;  (aplica uma linha superior ao texto)
+text-decoration: line-throught; (deixa o texto tachado, como se estivesse errado)
+
+text-indent: 5px; (cria identação no texto)
+
+line-height: 5px; (aumenta o espaçamento entre textos, muito parecido com o padding)
+
+text-transform: uppercase; (transforma todo o texto em maiúsculo)
+
+letter-spacing: 0.1em; (determina o espaçamento entre as letras e espaçamento negativo -2em, junta as letras)
+
+text-align: left / center / right / justify; (alinha o texto)
+
+text-justify: inter-word;  (justifica o text)
+
+text-overflow: clip|ellipsis|string|initial|inherit; (especifica como o conteúdo excedido que não é exibido deve ser mostrado ao usuário)
+Deve ser usado com os atributos abaixo
+div {
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: clip|ellipsis|string|initial|inherit;
+}
+
+text-shadow: -20px 20px 5px 10px black/#ccc/rgba(0,0,0,1); (aplica uma sombra ao texto. O primeiro parâmetro movimenta a sombra na horizontal; o segundo movimenta a sombra na vertical; o terceiro determina o blur (suavidade/borrão); o quarto define o quanto a sombra irá se espalhar (spread); o quinto parâmetro determina a cor da sombra)
+
+Para centralizar verticalmente um texto, basta usar o atributo line-height: 2.1em; (por exemplo)
+
+
+-- BACKGROUND ------------------------------
+
+background: blue;
+
+background-color: blue (aplica somente a cor de fundo do background)
+
+background-image: url('yoshi.png);
+ou
+background-image: url('https://images.tcdn.com.br/img/img_prod/444589/produto_teste_7080_1_20180221140614.png');
+ba
+
+background-repeat: repeat(padrão) / no-repeat(não repete) / repeat-y (repete na vertical) e repeat-x (repete na horizontal)
+
+background-attachment: scroll (a imgem acompanha a rolagem) ou fixed (a imagem permanece fixa)
+
+background-position: left/center/right (alinhamento na horizontal - primeiro valor) center/top/bottom (alinhamento na vertical)
+	ou
+background-position: 10px;
+
+	União dos atributos acima
+background: blue url('yoshi.png') repeat-x scroll center top;
+
+background-size: cover; (amplia a imagem de modo que ela ocupe todo o fundo do container no qual está inserido, mesmo que tenha que redimensioná-la, contudo, ao redimensionar a tela, a imagem não fica centralizada. Para resolver este problema é interessante usar o atributo backhround-position: center; Desse modo, a imagem sempre ficará centralizada)
+
+background: linear-gradient (to bottom ou 50dg, #faa600, #f68a00) (aplica um gradiente linear no fundo, somente os navagadores atualizados possuem suporte a esse tipo de estilo)
+
+background: rgba(0,0,0,0.6); (aplica uma fundo transparente e o valor 0.6 indica o grau de transparência)
+
+Para aplicar uma imagem em cima de outra
+background: url(../imagens/capa.png), url(../imagens/ruido.png), linear-gradient(50dg, #ff4169, #7c26f8); (Nesse caso a imagem "capa.png" ficará em cima, logo em seguida a imagem "ruido.png" e, por último, o degradê)
+
+-- BOX MODEL ----------------------------
+
+-- PADDING -----------------------------
+
+	Padding (aplica espaço interno e é contabilizado na altura e largura do elemento, ou seja, se um elemento tem width: 100px; e padding: 10px; o elemento ficará com a largura de 100px + 10px = 110px;. Para evitar isso, basta usar o atributo box-sizing: border-box; com os prefixos de browsers)
+
+padding-top: 5px; (aplica espaço interno para cima)
+padding-bottom: 5px; (aplica espaço interno para baixo)
+padding-left: 5px; (aplica espaço interno para esquerda)
+padding-right: 5px; (aplica espaço interno para direita)
+
+padding: 5px (aplica espaço interno para todos os lados)
+ou
+padding: 5px (top e bottom) 5px (left e right);
+
+-- MARGIN -----------------------------
+
+	Margin (aplica espaço externo)
+margin-top: 20px; (aplica espaço externo para cima)
+margin-right: 20px; (aplica espaço externo para direita)
+margin-left: 20px;  (aplica espaço externo para esquerda)
+margin-bottom: 20px;  (aplica espaço externo para baixo)
+
+margin: 5px; (aplica espaço interno para todos os lados)
+ou
+margin: 5px(top e bottom) 5px(left e right);
+
+	Margin Collapse
+As margens se sobrepõe, ou seja, elas não são somadas. Prevalece a margin com o valor maior. Além disso, nos elementos com o atributo clear=both, a margin superior fica colada com a margin inferior do elemento que possui o float. Para resolver este problema, deve-se aplicar margin-bottom em todos os elementos flutuantes que estão acima do elemento com o clear=both;
+
+	Alinhamento AUTO
+margin: 5px auto; (centraliza o elemento horizontalmente)
+
+	Margin Negativa
+margin-top: -60px; (aplica uma margem para "fora do elemento", ou seja, o elemento em vez de descer, irá subi)
+
+-- BOX-SIZING -------------------------------
+
+box-sizing: border-box; (evita que o atributo padding entre na contagem do width e height do elemento.)
+
+Prefixos de browsers
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+
+--FLOAT --------------------------------------------------------
+
+	Float (permite que um objeto fique ao lado de outro (inline), ou seja, flutue)
+float: none / left / right; 
+
+Os objetos que não possuem o float podem ficar sobrepostos aos objetos que possuem o float;
+
+-- CLEAR -------------------------------------------------
+
+	Clear (permite ao objeto voltar ao fluxo normal)
+clear: none / left / right / both (nenhum elemento flutuante no lado esquerdo e direito);
+
+Uma técnica muito usada é usar o float no elemento pai para que este continue no fluxo normal.
+Ex: ul{
+		float: left; (poderia ser usado o clear: both;)
+	}
+
+	ul li{
+		float: left;
+	}
+
+Outa técnica usada é aplicar o atributo clear: both no último elemento, caso não tenha, crie uma div vazia e aplique esse atributo, como no exemplo abaixo;
+	<div id="menu-locais">
+		<span class="locais" style="float: left;">
+			Rio de Janeiro - São Paulo - Belo Horizonte
+		</span>
+		<a class="reserva" href="" style="float: right;">Reservar</a>
+		<div style="clear: both;"></div>
+	</div>
+
+
+-- DISPLAY INLINE, BLOCK E INLINE-BLOCK ---------------------------------------
+
+Block -> a largura do elemento ocupa todo o espaçamento da tela e ficam um abaixo do outro e é possível aplicar margem, padding e width.
+(Ex: <h1>, <p>, <table>)
+
+Inline -> a largura do elemento é de acordo com o seu conteúdo e ficam um ao lado do outro e se não cabe na mesma linha, o elemento irá para a próxima linha. Alem disso, não é possível aplicar margem, padding e width.
+(Ex: <a>, <span>, <img>)
+
+Inline-Block -> a largura do elemento é definida de acordo com o seu conteúdo (inline), mas ficam um abaixo do outro (block)
+(Ex: display: inline-block;)
+
+display: inline; (transforma um objeto do tipo block em um objeto do tipo inline)
+display: block; (transforma um objeto do tipo inline em um objeto do tipo block e ocupa toda a largura)
+display: inline-block (transforma um objeto inline em block, mas mantém a largura do elemento. Obs. O objeto será enviado para a próxima linha somente se não couber na mesma linha)
+display: none; (esconde um elemento)
+
+-- POSIÇÃO STATIC, RELATIVE, ABSOLUTE e FIXED ----------------------------------
+	
+	Static 
+position: static; (posição padrão)
+
+	Relative (A posição é alterada conforme a sua posição inicial/padrão no documento.Precisa utilizar propriedades de deslocamento para movimentar o elemento: top / right / bottom / left)
+
+position: relative;
+top: 5px; / right: 5px; / bottom: 5px; / left: 5px; (Propriedades de deslocamento. Permite valores negativos. Ex: top: -5px;. Se colocar o valor 0 ZERO, o elemento voltará a posição inicial. Ex: top: 0px;)
+	
+	Absolute (A posição é alterada em relação ao container que o elemento está inserido. Se o container não possuir uma posição diferente de static (padrão), será considerado o corpo do documento <body> como parâmetro. O elemento sai do fluxo normal e não afeta o fluxo dos demais, ou seja, o elemento é ignorado. Precisa utilizar propriedades de deslocamento para movimentá-lo em relação ao container-pai: top / right / bottom / left. Para o funcionamento correto do position: absolute;, deve-se aplicar no mesmo elemento, os atributos width, height, left ou right ou top ou bottom)
+
+position: absolute;
+top: 5px; / right: 5px; / bottom: 5px; / left: 5px; (Propriedades de deslocamento)
+	incluir no container pai:
+	position: relative; ou position: absolute; ou position: fixed;
+
+	Fixed (A posição é fixa em relação à janela do navegador. Precisa utilizar propriedades de deslocamento para movimentá-lo: top / right / bottom / left)
+
+position: fixed;
+top: 5px; / right: 5px; / bottom: 5px; / left: 5px; (Propriedades de deslocamento)
+
+
+-- Z-INDEX (EMPILHAMENTO) ----------------------------------------------------
+
+	Z-Index (determina a "camada" do elemento, ou seja, quem fica embaixo ou em cima. Quanto maior o número, mais à frente o elemento ficara da tela. Pode ser qualquer valor)
+z-index: 0; (este elemento ficará embaixo)
+z-index: 1; (este elemento ficará emcima)
+
+Se o número de z-index de um elemento for igual ao z-index de outro elemento prevalecerá a ordem do documento, ou seja, o último elemento ficará na em cima 
+
+-- LINK ---------------------------------------------------------
+
+Link Não Visitado
+a:link{
+	color: #b9c941;
+}
+
+Link Visitado
+a:visited{
+	color: orange;
+}
+
+Link Hover, passa o cursor sobre o link
+a:hover{
+	color: #6d790f;
+}
+
+Link Ativo, quando clicado
+a:active{
+	color: #e4f371;
+} 
+
+Podem ser combinados
+a:link, a:visited{
+	color: orange;
+}
+
+Geralmente os links não visitados e visitados têm a mesma formatação.
+
+É importante manter a sequência de formatação dos links: a:link{} , a:visited{} ,
+ a:hover{} , a:active{}
+
+-- LISTAS --------------------------------------------------
+
+Remove a listagem da tag <ul></ul>
+ul{
+	list-style-type: none;
+	ou
+	list-style: none;	
+}
+
+Deixar as listas/iens um ao lado do outro, como menu
+ul li{
+	float: right; (os itens ficarão alinhados à direita um do outro)
+}
+
+-- SELETORES ---------------------------------------
+	
+	Seletor Universal (O * significa tudo)
+*{}
+
+Usado geralmente para limpar a formatação padrão dos elementos
+
+	Seletor de texto
+h1{}
+ou
+h1, h2, h3{}
+
+	Seletor de classe
+.verde{} (aplica a propriedade em todos os elementos que possuem essa classe)
+ou
+p.verde{} (aplica a propriedade somente nos parágrafos que possuem essa classe) 
+
+	Seletor de ID(#)
+#ID{}
+ou
+p.#ID{}
+
+	Seletor de Filho
+li>a{} (aplica a propriedade somente nos filhos indicados; nesse caso, será aplicada a formatação somente aos links que estão imediatamente inferior à tag <li>)
+Ex: <li><a href="">teste</a></li>
+
+	Seletor de Descendente
+p a{} (aplica a formatação ao elemento que está descendendo de outro; diferente do seletor de filho, o elemento descendente basta residir dentro de um elemento pai, mesmo havendo outros elementos aninhados; nesse caso será aplicada a formatação aos links que estão dentro de um parágrafo, mesmo não sendo filho direto)
+Ex: <p><span><a href=""></a></span></p>
+	
+	Neste caso será aplicado somente aos links que estão dentro de um conteiner(<div></div>) que possui o id '#link'
+#link a.link{
+	color: red;
+}
+
+	Neste caso será aplicado a todos os links da página
+a.link{
+	color: red;
+}
+
+	Seletor de irmão adjacente
+h1+p{} (aplica formatação ao elemento mais próximo de outro / irmão, ou seja, que está imediatamente abaixo ou na sequência; nesse caso, será aplicada a formatação somente no parágrafo <p></p> que está após o <h1>)
+Ex:	<p>Parágrafo 0</p> 
+	<h1>Título</h1>
+	<p>Parágrafo 1</p> (será aplicada a formatação somente nesse parágrafo)
+	<p>Parágrafo 2</p>
+
+	Seletor de irmão geral
+h1~p{} (aplica formatação aos elementos posteriores; nesse caso, será aplicada formatação a todos os parágrafos posteriores a um <h1></h1>; diferente do seletor de irmão adjacente, aqui poderá ser aplicado formatação a mais de um elemento, desde que seja do mesmo tipo e posterior ao elemento principal)
+Ex: <p>Parágrafo 0</p> (não será aplicada formatação)
+	<h1>Titulo</h1>
+	<p>Parágrafo 1</p> (será aplicada formatação)
+	<p>Parágrafo 2</p> (será aplicada formatação)
+
+-- HERANÇA ------------------------------
+
+As propriedades border e background não são herdadas
+
+Seletor mais específico terá precedência sobre regras mais gerais. O ID prevalece sobre Class. Não importa a ordem.
+Ex: 
+3 - *{} (regra geral)
+2 - h2{} (regra específica)
+1 - h2.verde{} (regra muito específica - esse será o atributo aplicado)
+
+	ou 
+
+4 -	*{} (regra geral)
+3 -	h2{} (regra específica)
+2 -	h2.verde{} (class)
+1 - h2#verde{} (id- esse atributo será aplicado)
+
+A útima propriedade é aplicada em caso de conflito, ou seja, com dois ou mais seletores iguais prevalecerá a formatação do último. Além disso, a propriedade específica herda as informações da propriedade geral. Caso queira definir um atributo como importante/prioritário, basta digitar !important ao lado do atributo.
+	#pagina p{
+		color: red !important;
+	}
+
+	#pagina p{
+		color: blue; (pela regra este atributo seria aplicado, mas como há !important no atributo acima, aquele terá prioridade)
+	}
+
+	border-bottom: 1px solid red;
+	border: 1px solid red;
+	border: 5px dashed green; (esta borda será aplicada ao elemento e não a primeira, porque é a última propriedade)
+
+	Propriedade geral
+	a:hover{
+		text-decoration: underline;
+	}
+
+	Propriedade específica (mesmo não tendo aplicado o text-decoration: underline;, os links da #area-cabecalho herdarão essa propriedade)
+	#area-cabecalho a:hover{
+		color: #f7b600;
+		background: #FFF;
+		text-decoration: underline; (herdado da propriedade geral)
+	}
+
+-- MIN-WIDTH E MAX-WIDTH ------------------------------------
+
+min-width: 500px; (define a largura mínima do layout ao reajustar a tela)
+min-height: 500px;(define a altura mínima do layout)
+max-width: 900px; (define a largura máxima do layout)
+min-width: 900px; (define a altura máxima do layout) 
+
+-- OVERFLOW -------------------------------------------------
+
+overflow: visible; (padrão, ou seja, mostra as duas barras de rolagens)
+overflow: scroll; (mesmo que não tenha conteúdo extrapolando a área principal, ainda assim irá aparecer as duas barras de navagações)
+overflow: hidden/visible; (esconde a barra de rolagem/mostra a barra)
+overflow-x: hidden/visible; (esconde a barra de navegação horizontal e é interessante aplicar no body / mostra a barra de rolagem)
+overflow-y: hidden/visible; (esconde a barra de navegação vertical / mostra a barra de rolagem)
+
+-- TABELAS --------------------------------
+
+border-collapse: separate (aplica borda individual para cada célula - padrão) collapse (une as bordas das células, formando uma borda única);
+OBS: Deve ser aplicado na tag <table>
+
+tr:hover{background: #c3e6e5;} (Cria um efeito (destaca alinha) ao passar o mouse por cada linha da tabela)
+
+-- CURSOR -------------------------------
+
+cursor: pointer; (alterar o ponteiro do mouse ao passar em determinado elemento)
+
+-- INHERIT -------------------------------
+Herda a propriedade do elemento pai.
+: inherit; 
+
+-- TRANSITION ------------------------
+
+transition: background 0.4s, color 0.4s; (nesse caso aplica uma transição no background e na cor. Os valores são: propriedade, duração, timing-função, delay)
+transition: property duration timing-function delay|initial|inherit;
+
+-- TRANSFORM -------------------------
+
+transform: rotate(30deg); (rotaciona a imagem em 30 graus)
+Prefixos de browsers
+-ms-transform: rotate(30deg); (IE 9)
+-webkit-transform: rotate(30deg); (Chrome, Safari, Opera)
+
+-- APLICAR ESTILO EM ATRIBUTOS ESPECÍFICOS -------------
+
+input[type="text"]{
+	width:20em;
+}
+
+Nesse caso, será aplicado uma largura (width) somente aos inputs do tipo "text".
+
+-- OPACITY ---------------------------------
+
+Aplica opacidade nos elementos
+opacity: 0 a 1; (zero -> 100% opaco; 1 -> sem opacidade)
+
+-- FAVICON ------------------------------
+
+Ícone que fica na aba do navegador ao lado do nome da página
+
+Para utilizar, copie o link a seguir e cole abaixo da <title>:
+<link rel="icon" href="pasta/nome-do-ícone">
+
+-- MEDIDAS PIXEL, PORCENTAGEM, EM, REM ------------------
+
+Valor é tomado em relação:
+px  -> ao dispositivo (mídia) de exibição;
+em  -> ao tamanho da fonte (font-size) herdada, ou seja, do pai do elemento;
+%   -> ao tamanho proporcional do elemento em si;
+rem -> à fonte do HTML, parecido com "em";
+
+-- TRANSPARENCIA E DEGRADE ------------------------------
+Transparência
+color: rgba(255, 255, 255, 1) (o último número define a o grau de transparência, permite valores 0.5, por exemplo)
+
+Degradê Linear
+background: linear-gradient(to left/to right/to bottom/to top, red, green);
+
+Degradê Radial
+background: radial-gradient(red, blue);
+
+Permite usar mais de duas cores
+background: linear-gradient(to left/to right/to bottom/to top, red, green, blue, #ccc);
+
+
+-- NORMALIZE.CSS --------------------
+ O normalize, além de zerar as configurações, padroniza as configurações de exibições para todos os browsers. Além disso, corrige vários problemas de exibições que existem entre browsers e de css, em razão dessas diferenças. É diferente de CSS resets(zeram as configurações padrões dos browsers). 
+ Link para download: 
+ https://necolas.github.io/normalize.css/
+ 
+ Para utilizar o normalize
+ Ao entrar no link acima, clique em download e logo após, irá abrir uma página com o código. Copie o código e cole em um arquivo do tipo .css, na mesma pasta do arquivo css (ex: normalize.css)
+ Copie o código abaixo dentro da tag <head>, trocando o local (href="") da pasta do arquivo "normalize.css".
+ <link rel="stylesheet" type="text/css" href="css/normalize.css">
+
+ OBS: O normalize só deve ser usado em projetos que utilizem somente HTML e CSS. Já em frameworks, como o Bootstrap 3 e 4, não há necessidade de usar esse recurso, pois o Bootstrap, a partir da versão 4, possui um recurso chamado Reboot, que é baseado no normalize. 
+
+ -- SOMBRA ----------------------------------------
+Sombra em texto
+text-shadow: -20px 20px 5px 10px black/#ccc/rgba(0,0,0,1); (aplica uma sombra ao texto. O primeiro parâmetro movimenta a sombra na horizontal; o segundo movimenta a sombra na vertical; o terceiro determina o blur (suavidade/borrão); o quarto define o quanto a sombra irá se espalhar (spread); o quinto parâmetro determina a cor da sombra)
+
+Sombra em caixa
+box-shadow: -20px 20px 5px 10px black/#ccc/rgba(0,0,0,1);(mesmas características do atributo text-shadow)
+
+-- ANIMAÇÃO -----------------------------------
+Cria animações. O nome da animação é você quem define.
+@keyframes nome-da-animação {
+	from {(estado inicial)
+		background: red;
+		border-radius: 0px;
+		top: 0;
+		left:0
+	}
+	to {(estado final)
+		background: green;
+		border-radius: 300px;
+		top: 200px;
+		left: 200px;
+	}
+}
+
+Para utilizar essa animação em um elemento, basta usar em conjunto os seguintes atributos: 
+
+animation-name: animacao-caixa; (define o nome da animação)
+animation-duration: 5s; (duração da animação)
+animation-delay: 3s; (tempo de espera para começar a animação)
+animation-iteration-count: 2; (determina a quantidade de vezes que a animação irá repetir)
+animation-direction: alternate (começa a animação do início para fim e repete do fim para o início) / reverse (começa a animação de trás para frente);
+
+animation-fill-mode: both; (o elemento fica com o estado da última animação)
+Link para pesquisar:
+https://developer.mozilla.org/en-US/docs/Web/CSS/animation-fill-mode
+
+Aninhar todos os atributos acima
+animation: animacao-caixa 5s 3s 2 alternate;
+
+Ex: 
+.caixa {
+	wwidth: 300px;
+	height: 300px;
+	background: red;
+	position: relative;
+	animation: animacao-caixa 5s 3s 2 alternate;
+}
+
+Prefixos de browser
+@-webkit-keyframes nome-da-animação {
+	from {(estado inicial)
+		background: red;
+	}
+	to {(estado final)
+		background: green;
+	}
+}
+
+@-moz-keyframes nome-da-animação {
+	from {(estado inicial)
+		background: red;
+	}
+	to {(estado final)
+		background: green;
+	}
+}
+
+@-o-keyframes nome-da-animação {
+	from {(estado inicial)
+		background: red;
+	}
+	to {(estado final)
+		background: green;
+	}
+}
+
+@keyframes nome-da-animação {
+	from {(estado inicial)
+		background: red;
+	}
+	to {(estado final)
+		background: green;
+	}
+}
+
+-webkit-animation-name: animacao-caixa;
+-moz-animation-name: animacao-caixa;
+-o-animation-name: animacao-caixa;
+animation-name: animacao-caixa;
+
+-webkit-animation-duration: 5s;
+-moz-animation-duration: 5s;
+-o-animation-duration: 5s;
+animation-duration: 5s;
+
+-webkit-animation-delay: 3s;
+-moz-animation-delay: 3s;
+-o-animation-delay: 3s;
+animation-delay: 3s;
+
+-webkit-animation-iteration-count: 2;
+-moz-animation-iteration-count: 2;
+-o-animation-iteration-count: 2;
+animation-iteration-count: 2;
+
+-webkit-animation-direction: alternate;
+-moz-animation-direction: alternate;
+-o-animation-direction: alternate;
+animation-direction: alternate;
+
+-webkit-animation: animacao-caixa 5s 3s 2 alternate;
+-moz-animation: animacao-caixa 5s 3s 2 alternate;
+-o-animation: animacao-caixa 5s 3s 2 alternate;
+animation: animacao-caixa 5s 3s 2 alternate;
+
+-- TRANSIÇÕES ----------------------------------------
+Cria uma transição
+transition: width 2s, background 3s; (define as transições em cima de atributos já aplicadas no elemento e é interessante ser aplicado junto com o :hover)
+ou
+transition: all 2s; (aplica transição em todos atributos)
+
+Prefixos de browsers
+-webkit-transition: width 2s, background 3s;
+-moz-transition: width 2s, background 3s;
+-o-transition: width 2s, background 3s;
+transition: width 2s, background 3s;
+
+#caixa {
+	width: 300px;
+	height: 300px;
+	background: orange;
+}
+
+#caixa:hover {
+	width: 400px;
+	background: yellow;
+	transition: width 2s, background 3s;
+	transition: all 3s; 	
+}
+
+-- FLEXBOX (precisa de prefixos) --------------------------------
+
+Precisa de um container (flex-container) e dentro dele dever colocado os flex-itens.
+
+ -----  Container-pai -------
+display: flex; (aplica o flexbox e deve ser usado em conjunto com os atributos abaixo)
+
+Sentido dos elementos (horizontal)
+flex-direction: row (é o padrão, ou seja, distribui os elementos à esquerda do container, um ao lado do outro e do primeiro ao último)/ row-reverse (distribui os elementos à direita do container, um ao lado do outro e começa do último ao primeiro) / column (empilha os elementos do primeiro ao último) / column-reverse (empilha os elementos do último ao primeiro); 
+
+Quebra ou não para a próxima linha
+flex-wrap: nowrap ("aperta os elementos para que caibam na largura do container, ou seja, sem quebra de linha") / wrap (há quebra de linha, ou seja, os elementos são enviados para baixo para que caibam na largura do container) / wrap-reverse (distribui os elementos de baixo para cima, caso não tenha espaço na largura, automaticamente o elemento irá ser distribuido para a linha de cima);
+
+Alinhamento e distribuição horizontal
+justify-content: flex-start (é o padrão, ou seja, o elemento fica alinhado ao canto superior esquerdo do container-pai)/ flex-end (o elemento fica alinhado ao canto superior direito) / center (o elemento fica centralizado horizontalmente) / space-between (aplica um espaçamento uniforme entre todos os elementos, exceto no primeiro e último, os quais ficam colados no container) /space-around (aplica um espaçamento uniforme entre todos os elementos e, diferente do space-between, aplica um espaçamento antes e depois do primeiro e último elemento);
+
+Alinhamento vertical
+align-itens: stretch (é o padrão e os elementos ocupam toda a altura do container-pai, caso o elemento não tenha os atributos width/height) / center (alinha os elementos verticalmente ao centro do container-pai) / flex-start (alinha os elementos ao topo do container-pai) / flex-end (alinha os elementos ao final do container-pai) / baseline (alinha os elementos com base na parte superior do texto);
+
+  ----  Flex-itens ----------
+order: 1,2,3...; (define a ordem dos flex-itens e deve ser aplicado nos elementos flex-itens. O valor padrão é 0. Esse atributo aceita valores negativos, por exemplo order: -1;). Dica: para colocar um determinado elemento na frente de outro, basta aplicar um valor negativo no atributo order, por exemplo order: -1, uma vez que os outros elementos terão o valor 0, que é o padrão.
+
+flex-grow: 0 / 1,2,3...; (define a proporção de espaço ocupado por um item. O número 0 é valor padrão, ou seja, os elementos ficam com o tamanho que foi definido para eles, enquanto que os outros valores definem a largura proporcional que o elemento tentará ocupar)
+
+flex-shrink: 1,2,3...; (define a capacidade de redução do item. O valor padrão é 1. Quanto maior o valor, menor fica o item quando reduzida a tela)
+
+flex-basis: auto; (indica o tamanho inicial do flex item antes da distribuição do espaço restante. O valor padrão é auto, que é o valor width e height aplicado no elemento.)
+
+Verificar a compatibilidade do flexbox nos navegadores
+https://caniuse.com/#search=flexbox
+
+Correção de flexbox para IE
+https://github.com/jonathantneal/flexibility
+
+Usar prefixos Flexbox
+https://autoprefixer.github.io/
+
+-- INCORPORAR VIDEO, MAPAS NO SITE ----------------
+
+Vídeo do youtube
+Abra o vídeo do youtube, clique em compartilhar(abaixo de do vídeo) -> incorporar -> copie o link abaixo de "Embed Video" e cole no seu site.
+
+Mapa do google maps
+No site do google maps, digite o local que queira buscar -> após a busca, clique em compartilhar -> na janela que abrir, clique em cima da aba "incorporar um mapa" -> clique em copiar html e cole no seu site
+
+-- HTML5 SHIV ------------>
+<!--
+HTML5 Shiv é uma solução JavaScript, criada pela Sjoerd Visscher, para permitir o estilo de elementos HTML5 em versões do Internet Explorer anteriores à versão 9, que não permitem que elementos desconhecidos sejam estilizados sem JavaScript.
+Links:
+https://github.com/aFarkas/html5shiv
+É preciso copiar as informações do link acima que estão dentro de -> pasta dist -> html5shiv.min.js -> colar dentro de arquivo chamado "html5shiv.js", que deve ser incluído dentro do diretório do site.
+Feito isso bastas alterar a localização do arquivo no link abaixo (que fica abaixo de "Using Bower")
+-->
+		<!--[if lt IE 9]>
+			<script src="bower_components/html5shiv/dist/html5shiv.js"></script>
+		<![endif]-->
+
+
+https://cdnjs.com/libraries/html5shiv (basta copiar o link abaixo e colar dentro da tag <head>)
+
+    <!--[if lt IE 9]>
+      https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js
+    <![endif]-->
+
+<!-- DICAS ------------------------------------------------------
+O px pode ser suprimido nos valores zerados:
+	margin: 0 0;
+
+920px para largura é um tamanhao muito usado no mercado
+
+Em alguns casos as propriedades border e margin podem não funcionar em elementos inline. Para resolver esse problema, basta aplicar a propriedade display:block;
+
+Em menus horizontais é interessante utilizar float: left + clear:both; no lugar do display: inline;
+
+Display Líquido ou Fluído -> utiliza-se a porcentagem (width: 90%;) em vez de valores fixos (width: 720px;). É interessante utilizar os atributos min-width; max-width, etc...
+
+Imagem líquida -> utiliza-se a porcentagem também, mas deve ser aplicada uma classe diretamente na imagem e não na div (<img class="teste" src="">). Nessa classe deve-se utilizar porcentagem no atributo width (width: 90%;). É interessante utilizar os atributos min-width; max-width, etc...
+
+Colunas falsas só funcionam em Layouts Líquidos (container principal)
+
+width: auto; (mantém a largura padrão do elemento)
+
+Aplicar transparência em uma cor
+color: rbga(255,255,255,0.3); (o último item representa a trasnparência)
+
+Para alinhar imagens poder ser utilizado text-align: center; no container pai da imagem
+
+Colocar uma elemento acima do outro
+Pode ser utilizado o atributo abaixo no último elemento
+position: relative; 
+
+Para esconder um texto e usar uma imagem de background, pode usar o text-indent: -3000px; (por exemplo)
+
+Criar imagens randômicas/aleatórias
+	https://source.unsplash.com/
+
+Converter Pixels para EM e vice-versa
+https://www.w3schools.com/tags/ref_pxtoemconversion.asp
+
+Para fins de acessibilidade, é interessante que a div do menu lateral fique abaixo dos outros conteúdos principais, pois o leitor de tela irá ler primeiro esses conteúdos.
+
+Para usar o atributo margin: 0 auto; em um elemento com o atributo position: absolute;, é necessário atribuir uma width e os atributos left:0 e right:0 para o mesmo elemento.
+
+Para gerar um imagem quadrada basta utilizar o atributo object-fit: cover;
+
+-->	
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CSS 3</title>
+		<meta charset="utf-8">
+
+		<link rel="stylesheet" type="text/css" href="estilo.css">
+
+		<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+
+		<style type="text/css">
+
+			/*body{
+				background: green;
+				background-color: green;
+				background-image: url('yoshi.png');
+				background-repeat: no-repeat;
+				background-attachment: fixed;
+				background-position: center center;
+				background: green url('yoshi.png') no-repeat fixed center center;
+				background-size: cover;
+				background-position: 10px;
+				background: linear-gradient(to left/to right/to top/to bottom/50deg, #faa600, #f68a00);
+				background: radial-gradient(red, blue);
+
+				color: red;
+				color: #D90A0A;
+				color: rgba(255,255,255, 0.3);
+				color: rgb(255,255,255);
+				background: linear-gradient(to left/to right/to top/to bottom/50deg, #faa600, #f68a00);
+				background: radial-gradient(red, blue);
+
+				border: 1px outset red;
+				border-width: 15px;
+				border-style: outset;
+				border-color: red;
+				border-collapse: separate;
+				border-collapse: collapse;
+				-webkit-border-radius: 500px;
+				-moz-border-radius: 500px; 
+				border-radius: 20px 10px;
+				border-radius: 10px 50px 80px 100px;
+				border-top-left-radius: 50px;
+				border-top-right-radius: 100px;
+				border-bottom-right-radius: 20px;
+				border-bottom-left-radius: 55px;
+
+			 	font-style: italic;
+			 	font-weight: 900;
+			 	font-weight: bold;
+			 	font-size: 2em;
+				font-size: 60px;
+				font-size: 100%;
+				font-family: 'Oswald', sans-serif;
+				font: bold 40px 'Oswald', sans-serif;
+
+			 	text-decoration: underline;
+			 	text-align: center;
+			 	text-indent: 5px;
+				line-height: 5px;
+				text-transform: uppercase;
+				letter-spacing: 0.1em;
+				text-justify: inter-word;
+				text-overflow: clip;
+				text-overflow: ellipsis;
+				text-overflow: string;
+				text-overflow: initial;
+				text-overflow: inherit;
+				text-shadow: -20px 20px 2px rgba(0,0,0,0.2);
+
+				padding-top: 20px;
+				padding-right: 20px;
+				padding-bottom: 20px;
+				padding-left: 20px;
+				padding: 20px;
+				padding: 20px 20px;
+
+				margin-top: 20px;
+				margin-right: 20px;
+				margin-left: 20px
+				margin-bottom: 20px;
+				margin: 20px;
+				margin: 20px 20px;
+				margin: 20px 20px 20px 20px;
+				margin: 20px auto;
+
+				float: right;
+				float: left;
+
+				clear: right;
+				clear: left;
+				clear: both;
+
+				display: inline;
+				display: block;
+				display: inline-block;
+				display: none;
+
+				position: static;
+				position: relative;
+					top: 5px;
+					right: 5px;
+				position: absolute;
+					top: 5px;
+					right: 5px;
+						incluir no container-pai
+						position: relative; ou position: absolute; ou position: fixed;
+				position: fixed;
+					top: 5px;
+					right: 5px;	
+
+				z-index: 0;
+
+				a:link{color: blue;} ou a:link, a:hover{color: blue;}
+				a:visited{color: orange;}
+				a:hover{color: green;}
+				a:active{color: black;}
+
+				list-style-type: none;
+				ou
+				list-style: none;
+
+				max-width: 900px;
+				max-height: 900px;
+				min-width: 720px;
+				min-height: 720px;
+
+				overflow: visible;
+				overflow: scroll;
+				overflow: hidden;
+				overflow-x: hidden;
+				overflow-y: hidden;
+
+				tr:hover: background-color: #D90A0A;
+
+				cursor: pointer;
+
+				input[type="texte"]{width: 100px;}
+
+				transition: background 0.4s, color 0.4s;
+				
+				-ms-transform: rotate(30deg);
+				-webkit-transform: rotate(30deg);
+				transform: rotate(30deg);
+
+				opacity: 0 a 1;
+				
+				-webkit-box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				box-sizing: border-box;
+
+				object-fit: cover;
+
+				box-shadow: 20px 20px 2px 10px rgba(0,0,0,0.2);
+				text-shadow: -20px 20px 2px rgba(0,0,0,0.2);
+
+				@-webkit-keyframes nome-da-animação {
+					from {
+					background: red;
+					}
+					to {
+					background: green;
+					}
+				}
+
+				animation-name: animacao-caixa;
+				animation-duration: 5s;
+				animation-delay: 3s;
+				animation-iteration-count: 2;
+				animation-direction: alternate / reverse;
+				animation: animacao-caixa 5s 3s 2 alternate;
+				animation-fill-mode: both;
+
+				-webkit-transition: width 2s, background 3s;
+				-moz-transition: width 2s, background 3s;
+				-o-transition: width 2s, background 3s;
+				transition: width 2s, background 3s;
+				transition: all 3s;
+	
+				elemento: inherit; 
+			 }*/
+
+		</style>
+	</head>
+	<body>
+
+
+		<div id="principal">
+			<div class="top">
+				Conteudo 1
+			</div>
+
+			<div class="top">
+				Conteudo 2
+			</div>
+
+			<div>
+				Conteudo 4
+			</div>
+
+			<p class="clear">
+			É um facto estabelecido de que um leitor é distraído pelo conteúdo legível de uma página quando analisa a sua mancha gráfica. Logo, o uso de Lorem Ipsum leva a uma distribuição mais ou menos normal de letras, ao contrário do uso de "Conteúdo aqui, conteúdo aqui", tornando-o texto legível. Muitas ferramentas de publicação electrónica e editores de páginas web usam actualmente o Lorem Ipsum como o modelo de texto usado por omissão, e uma pesquisa por "lorem ipsum" irá encontrar muitos websites ainda na sua infância. Várias versões têm evoluído ao longo dos anos, por vezes por acidente, por vezes propositadamente (como no caso do humor).
+		</p>
+		</div>
+
+		<h1 class="borda">Bloco 1</h1>
+		<h1 class="borda">Bloco 2</h1>
+
+		<span  class="borda">É um facto estabelecido de que um leitor é distraído pelo conteúdo legível de uma página quando analisa a sua mancha gráfica. Logo, o uso de Lorem Ipsum leva a uma distribuição mais ou menos normal de letras, ao contrário do uso de "Conteúdo aqui, conteúdo aqui", tornando-o texto legível. Muitas ferramentas de publicação electrónica e editores de páginas web usam actualmente o Lorem Ipsum como o modelo de texto usado por omissão, e uma pesquisa por "lorem ipsum" irá encontrar muitos websites ainda na sua infância. Várias versões têm evoluído ao longo dos anos, por vezes por acidente, por vezes propositadamente (como no caso do humor).</span>
+		<span  class="borda">Inline 2</span>
+
+			
+
+	</body>
+</html>

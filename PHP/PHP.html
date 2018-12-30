@@ -1,0 +1,1107 @@
+Internet é não é a mesmo coisa de WEB
+--------------------------------------------
+Servidor APACHE
+Servidor APACHE usa a porta 80, 443;
+Servidor MySql usa a porta 3006;
+
+Configurar as páginas index
+painel xampp -> config (Apache) -> Apache (httpd.conf) -> irá abrir arquivo de texto -> ctrl + f -> digite DirectoryIndex -> mostrará quais scripts index serão procurados -> caso altere precisará reinicializar o xampp.
+
+Habilitar Tag curta
+painel xampp / C:\xampp\php\php.ini -> Config (Apache) -> PHP (php.ini) -> irá abrir arquivo de texto -> ctrl+f (pesquisar) -> digite short_open_tag e pesquise a ocorrência de "short_open_tag=Off"-> basta alterar de Off para On -> reinicie o Apache.
+--------------------------------------------------------------------
+ENDEREÇO DO SERVIDOR APACHE
+localhost/nome-do-arquivo-ou-pasta
+127.0.0.1/nome-do-arquivo-ou-pasta
+----------------------------------------------------------------------
+LINGUAGEM PHP
+O php é interpretado, ou seja, não cria um compilado/arquivo executável;
+----------------------------------------------------------
+TIPOS DE TAGS
+Tag padrão       <?php código aqui ?> -> Habitlitada
+Tag de impressão <?= código aqui ?>   -> Habilitada
+Tag curta        <? código aqui ?>    -> Desabilitada
+Asp Tag          <% código aqui %>    -> Descontinuada na versão 7
+
+<?= 'código aqui' ?> -> tag de impressão não precisa do "echo";
+
+Habilitar Tag curta
+painel xampp / C:\xampp\php\php.ini -> Config (Apache) -> PHP (php.ini) -> irá abrir arquivo de texto -> ctrl+f (pesquisar) -> digite short_open_tag e pesquise a ocorrência de "short_open_tag=Off"-> basta alterar de Off para On -> reinicie o Apache.
+--------------------------------------------------------------------
+ECHO E PRINT
+print -> é uma função e retorna 1 quando é executada corretamente;
+echo  -> é mais utilizado, não exibe array;
+--------------------------------------------------------------------
+COMENTÁRIOS
+// comentário de 1 linha
+
+#comentário de uma linha no estilo shell
+
+/*
+comentários de múltiplas linhas
+*/
+---------------------------------------------------------------
+TIPOS DE VARIÁVEIS
+**string
+$nome = 'Jota';
+**int/integer
+idade = 10;
+**float/double/real (decimal)
+A separação de fração é feita por . (ponto);
+$peso = 82.5;
+**bool/boolean (true/false)
+true  -> qualquer valor superior a 0;
+false -> 0 (zero);
+$sim = true; (true = 1. Quando uma variável representar um valor booleano(true/fale) em uma expressão lógica, não há necessidade de fazer a comparação com true/false. 
+Ex: 
+$teste = true; 
+
+if($teste) { //não precisa declarar: $teste = true;
+	#code
+}
+)
+$nao = false;(false = diferente de 1, ou seja, vazio)
+
+**Array
+$lista_frutas = []; //Array vazio
+$lista_frutas = array(); //Array vazio
+
+Sequencial (numérico)
+$lista_frutas = array('Banana', 'Maça', 'Morango', 'Uva'); //Forma de representar um array sequencial
+ou
+$lista_frutas = ['Banana', 'Maça', 'Morango', 'Uva']; //Forma de representar um array sequencial
+
+array(
+	[0] => Banana;
+	[1] => Maça;
+	[2] => Morango;
+	[3] => Uva;
+)
+
+$lista_frutas[] = 'Abacaxi'; //Acrescentar um item ao array ao sequencial
+array(
+	[0] => Banana;
+	[1] => Maça;
+	[2] => Morango;
+	[3] => Uva;
+	[4] => Abacaxi; //Item acrescentado
+)
+
+echo $lista_frutas[2]; //Exibir um determinado item do array sequencial, nesse caso será exibido Morango.
+
+Associativo
+$lista_frutas = array('a' => 'Banana', 'b' => 'Maça', 'c' => 'Morango', 'd' => 'Uva'); //Forma de representar um array associativo
+ou
+$lista_frutas = ['a' => 'Banana', 'b' => 'Maça', 'c' => 'Morango', 'd' => 'Uva']; //Forma de representar um array associativo
+
+$lista_frutas['e'] = 'Abacaxi'; //Acrescentar um item ao array ao associativo
+$lista_frutas = array(
+	'a' => 'Banana', 
+	'b' => 'Maça', 
+	'c' => 'Morango', 
+	'd' => 'Uva',
+	'e' => 'Abacaxi'); //Item acrescentado
+
+echo $lista_frutas['a']; //Exibir um determinado item do array associativo, nesse caso será exibido Banana.
+
+Multidimensional
+$lista_de_coias = []; // Array vazio
+
+$lista_de_coias['frutas'] = array(1 => 'Banana', 2 => 'Maça', 3 => 'Morango', 4 => 'Uva'); //primeiro indíce com um array, que é o valor do array principal
+
+$lista_de_coias['pessoas'] = array(1 => 'João', 2 => 'José', 3 => 'Maria');
+//segundo índice com um array, que é o valor do array principal
+
+Array
+(
+    [frutas] => Array
+        (
+            [1] => Banana
+            [2] => Maça
+            [3] => Morango
+            [4] => Uva
+        )
+
+    [pessoas] => Array
+        (
+            [1] => João
+            [2] => José
+            [3] => Maria
+        )
+)
+
+echo $lista_de_coias['frutas'][3]; //Exibir um determinado item do array multidimensional, nesse caso será exibido Morango. 
+
+Para visualizar o array de maneira legível, é interessante utilizar o seguinte código:
+echo '<pre>';
+	var_dump($array);
+echo '</pre>';
+ou
+echo '<pre>';
+	print_r($array);
+echo '</pre>';
+------------------------------------------------------------------
+CONCATENAÇÃO
+. -> usado para concatenação;
+As aspas "" duplas se tornam um pouco mais lentas que aspas simples ''. Assim, se utilizar somente string, o ideal é usar aspas simples '', caso contrário use aspas duplas "".
+---------------------------------------------------------------------
+CONSTANTES
+define ('BD_SENHA', 'usuario_dev');
+echo BD_SENHA;
+O nome da constante deve ser maiúsculo. Para chamar a constante não é necessário o $.
+-----------------------------------------------------------------
+OPERADORES DE COMPARAÇÃO (CONDICIONAIS)
+Servem para formar as expressões condicionais para o comando if
+
+==  -> verifica se valores são iguais
+=== -> verifica se valores são iguais e do mesmo tipo
+!=  -> verifica se os valores são diferentes
+<>  -> verifica se os valores são diferentes  
+!== -> verifica se os valores são diferentes e de tipos diferentes (basta uma condição para ser verdadeiro/true)
+<   -> verifica se o valor da esquerda é menor que o da direita
+>   -> verifica se o valor da esquerda é maior que o da direita
+<=  -> verifica se o valor da esquerda é menor ou igual que o da direita (basta uma condição para ser verdadeiro/true)
+>=  -> verifica se o valor da esquerda é maior ou igual que o da direita (basta uma condição para ser verdadeiro/true)
+--------------------------------------------------------------
+OPERADORES LÓGICOS
+AND ou && -> todas as expressões devem ser verdadeiras;
+OR ou ||  -> pelo menos uma das expressões deve ser verdadeira;
+XOR       -> apenas uma das expressões deve ser verdadeira;
+!         -> inverte o resultado da expressão;
+-----------------------------------------------------------------------------
+OPERADORES ARITMÉTICOS
++ -> adição;
+- -> subtração;
+* -> multiplicação;
+/ -> divisão;
+% -> resto da divisão; (Sempre retorna valor inteiro. Ex. echo 9%4; Será mostrado na tela o valor 1, pois é o resto da divisão entre 9 e 4.)
+
++= -> soma o valor atribuído à variável; (Ex. $valor=1; $valor += 1; echo $valor; Será mostrado o valor 2.)
+-= -> subtrai o valor atribuído à variável; (Ex. $valor=1; $valor -= 1; echo $valor; Será mostrado o valor 0.)
+*= -> multiplica o valor atribuído à variável; (Ex. $valor=3; $valor *= 2; echo $valor; Será mostrado o valor 6.)
+/= -> divide o valor atribuído à variável; (Ex. $valor=4; $valor /= 2; echo $valor; Será mostrado o valor 2.)
+%= -> divide o valor da variável pelo atribuído e retorna o resto; (Ex. $valor=10; $valor %= 8; echo $valor; Será mostrado o valor 2, pois este valor é o resto da divisão entre 10 e 8.)
+-----------------------------------------------------------------------------
+OPERADORES DE INCREMENTO/DECREMENTO
+
+++$a -> adiciona uma unidade antes de retornar $a, ou seja, ao valor da variável $a será acrescido +1 na primeira vez que utilizada;
+$a++ -> retorna $a e depois adiciona uma unidade, ou seja, na próxima vez que utilizarmos a variável $a, o valor será acrescido de +1;
+--$a -> diminui uma unidade antes de retornar $a, ou seja, ao valor da variável $a será diminuído -1 na primeira vez que utilizada;;
+$a-- -> retorna $a e depois diminui uma unidade, ou seja, na próxima vez que utilizarmos a variável $a, o valor será diminuído de -1;
+--------------------------------------------------------------------------
+IF/ELSE
+
+if (condition/true) {
+	# code...
+}
+
+ou 
+
+if (condition/true) echo 'verdadeiro'; 
+
+(omitir as {}, deve ser utilizado somente em caso de uma única instrução)
+	----------------------------------
+if (condition/true) {
+	# code...
+} else {
+	# code...
+}
+	----------------------------------
+if (condition/true) {
+	# code...
+} else if {
+	# code...
+} else {
+	# code...
+}
+---------------------------------------------------------------------------
+OPERADOR TERNÁRIO
+
+Sintaxe
+<condição> ? true : false;
+
+Ex:
+$desconto_frete = false;
+
+<?= $desconto_frete ? 'SIM' : 'NÃO'; 
+
+O resultado será impresso na tela será não.
+----------------------------------------------------------------------
+SWITCH
+
+switch (variable) {
+
+	case 'value1':
+		# code...
+		break;
+
+	case 'value2':
+		# code...
+		break;
+
+	default:
+		# code...
+		break;
+}
+
+Caso nenhum dos "case" seja encontrado, o "default" será executado. O "default" é opcional e funciona como 'else' do if, ou seja, pode ser omitido. Pode ser incluído quantos "case" forem necessários. O switch faz um casting (conversão) de tipo para verificar valores, ou seja, '2' = 2. O 'break' é fundamental para interromper a execução de um determinado 'case'.
+--------------------------------------------------------------------------------
+WHILE
+
+$num = 1;
+
+while($num < 10) { //operadores de comparação/lógicos
+	
+	código aqui;
+
+	$num++; $num += 5; $num = $num + 5; etc..; //critério de parada para evitar loop infinito, deve ser usado antes do continue
+
+	continue; //usado para pular/interromper uma condição dentro do loop, ou seja, irá repetir novamente;
+
+	break; //o break pode ser usado para terminar o loop
+}
+
+Se a condição logo de cara for falsa, o laço não é executado.
+------------------------------------------------------------------------------------
+DO WHILE
+
+$x = 1;
+
+do {
+
+	código aqui // o código será executado pelo menos uma vez
+
+	$x++; $x+=5; $x = $x + 5; // critério de parada para evitar loop infinito, deve ser usado antes do continue
+
+	continue; //usado para pular/interromper uma condição dentro do loop, ou seja, irá repetir novamente;
+
+	break; //o break pode ser usado para terminar o loop
+
+} while($x < 9); // a condição é executada no final
+
+Se a condição logo de cara for falsa, o laço será executado uma única vez.
+-------------------------------------------------------------------------------
+FOR
+
+for(variavel; condicao; incremento) {
+
+	código aqui
+
+	continue; //usado para pular/interromper uma condição dentro do loop, ou seja, irá repetir novamente;
+
+	break; //o break pode ser usado para terminar o loop
+	
+}
+
+for($x = 1; $x <= 10; $x++) { // o loop começa com o valor definido na variável, no caso será 1
+	echo "$x <br>";
+}
+
+for($x=1; true; $x++) { //a condição pode ser omitida e usar o true no lugar
+	
+	if($x >= 20) { //a condição pode ser definida usando o break
+		break;
+	}
+}
+
+Se a condição logo de cara for falsa, o laço não é executado.
+------------------------------------------------------------------------------
+FOREACH (SOMENTE ARRAY e OBJETOS)
+
+foreach ($array as $valor(qualquer nome) {
+	codigo aqui;
+}
+
+ou
+
+foreach ($array as $índice(opcional/qualquer nome) => $valor(qualquer nome) {
+	codigo aqui;
+}
+
+$itens = ['sofá', 'mesa', 'cadeira', 'fogão', 'geladeira'];
+
+foreach ($itens as $subitens) {
+	echo $subitens . '<br />';
+}
+
+ou
+
+foreach ($itens as $indice => $subitens) {
+	echo $indice . ' = ' . $subitens . '.<br />';
+}
+
+ou 
+
+foreach ($itens as $indice => $subitens) {
+	echo $indice . ' = ' . $subitens;
+
+	if ($subitens == 'mesa') { //condição para quando encontrar o valor 'mesa'
+		echo '. Compre uma mesa e ganhe 25% de desconto.';
+	}
+
+	echo '<br />';
+}
+
+Percorrer array multidimensional
+
+$funcionarios = array( // array multidimensional
+	array('nome' => 'João', 'salario' => 2500), 
+	array('nome' => 'Maria', 'salario' => 3000), 
+	array('nome' => 'Júlia', 'salario' => 2200), 
+);
+
+foreach ($funcionarios as $idx => $funcionario) { //percorre o array principal ($funcionarios)
+	foreach ($funcionario as $idx2 => $valor) { //percorre cada array que possui o nome e salário
+		echo "$idx2 - $valor <br />";
+	}
+}
+
+---------------------------------------------------------------------------
+CASTING DE TIPOS COM (INT/INTEGER), (BOOL/BOOLEAN), (FLOAT/DOUBLE/REAL) E (STRING)
+
+Sintaxe
+(tipo) variável
+
+INT/INTEGER  -> pode ser transformada para FLOAT e STRING;
+FLOAT        -> pode ser transformada para INT (mantém somente a parte inteira, antes da virgula) e STRING (mantém toda a numeração);
+STRING       -> pode ser transformada para INT (a string deve conter número, senão retornará erro/false (0)), FLOAT (a string deve conter número, senão retornará erro/false (0)) e BOOL/BOOLEAN (se tiver alguma string na variável retornará 1, caso contrário não retornará nada (false));
+BOOL/BOOLEAN -> pode ser transformada para INT (se a variável for definida como 'true' será retornado o valor 1, caso a variável seja setada como false, o valor será vazio) e STRING (se a variável for definida como 'true' será retornado o valor 1, caso a variável seja setada como false, o valor será vazio);
+
+Ex:
+Casting da variável $valor de 'int' para 'bool' 
+$valor = 10; (o tipo da variável é int)
+$valor1 = (float) $valor; (o tipo foi alterado para float)
+echo gettype($valor1);
+
+Será impresso na tela float, pois a variável $valor foi convertida de 'int' para 'float'.
+-----------------------------------------------------------------------
+PRECEDÊNCIA
+O PHP dará prioridade ao que tiver dentro de parênteses ().
+-------------------------------------------------------------------------
+FUNÇÃO
+
+Sintaxe 1 - tipo void (sem retorno)
+function nome-da-função() {
+	código aqui;
+}
+
+Sintaxe 2 - tipo com retorno
+function nome-da-função($parâmetros/argumentos) {
+	código aqui;
+	return variável;
+}
+
+Chamar função sem parâmetro
+nome-da-função();
+
+Chamar função com parâmetro
+nome-da-função(parâmetro1, parâmetro2);
+
+Ex1:
+function exibirBoasVindas() {
+	echo "Bem-vindo ao curso de PHP";
+}
+
+exibirBoasVindas(); (irá exibir na tela Bem-vindo ao curso de PHP)
+
+Ex2:
+function calcularAreaTerreno($largura, $comprimento) {
+	$area = $largura*$comprimento;
+	return $area; 
+}
+
+echo calcularAreaTerreno(5,10); (neste caso precisará do echo, pois a função retorna um valor. Será exibido na tela 50.)
+ou
+$resultado = calcularAreaTerreno(5,10); (o valor retornado está dentro da variável $resultado)
+
+Regras para criar nome de função: a primeira palavra deve ser um verbo no infinitivo e todas as letras minúsculas, enquanto que a segunda e demais palavras devem ser substantivos, com a primeira letra maiúscula de cada palavra, conforme exemplos abaixo. 
+Ex: exibirBoasVindas(){}, calcularAreaTerreno() {}, encerrarJogo() {}, etc...
+---------------------------------------------------------------------
+FUNÇÕES STRING (ALGUMAS IMPORTANTES)
+
+strtolower($texto) -> transforma todos os caracteres da string em minúsculos;
+strtoupper($texto) -> transforma todos os caracteres da string em maiúsculos;
+ucfirst($texto)    -> transforma o primeiro caracter da string em maiúsculo;
+strlen($text)      -> conta a quantidade de caracteres de uma string, inclusive espaços;
+str_replace(<procura por>, <substitui por>, $texto)  -> substitui uma cadeia de caracteres por outra dentro de uma string e é case sensitive;
+substr($texto, <posicao inicial>, <qtde caracteres>) ->retorna parte de uma string. A contagem começa do 0, ou seja, o primeiro caractere está na posição 0, o segundo na posição 1, etc...;	
+------------------------------------------------------------------------------
+FUNÇÕES MATEMÁTICAS (ALGUMAS IMPORTANTES)
+
+ceil($numero)  -> arredonda o valor para cima;
+floor($numero) -> arredonda o valor para baixo;
+round($numero) -> arredonda o valor com base nas casas decimais, ou seja, se a casa decimal estiver entre .0 e .4 => arredonda para baixo / .5 => arredonda para cima;
+rand(<valor inicial>, <valor final>)  -> gera um número aleatório de 0 até randmax (maior valor possível com base no sistema operacional que está rodando a aplicação) e para descobrir o valor randmax, basta utilizar a função echo getrandmax(). Os valores inicial e final são opcionais.;
+sqrt($numero)  -> retorna a raiz quadrada;
+-----------------------------------------------------------------------------------
+FUNÇÕES DATAS
+
+date(formato)                              -> recupera a data atual;
+date_default_timezone_get()                -> descobre o timezone default da aplicação;
+date_default_timezone_set(timezone/string) -> atualiza o timezone default da aplicação. O tamanho zone padrão do Brasil no site do php.net é o America/Sao_Paulo. Caso queira mudar para o time zone do Brasil, há duas possibilidades:
+	1ª - utilizar o seguinte código na aplicação: date_default_timezone_set('America/Sao_Paulo').
+	2ª - alterar o time zone pelo servidor APACHE -> abra o control painel do XAMPP -> na linha do APACHE, clique em 'Config' -> 'PHP (php.ini)' -> e pesquise por date.timezone -> altere para America/Sao_Paulo -> reinicie o servidor APACHE;
+strtotime(data/string)                     -> transforma datas textuais (string) em segundos (timestamp) e espera a data no formato 'Y-m-d';
+Timestamp                                  -> cálcula os segundos entre 01/01/1970 e a data fornecida;
+Um dia tem 86400 segundos. Para chegar a esse resultado, basta multiplicar 24 * 60 * 60 = 86400.
+Para transformar um timestamp em dias, basta realizar o seguinte cálculo: timestamp/86400
+----------------------------------------------------------------------------------
+FUNÇÕES ARRAY 
+
+(PESQUISA ALGUMAS IMPORTANTES)
+in_array(value, $array)     -> pesquisa no array se o valor existe ou não e retorna true ou false, caso a pesquisa seja positiva -> 1 e se for negativa retornará false (vazio). 
+array_search(value, $array) -> pesquisa no array se o valor existe ou não e, diferente de in_array, em caso positivo, o array_search retorna o índice do valor pesquisado, entretanto, se a pesquisa for negativa retornará null;
+
+Para utilizar o in_array ou o array_serach em um array multidimensional, basta seguiar a sintaxe:
+in_array(value, $array[indice]);
+array_search(value, $array[indice]);
+
+(MANIPULAÇÃO DE ARRAY ALGUMAS IMPORTANTES)
+is_array($array)                 -> verifica se um parâmetro é um array e retorna true/false;
+array_keys($array)               -> retorna todas as chaves de um array, ou seja, retorna um array com os índices/chaves do array pesquisado;
+sort($array)                     -> ordena um array pelos valores em ordem alfabética e reajusta também seus índices e retorna true/false, ou seja, não retorna um array, mas altera a estrutura do array original;
+asort($array)                    -> ordena um array pelos valores preservando os índices e retorna true/false, ou seja, não retorna um array, mas altera a estrutura do array original;
+count($array)                    -> conta a quantidade de elementos de uma array e retorna um int/integer;
+array_merge($array1, $array2...) -> funde um ou mais arrays e retorna um novo array;
+explode('delimitador', $string)    -> divide uma string baseada em um delimitador e retorna um array com as partes da string;
+implode('delimitador', $array)     -> junta elementos de um array e retorna uma string separada pelo delimitador informado como parâmetro;
+---------------------------------------------------------------------------------
+FUNÇÕES DEBUG
+
+var_dump($variavel)       -> mostra informações da variável, inclusive o tipo e o valor;
+print_r($variavel)        -> mostra informações sobre a variável de maneira legível, e bastante utilizada em arrays;
+
+Ao utilizar o var_dump() ou print_r() entre as tags html <pre></pre>, o código ficará mais organizado e legível para visualizar.
+echo '<pre>';
+	var_dump($variavel);
+echo '</pre>';
+ou
+echo '<pre>';
+	print_r($variaval);
+echo '</pre>';
+--------------------------------------------------------------------------------
+OUTRAS FUNÇÕES
+
+gettype($variavel)             -> mostra o tipo da variável;
+getrandmax()                   -> mostra o maior valor randmax do sistema operacional;
+abs(integer/double/float)      -> retorna o valor absoluto de um número;
+is_null($variavel)             -> verifica se uma variável é null ou não e retorna true/false;
+empty($variavel)               -> verifica se uma variável está vazia ou não;
+header('Location: script.php') -> redireciona a página para o script;
+isset($variavel)               -> verifica se uma variável está setada,ou seja, se foi atribuído algum valor a variável, nem que seja vazio ''; 
+PHP_EOL                        -> quebra a linha e substitui \n (Linux) e \r\n (Windows);
+get_class_methods($variavel)   -> retorna um array com as classes públicas de um objeto e no lugar da variável deve ser colocado o objeto instanciado.
+file_exists('nome-do-arquivo') -> verifica se um arquivo existe e retorna true/false;
+die()                          -> mata/encerra a execução do script naquele ponto;
+parse_url()                    -> recebe uma url e retorna seus componentes em um array (path; query string);
+PHP_URL_PATH                   -> usado em conjunto com o parse_url() e retorna somente a string referente ao path (parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH););
+get_class($this)               -> retorna o local da classe 	classe por meio do $this, echo get_class($this);
+------------------------------------------------------------------------------------
+FALSE, NULL e EMPTY
+false        -> tipo de variável bool/boolean;
+null e empty -> valores especiais;
+
+null  -> null, empty(vazio) ou quando a variável não tiver nenhum valor atribuído a ela (diferente de '');
+empty -> '', false;
+false -> empty(vazio);
+
+is_null($variavel) -> verifica se uma variável é null ou não e retorna true/false;
+empty($variavel)   -> verifica se uma variável está vazia ou não;
+---------------------------------------------------------------------
+GET e POST
+
+Quando o atributo method="" não é definido na tag <form>, por padrão, é utilizado o método GET (pela url);
+
+Para enviar dados pelo formulário é necessário incluir o atributo action"nome-do-script.php" na tag <form>;
+
+O script recebe os dados nos campos do formulário pelo atributo name="senha";
+
+<form action="script.php" method="post/get"></form>
+
+GET (SUPERGLOBAL)
+O método GET passa os parâmetros pela url;
+$_GET['valor do atributo name do formulário'];
+$_GET[''] -> é um array;
+
+POST(SUPERGLOBAL)
+$_POST['valor do atributo name do formulário'];
+$_POST[''] -> é um array;
+-------------------------------------------------------------
+LOGIN e SESSION
+
+session_start() -> toda vez que trabalhar com sessão deve ser incluída esse função e sempre no início do script ou antes de output de algum dado (tipo echo);
+
+A página de login não precisa de validação da superglobal $_SESSION['nome-da-sessão'], já as outras páginas da aplicação sim;
+
+$_SESSION[''] -> é um array e os dados contidos nela podem ser recuperados por qualquer script da aplicação e cada sessão em PHP, por default, dura 3 horas, ou seja, mesmo fechando o browser, o cookie estará lá. É preciso definir um valor para a essa variável: $_SESSION['nome'] = 'valor';
+
+header('Location: script.php'); -> redireciona a página para o local do script.php;
+
+Existe duas opções de realizar logoff
+unset($_SESSION['indice']); -> remove os índices individuais do array de sessão;
+session_destroy()           -> destroi a variável de sessão, mas a variável só é destruída de fato após nova requisição;
+-------------------------------------------------------------------------
+INCLUDE, INCLUDE_ONCE, REQUIRE e REQUIRE_ONCE
+
+include("script.php"); ou include "script.php";           -> se não localizar o script, gera um erro warning (alerta), ou seja, o script continua a execução normalmente;
+include_once("script.php"); ou include_once "script.php"; -> igual ao include, entretanto permite a inclusão de um script apenas uma vez;
+require("script.php"); ou require "script.php";           -> se não localizar o script, gera um erro fatal error, ou seja, para a execução do script;
+require_once("script.php"); ou require_once "script.php"; -> igual ao require, entretanto permite a inclusão de um script apenas uma vez;
+
+O ideal é utilizar o require_once("script.php");
+---------------------------------------------------------------------------------
+FOPEN, FWRITE, FCLOSE, FEOF, FGETS
+
+fopen('nome-do-arquivo.extensao', 'r, r+, w, w+, a...'); -> o primeiro parâmetro indica o nome do arquivo que deve ser aberto e caso ele não exista será criado um arquivo com esse nome, já o segundo parâmetro define se o arquivo será somente leitura, onde será posicionado o cursor, etc..;
+fwrite($variavel-arquivo-criado, $conteudo) -> 'escreve' dentro do arquivo criado ou aberto;
+fclose($variavel-arquivo-criado);           -> fecha o arquivo;
+feof($arquivo)                              -> verifica o fim de arquivo, ou seja, retorne true caso encontre o fim do arquivo, caso contrário retorna false;
+fgets($arquivo, bits/fim-de-linha) -> com base no arquivo aberto e na posição do cursor recupera o que estiver na linha, conforme o segundo parâmetro que pode ser em bits ou quebra de linha (caso não passe o segundo parâmetro, o padrão será o fim da linha);
+
+$arquivo = fopen('arquivo.txt', 'a'); //cria o arquivo
+$conteudo = 'Teste de arquivo.'; //conteúdo a ser inserido no arquivo
+fwrite($arquivo, $conteudo); //escreve o conteúdo dentro do arquivo
+fclose($arquivo); // fecha o arquivo
+-----------------------------------------------------------------------------
+CRIPTOGRAFIA
+
+md5() -> cria um hash de 32 caracteres;
+
+-----------------------------------------------------------------------------
+SEGURANÇA
+
+O ideal é salvar os scripts relacionados a arquivos que contenham informaçãos sigilosas em outra pasta diferente do local público da aplicação (htdocs) e utilizar o require/require_once para incorporar o script à aplicação.
+----------------------------------------------------------------------
+ERRO
+
+ini_set('error_reporting', 'E_STRICT'); -> desabilita mensagens que alertem sobre uso de código obsoleto ou que poderá não estar seguro no futuro ao executar o script, isso pode ser feito também no arquivo php.ini;
+
+//configurar erros no php.ini
+abra o control painel -> cliquem em config -> php.ini -> localize error_reporting=E_ALL & ~E_DEPRECATED & ~E_STRICT -> esse é o padrão do PHP e significa:
+E_ALL = mostra todos os erros E_All menos os erros depreciados ou erros do tipo E_STRICT;
+
+//configurar erros no arquivo php
+error_reporting(E_ALL & ~E_NOTICE); // neste exemplo será mostrado todos os erros menos os notices;
+
+//pasta do Apache com log de erro
+xampp/apache/logs/error.log 
+
+//capturar qualquer tipo de erro quando acontecer
+function nome_funcao($code, $message, $file, $line){
+	echo json_encode(array(
+		"code" => $code,
+		"message" => $message,
+		"file" => $file,
+		"line" => $line
+	));
+}
+
+//diferença entre Try/Catch e Error_handler
+Try/Catch     -> trata erros que você define;
+Error_handler -> é chamado quando ocorrer o erro, não importa onde e nem o tipo; 
+
+//tratando exceptions
+try {
+
+	$conexao = new PDO('mysql:host=localhost;dbname=php_com_pdo', 'root', '');	
+
+	$query = //consulta ao banco de dados
+		'CREATE TABLE tb_usuarios(
+			id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+			nome VARCHAR(50) NOT NULL,
+			EMAIL VARCHAR(100) NOT NULL,
+			SENHA VARCHAR(32) NOT NULL
+		)
+	';
+
+	$conexao = exec($query); // o exerc() processa a consulta(query) junto ao banco de dados e retorna o número de linhas modificadas ou removidas, como se trata de query DDL (data definition language), ou seja, aquelas instruções que definem a estrutura dos dados, o retorno será 0. O SELECT (DML - data manipulation language) também retornará 0. Já as instruções DELETE, UPDATE e INSERT, retornará a quantidade de linhas afetadas. Não é muito recomendado o seu uso. 
+
+} catch (PDOException $e) { //PDOException é uma classe nativa que retorna um exception referente a PDO
+
+	echo '<pre>';
+	print_r($e)    // utilizado para debugar os erros e visualizar o array
+	echo '</pre>';
+	
+	echo 'Erro: ' . $e->getcode() . '. Mensagem: ' . $e->getMessage() . ' .'; //aqui foi usado alguns métodos da classe nativa PDOException, como o getcode() -> pega as informações do código do erro; getMessage() -> pega as informações da mensagem do erro. Para maiores informações, basta pesquisar os métodos da classe PDOException no php.net;
+
+}
+--------------------------------------------------------------------------
+PROGRAMAÇÃO ORIENTADA A OBJETO (POO)
+
+//new stdClass();
+stdClass é uma classe nativa do php e, por meio dela, é possível criar objetos padrões (vazios), ou seja, transforma atributos em objetos que podem acessar/criar outros atributos.
+Ex:
+class IndexController {
+	private $view;
+
+	public function __construct(){
+		$this->view = new stdClass(); //aqui o atributo view instanciou a classe stdClass
+	}
+
+	public function index() {
+		$this->view->dados = array('Sofá', 'Cadeira'); //aqui o atributo, que virou objeto, criou um outro atributo 'dados'(array)
+	}
+}
+
+//Nome de classes 
+As classes devem ter a primeira letra maiúscula em cada palavra e deve ser igual ao nome do arquivo. 
+Ex: class CalculadoraTeste {} //nome da classe
+
+//Nome de atributo e método
+Atributos e Métodos devem ter a primeira letra maiúscula a partir da segunda palavra. 
+Ex: 
+private $numFilhos = null; //atributo
+public function modificarNumFilhos() {} //método
+
+//$this
+Usado para utilizar aributos e métodos
+Ex: $this->atributo / $this->método;
+
+//verificar todas os métodos dentro de uma classe
+print_r($variavel) -> a variável é o objeto instanciado.
+$filho = new Filho();
+print_r($filho); //exibirá todas os métodos dentro da classe Filho
+
+//referenciar a classe/objeto dentro dela mesmo
+usar o $this
+
+//pilares
+abstração;
+herança/classe pai-filha/classe genérica-especializada/classe superclasse-subclasse -> verificar atributos e métodos comuns nas classes e que possam ser definidos em outro modelo/classe como principal;
+polimorfismo -> sobrescrita de métodos, ou seja, o metódo da classe-filha pode sobrepor método da classe-pai 
+encapsulamento -> controla a visibilidade do atributo e método por meio de public, protected e private,ou seja, quem poderá ter acesso assim como quem poderá herdar os atributos e métodos;
+
+//objeto
+modelo   -> classe;
+atributo -> variável;
+método   -> funcões;
+
+//instanciar objeto
+$variavel = new NomedaClasse(); //primeiro -> chamar a classe
+$variavel->metodo(); //segundo -> chamar os métodos, para cada metodo é necessário chamar a $variavel e o metodo. Ex. echo $variavel->__get('nome') . ' possui ' . $variavel->__get('numFilhos') . ' filhos.';
+
+//acessar atributo direto
+$variavel->atributo;
+ou
+$variavel->atributo = 'Jota'; //atribuindo valor ao atributo diretamente, o correto é utilizar os métodos getters e setters;
+
+//classe (modelo)
+class NomeClasse {
+	//atributos
+	//metodos
+}
+
+//referenciar a classe/objeto dentro dela mesmo
+usar o $this
+Ex:
+class Pai {
+	//atributos
+	//método
+	public function __construct() {
+		print_r(get_class_methods($this)) //o $this é o mesmo que o nome da classe, neste caso o $this representa Pai
+	}
+}
+
+//método (função)
+public function nomeMetodo($variavel-opcional) {
+	codigo aqui
+}
+
+//chamar método
+$variavel->metodo(); //para cada metodo é necessário chamar a $variavel e o metodo. Ex. echo $variavel->__get('nome') . ' possui ' . $variavel->__get('numFilhos') . ' filhos.';
+
+//chamar método dentro do objeto
+$this->nomeMétodo()
+Ex: return $this->__get('nome') . ' possui ' . $this->__get('numFilhos') . 'filho(s).';
+
+//métodos getters e setters
+getters e setters -> alteram o atributo do objeto;
+o método set, outro método ou o próprio atributo deve estar definido antes para que o método get funcione;
+function setNomedoAtributo($valor) { //método set -> seta um valor para o atributo e somente recebe um determinado valor, mas não retorna nada (tipo void)
+	$this->nome = $valor;
+} 
+
+function getNomedoAtributo() { //método get -> pega o valor atribuído e é do tipo return
+	return $this->nome; // o atributo nome será igual à variável $valor do método set acima
+}
+
+//métodos mágicos getters e setters (overloading / sobrecarga)
+function __set($atributo, $valor) {
+	$this->$atributo = $valor;
+}
+ou
+function __set($atributo, $valor) {
+	$this->nome = $valor;
+	return $this; //pode ser utilizado o return no método mágico set para retornar a instância do próprio objeto;
+}
+Para utlizar o método set acima com return, basta seguir a sintaxe abaixo:
+Ex: $tarefa = new Tarefa();
+	$tarefa->__set('id', $_POST['tarefa'])
+		  	->__set('tarefa', $_POST['tarefa']);
+
+function __get($atributo) {
+	return $this->$atributo;
+}
+
+//chamar métodos mágicos getters e setters
+$variavel->__get('nome do atributo'); //chamar método mágico getter
+$variavel->__set('nome do atributo', 'valor do atributo'); //chamar método mágico setter
+ou
+$variavel->atributo = 'teste'; //utiliza automaticamente o método mágico __set()
+echo $variavel->atributo; //utiliza automaticamente o método mágico __get()
+
+//método construtor e destrutor
+function __construct($parâmetro - opcional) {} -> chamada automaticamente ao criar a instancia do objeto, o parâmetro é opcional;
+function __destruct() {}                       -> chamada automaticamente quando a instancia do objeto é removida da memória, ou seja, quando todas as referências a um objeto particular forem removidas ou quando o objeto for explicitamente destruído (utilizando a função unset(nome-do-objeto) ao instanciar o objeto).
+Ex: 
+$pessoa = new Pessoa(); // o método __destruct é automaticamente chamado, pois a referência ao objeto foi removida da mémoria;
+ou
+$pessoa = new Pessoa();
+unset($pessoa); //aqui o método __destruct() é automaticamente chamado pois o objeto foi explicitamente destruído;
+
+//herança
+A classe filha, além de ter acesso a seus atributos/métodos, poderá acessar os atributos/métodos da classe-pai. A maneira de chamar métodos da classe-pai é a mesma para outros métodos: $variavel->metodo();
+class NomedaClasse(filha) extends Classeprincipal(pai) {
+	//atributos
+	//metodos
+}
+
+//polimorfismo
+A classe-filha poderá sobrepor métodos da classe-pai, para isso, basta incluir o mesmo método da classe-pai na classe-filha e alterar o código desse método incluído na classe-filha, desde que o método são seja private
+
+//encapsulamento
+Pilar responsável pela visibilidade de atributos e métodos 
+public/private/protected $atributo; 
+public    -> os atributos e métodos podem ser acessados pela instância do objeto e outras classes/objetos e podem ser herdados por outras classes/objetos;
+private   -> os atributos e métodos só podem ser acessados pelo próprio objeto/classe e pela instância do objeto por meio de algum método do tipo público, ou seja, não será possível acessar o atributo/método diretamente pela instância do objeto e nem pela classe-filha, a não ser por um método público da mesma classe que acesse o atributo/método private, e não podem ser herdados por outras classes/objetos. Quando uma classe-filha tentar acessar um atributo private da classe-pai, irá dar erro, mas o php irá criar automaticamente no contexto da classe-filha um atributo com o mesmo nome da classe-pai;
+protected -> os atributos e métodos podem ser acessados somente pela própria classe/objeto e pela classe/objeto-filha, são herdados pelas classes/objetos-filha e podem ser acessados pela instância do objeto por meio de um método público dentro de umas das classes-pai/filha;
+Quando o atributo é do tipo protected e private e na própria classe há os métodos publicos __get() e __set(), a instância do objeto conseguirá acessar e modificar os atributos private e protected, isso porque o PHP tem a inteligência de utilizar os métodos __get() e __set(), desde que sejam públicos, de forma automática;
+Para acessar atributos/métodos private e protected é interessante criar um método público (public function nomedoMetodo(){}) que acesse tais atributos, assim, outras classes/objetos podem acessar indiretamente os atributos protegidos e privados.
+get_class_methods($variavel) -> retorna um array com as classes públicas de um objeto e no lugar da variável deve ser colocado o objeto instanciado.
+Ex: 
+$filho = new Filho(); //instancia o objeto
+get_class_methods($filho); //usa a função
+
+//atributo e método estático
+Atributos e métodos estáticos podem ser acessados sem que seja realizada a instância do objeto com base em uma classe.
+Atributos estáticos não estão acessíveis por meio do '->';
+Métodos estáticos não estão acessíveis por meio do $this->;
+Dentro de métodos estáticos não pode ser utilizado $this->;
+Ex: 
+public static $atributo //atributo estático
+public static function $metodo() {} //método estático
+
+//chamar atributo e método estático
+NomedaClasse::$atributo; //chamando o atributo sem precisar instanciar a classe ($x = new Class{})
+NomedaClasse::metodo(); //chamando o metodo sem precisar instanciar a classe ($x = new Class{})
+Ao usar um atributo não-estático em uma chamada "estática" dará erro, mas se utilizar um método não-estático em um chamada "estática" não dará erro. Contudo, não é recomendado esse tipo de abordagem, ou seja, chamar atributo e método de forma estática somente se estes forem estáticos.
+public $atributo;
+public function metodo(){}
+NomedaClasse::$atributo; //dará erro, pois o atributo não é estático (static)
+NomedaClasse::metodo(); //não dará erro, mas não é recomendado este tipo de abordagem
+
+//classe abstrata
+A classe abstrata não pode ser instanciada, mas somente herdada.
+Ex:
+abstract class Bootstrap {} 
+Pode ser usada para forçar uma classe-filha a implementar um método que está dentro da classe-abstrata-pai
+Ex: 
+abstract class Bootstrap{//classe-pai
+	abstract protected function initRoutes(); //esse método deve ser obrigatoriamente implementado na classe-filha
+}
+
+classa Filha extends Bootstrap {
+	protected function initRoutes(){} //método herdado da classe-abstrata-pai
+}
+
+//interface
+As interfaces definem quais os métodos que devem ser obrigatoriamente contruídos dentro das classes que implementam aquela respectiva interface. Só vale para métodos, atributos não entram nessa definição. Quando a classe/objeto usa uma interface, orbigatoriamente ela deve implementar os métodos definido na interface. Todos os métodos da interface devem ser públicos (public). É interessante colocar no nome da interface a palavra Interface, para diferenciarmos de uma classe comum;
+interface NomedaInterface { //sintaxe de uma interface
+	public function NomedoMetodo1(); //não há {}, pois não há escopo
+	public function NomedoMetodo2();
+	....
+}
+
+//implementar interface
+Um classe pode implementar mais de uma interface
+class NomedaClasse implements NomedaInterface1, NomedaInterface2... { //usar a palavra implements e o nome da interface
+	public function NomedoMetodo1() { seu código aqui } //método definido na interface
+	public function NomedoMetodo2() { seu código aqui } //método definido na interface
+	public function NomedoMetodo() { seu código aqui } //método normal da classe
+}
+Quando uma interface-filha é extendida (extends) de uma interface-pai, ao aplicar a interface em uma classe, tanto os métodos da interface-filha quanto os da interface-pai devem ser implementados na classe, senão dará erro, pois a interface-filha herdou os métodos da interface-pai.
+interface AnimalInterface { //interface-pai
+	public function comer();
+}
+interface AveInterface extends AnimalInterface { //interface-filha
+	public function voar();
+}
+class Papagaio implements AveInterface { //ao implementar a interface-filha é necessário incluir o método da interface-filha e da interface-pai, pois a primeira herdou os métodos da interface-pai
+	public function voar() {
+		echo 'Voar';
+	}
+
+	public function comer() {
+		echo 'Voar';
+	}
+}
+
+//namespaces
+Evita conflito de nome, ou seja, define o local das classes. Interfaces com o mesmo nome no script mas em cada namespace não dará conflito.
+Os nomes de namespaces respeitam as mesmas regras de definições para nomes de variáveis.
+namespace A;
+class Cliente {}
+namespace B;
+class Cliente {}
+$a = new \A\Cliente(); //utiliza a classe com o namespace A no mesmo arquivo
+$a = new \B\Cliente(); //utiliza a classe com o namespace B no mesmo arquivo
+
+//usar namespaces
+require "./localdonamespace/script.php"; //incluir o script com as classes a serem usadas
+use B/NomedaClasse; //usa a classe/interface do namespace B que está dentro de outro arquivo
+use B/NomedaClasse as C1; //'apelida' a classe para evitar conflitos, caso haja outra classe com o mesmo nome
+$c = new C1(); //para usar a classe renomeada/apelidada;
+
+//try, catch, finally e throw - tratamento de erros
+Evita que o script pare por causa de erros
+try     -> tente, ou seja, executa um trecho com potencial chances de erro;
+catch   -> pegar, ou seja, captura um erro para tratá-lo visualmente e armazernar no bando de dados;
+finally -> finalmente, é opcional;
+throw   -: lançar, ou seja, lança uma exception propositadamente. Pode ser utilizado o Erro no lugar do Exception. Para recuperar o erro, é necessário utilizar o bloco try{throw new Exception('erro')}catch(Exception $e){'tratar a exception'} ou try{throw new Error('erro')}catch(Error $e){'tratar a exception'};
+O Exception é mais usado para forçar error por desenvolvedor, já que o Error fica a cargo do próprio PHP, ou seja, a diferença é a origem do erro: Exception -> programador; Error -> PHP.
+Ex:
+try {
+	//trecho com possível chances de erro
+} catch(Error $e) { //os erros ficam armazenados na variavel $e (pode ser qualquer outra)
+	//pega o erro para tratá-lo de forma a ficar mais legível e armazenar os erros em banco de dados
+} finally {
+	//é opcional, continua o script evitando que a execução pare
+}
+Ex:
+try {//trecho com possível chances de erro
+
+	if(!file_exists('require_once.php')) {
+
+		throw new Exception('O arquivo não está disponível'); //Exception é uma classe nativa do PHP e dentro dela é passado uma mensagem,aqui é força do erro, pois o arquivo não existe
+		ou
+		throw new Error('O arquivo não está disponível');
+
+	}
+
+} catch(Exception $e) ou catch(Error $e) { //tratando o erro
+	echo "catch - Exception";
+	echo '<p style="color:red;">' . $e . '</p>';
+}
+
+//Exceções customizadas
+Error        -> php;
+Exception    -> programadores;
+Customizadas -> programadores;
+
+class MinhaExceptionCustomizada extends Exception { // cria a classe customizada que será classe-filha da classe-pai nativa do PHP, a Exception
+	private $erro = '';
+	public function __construct($erro) { //metodo construtor que pega o erro no throw new ao instanciar a classe
+		$this->erro = $erro;
+	}
+	public function exibirMensagemCustomizada() { // metodo que exibe o erro que foi pego na classe construtor acima
+		echo '<div style="border: 1px solid #000; padding: 15px; background-color: red; color: white;">';
+		echo $this->erro;
+		echo '</div>';
+	}
+}
+
+try {
+	throw new MinhaExceptionCustomizada ('Erro de teste'); //altera a classe de Exception para a classe customizada, que no caso é MinhaExceptionCustomizada, e pega o erro dentro do ()
+} catch (MinhaExceptionCustomizada $e) { //joga o nome da classe customizada e a variável que será o objeto que instanciará a nova classe 
+	$e->exibirMensagemCustomizada(); //instancia a variável e chama o método de exibir o erro que foi passado em throw new MinhaExceptionCustomizada ('Erro de teste');
+}
+
+//PHP Mailer 
+para instalação manual, basta acessar o link https://packagist.org/packages/phpmailer/phpmailer e clicar no link do github -> no site do github verificar no exemplo ('Installation & loading') qual a versão que está sendo usada e mudar o branch para a versão do exemplo -> despois, basta clicar em Clone or download e escolher a Download Zip -> extrair os arquivos -> copiar para a a pasta da aplicação somente a pasta "src" -> é interessante copia esta pasta para uma chamadada bibliotecas e renomeá-la para PHPMailer;
+Em seguida, deve ser incluídos os arquivos da pasta PHPMailer no script da aplicação por meio do require
+	require "./bibliotecas/PHPMailer/Exception.php";
+	require "./bibliotecas/PHPMailer/OAuth.php";
+	require "./bibliotecas/PHPMailer/PHPMailer.php";
+	require "./bibliotecas/PHPMailer/POP3.php";
+	require "./bibliotecas/PHPMailer/SMTP.php";
+Depois deve ser incluído no script os seguintes namespaces
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\Exception;
+Logo após, é preciso copiar todo o script que está abaixo de 'A Simple Example' no link do github e colar no seu script;
+Em seguida, no script do PHPmailer encontre as linhas e faças as alterações necessárias:
+$mail->SMTPDebug = 2;                                -> coloque false após configurar o PHPMAILER, para aparecer o debub;
+$mail->Username = 'user@example.com';                -> o email que enviará as mensagens
+$mail->Password = '362124';                          -> a senha do email que enviará as mensagens
+$mail->Host = 'smtp1.example.com;smtp2.example.com'; -> 'smtp.gmail.com'
+$mail->setFrom('from@example.com', 'Mailer');        -> o mesmo email que enviará as mensagens
+$mail->addAddress('joe@example.net', 'Joe User');    -> destinatário, os valores devem vir de um formulário
+$mail->Subject = 'Here is the subject';              -> assunto do email, os valores devem vir de um formulário HTML
+$mail->Body    = 'This is the HTML message body <b>in bold!</b>'; -> corpo do email com HTML, os valores devem vir de um formulário de email
+$mail->AltBody = 'This is the body in plain text for non-HTML mail clients'; -> corpo do email sem HTML, os valores devem vir de um formulário de email
+
+Caso ao enviar o email apareça o erro 'SMTP Error: Could not authenticate.' será preciso entrar na sua conta do google, clicar em no ícone da letra do seu nome, que fica no canto superior direito, depois clicar em conta do google, na aba 'Login e segurança' e localizar 'Permitir aplicativos menos seguros' e ativar essa opção.
+
+É preciso incluir as seguintes linhas de códigos no script do PHPMailer abaixo de $mail->Port = 587;:
+$mail->SMTPOptions = array( 'ssl' => array( 'verify_peer' => false, 'verify_peer_name' => false, 'allow_self_signed' => true ) );
+
+Caso dê erro na acentuação, será necessário incluir o seguinte comando no script dp PHPMailer, pode ser inserido abaixo de Try {...:
+$mail->CharSet = 'UTF-8';
+--------------------------------------------------------------------------------------------------------
+PDO (PHP DATA OBJECTS) - A partir da versão 5.1
+
+Padroniza a forma como o PHP se comunica com os bancos de dados;
+Compatível com Oracle, MySQL, PostgreSQL e SQLServer;
+Evita SQL injections;
+O MySQL já vem com essa função habilitada por padrão;
+
+//sintaxe
+$dns = 'mysql:host=localhost;dbname=php_com_pdo'; //conexão
+$usuario = 'root'; //usuário
+$senha = ''; //senha
+$conexao = new PDO($dns, $usuario, $senha);
+ou
+$conexao = new PDO('mysql:host=localhost;dbname=php_com_pdo', 'root', '');
+
+$retorno = $conexao->exec($query);            -> retorna a quantidade de linhas afetadas no BD, só retorna valor para comandos DML (INSERT, UPDATE, DELETE), já para comandos DDL (CREATE, ALTER, DROP) retorna 0;
+$stmt = $conexao->query($query);              -> retorna um PDOStatemet;
+$retorno = $stmt->fetchALL();                 -> recupera todos os registro da consulta em um array associativo, a consulta dentro do array poderá ser feita por indíces associativos (nomes das colunas) ou indíces numéricos;
+Ex:
+$retorno[0]['nome']                           -> pega o dado do primeiro registro [0], referente à coluna 'nome', por exemplo;
+$retorno[0][0]                                -> pega o dado do primeiro registro [0], referente à coluna primeira coluna [0];
+$retorno = $stmt->fetchAll(PDO::FETCH_ASSOC); -> retornará array somente com os índices associativos;
+Ex: 
+$retorno[0]['nome'];
+$retorno = $stmt->fetchAll(PDO::FETCH_NUM);   -> retornará array somente com os índices numéricos;
+Ex: 
+$retorno[0][2];
+$retorno = $stmt->fetchAll(PDO::FETCH_BOTH);  -> retornará ambos os índices, associativos e numéricos;
+Ex:
+$retorno[0]['nome'];
+$retorno[0][2];
+$retorno = $stmt->fetchAll(PDO::FETCH_OBJ);   -> retornará um array de objetos e para acessar basta seguir o código abaixo
+Ex:
+$retorno[0]->nome;
+$retorno = $stmt->fetch();                    -> retornará uma única consulta;
+Ex:
+echo $retorno[0];      //não precisa acessar dois índices, como no caso do fetchAll
+echo $retorno['nome']; //não precisa acessar dois índices, como no caso do fetchAll
+echo $retorno->atributo; //ao instanciar o objeto, não precisa passar nenhum índice, como no caso do fetchAll
+acessar os dados diretamente do fetchAll por meio do foreach
+foreach ($stmt->fetchAll(PDO::FETCH_ASSOC) as $key => $value) {
+	print_r($value);
+	echo '<hr>';
+}
+ou
+por meio de uma outra varável
+$retorno = $stmt->fetchAll(PDO::FETCH_ASSOC);
+foreach ($retorno as $key => $value) {
+	print_r($value);
+	echo '<hr>';
+}
+$stmt = $conexao->prepare($query);                                         -> não executa a query diretamente, prepara a query por meio do $stmt->bindValue();
+$stmt->bindValue(':variavel', $_POST['usuario'], PDO::PARAM_INT(opcional)) -> o primeiro parâmetro subsituirá o valor na query, e o segundo parâmetro é o valor que deverá ser passado na consulta, para evitar sql injection, por padrão ele recebe string, mas podemos passar um terceiro parâmetro para receber um tipo de dado. A query pode ser executada assim -> $query = "UPDATE tb_tarefas SET tarefa = :tarefa WHERE id = :id "; ou assim -> $query = "UPDATE tb_tarefas SET tarefa = ? id = ? ". Contudo, ao executar o $stmt->bindValue(), os parâmetros devem ser passados colocando números para indicar a ordem: $stmt->bindValue(1, $this->tarefa->__get('tarefa'));
+
+$stmt->execute();                                                          -> após preparar a query, executa a query e retorna 1 para um registro atualizado N ou N registros atualizados;
+
+
+----------------------------------------------------------------------------
+CRUD
+C -> create (criar);
+R -> read (ler);
+U -> update (atualizar);
+D -> delete (deletar);
+------------------------------------------------------------------------
+MVC
+
+É um padrão de arquitetura (Architectural Pattern) e não Padrão de projeto (Design Pattern);
+É uma forma de organização do código e não como programar a aplicação e independem de linguagem e tecnologia;
+É o padrão mais utilizado no campo de desenvolvimento web;
+Os frameworks como Zend, Lavarel, Cake, etc..., implementam o MVC como padrão de arquitetura;
+O padrão de arquitetura não se preocupa com o código em si, mas como os componentes da aplicação estão interconectados;
+M -> model;
+V -> view;
+C -> controller;
+
+//requisitos
+gerenciador de dependências - Composer; (substituir requires)
+sistema de rotas;
+
+//pastas
+App    -> conterá as 'três camadas' do MVC;
+	Controllers -> conterá os controladores da aplicação que controlam o que deve acontecer e quando;
+	Models      -> modelos da aplicação (camada de banco de dados e regras de negócio);
+	Views       -> exibição dos dados (html, xml, json)
+public -> conterá o script público, tipo index.php, etc...;
+	index.php -> arquivo padrão;
+
+//executar o servidor embutido pelo CMD (facilita o desenvolimento)
+1º desativar o XAMPP;
+2º abra o CMD e digite -> cd c:/xampp/php -> aperte enter -> depois digite -> php -v ;
+3º configurar o caminho acima como variável de ambiente do sistema operacional, para que o sistema faça o mapeamento dos executáveis dentro da pasta do XAMPP -> clique com o botão direito em cima de MEU COMPUTADOR -> propriedades -> configurações avançadas do sistema -> aba avançado -> variáveis de ambiente -> na caixa que abrir clique duas vezes na variável path -> irá abrir outra caixa -> copie o link do local da pasta XAMPP (C:\xampp) e cole na caixa aberto após a última variável -> clique em OK em todas as telas;
+4º após o procedimento, o php já estará mapeado pelo sistema, ou seja, poderá ser acessado em qualquer local do sistema operacional;
+5º abra o CMD e digite -> cd local-do-diretório/public -> aperte enter;
+6º ainda no CMD, digite -> php -S localhost:8080 -> aperte enter;
+7º será iniciado um servidor de desenvolvimento;
+8º ctrl + c -> interrompe esse servidor de teste de desenvolvimento;
+Resumindo
+1º -> php -v ;
+2º -> cd local-do-diretório/public ;
+3º -> php -S localhost:8080 -> para cada aplicação, a porta deve ser mudada, por exemplo, localhost:8888;
+Pronto;
+
+------------------------------------------------------------------------------------
+COMPOSER e AUTOLOAD PSR-4
+
+Composer -> É um gerenciador de dependências, mapea toda a estrutura da aplicação, recupera todas as classe contidas nos scripts e permite o acesso às classes por meio de namespaces;
+
+PSR-4 -> os namespaces devem ter o mesmo nome da pasta;
+
+//Download
+https://getcomposer.org/
+
+//executar o composer em um projeto específico
+1º clique em download na página acima e irá abrir outra página -> 
+2º abaixo de 'Command-line installation', copie o código -> php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" ;
+3º cole no cmd do windows, detalhe importante, no cmd o local do diretório já deve estar setado, conforme 'Resumindo' nos itens 1 e 2 da sessão MVC acima -> caso queira testar, basta copiar o seguinte código no cmd -> php -r "if (hash_file('SHA384', 'composer-setup.php') === '93b54496392c062774670ac18b134c3b3a95e5a5e5c8f1a9f115f203b75bf9a129d5daa8ba6a13e2cc8a1da0806388a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" -> se der tudo certo aparecerá a seguinte mensagem -> Installer verified;
+4º para baixar o composer, copie o seguinte código para o cmd -> php composer-setup.php ;
+5º irá ser criado na pasta o arquivo chamado composer.phar ;
+6º após executar o comando acima, o arquivo composer-setup.php poderá ser deletado simplesmente apertando delete, ou executando o comando php -r "unlink('composer-setup.php');"
+no cmd;
+7º para instalar o composer dentro do projeto -> criar um arquivo na pasta do projeto chamado -> composer.json;
+8º dentro do arquivo composer.json digite:
+{
+	"name": miniframework, //nome do projeto
+	"require": { //define alguns critérios para o nosso projeto
+		"php": ">=7.0"
+	},
+	"authors": [ //autor do projeto
+		{
+			"name": "Jota",
+			"email": jota@teste,.com.br //opcional
+		}
+	],
+	"autoload": { //informa os diretórios que precisam se mapeados para carregar as classes do projeto
+		"psr-4": { //informa como os arquivos serão carregados
+			"APP\\": "App/", //namespace 'APP' que terá acesso a todas as classes localizada na pasta App da aplicação
+			"MF\\": "vendor/MF/" //namespace 'MF' que terá acesso às classes localizadas na pasta vendor/MF/
+ 		}
+	}
+}
+8º agora, para instalar o composer, basta digitar no CMD -> php composer.phar install
+9º após a instalação, será criado os arquivos composer.lock e pasta a vendor
+
+1 - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+2 - php composer-setup.php
+3 - criar arquivo composer.json
+4 - digite as informaçãs e namespaces do projeto
+5 - php composer.phar install
+
+
+//autoload
+O arquivo autoload.php é responsável por carregar todas as classe da aplicação e é preciso fazer um require_once "../vendor/autoload.php";
+
+//extensão phtml (arquivos da pasta View->index)
+Extensão criada para arquivos que contenham php e html
+
+
+
