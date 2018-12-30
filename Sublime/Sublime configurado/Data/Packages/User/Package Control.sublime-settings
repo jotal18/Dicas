@@ -1,0 +1,26 @@
+{
+	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"AdvancedNewFile",
+		"BracketHighlighter",
+		"cdnjs",
+		"CodeFormatter",
+		"Colorsublime",
+		"File Rename",
+		"HTMLBeautify",
+		"Package Control",
+		"PHP Companion",
+		"phpfmt",
+		"ProjectMaker",
+		"ProjectManager",
+		"SideBarEnhancements",
+		"SnippetMaker",
+		"SQLTools",
+		"SublimeCodeIntel",
+		"Theme - Monokai Pro"
+	]
+}
