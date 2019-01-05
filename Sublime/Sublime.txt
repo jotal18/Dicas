@@ -1,10 +1,187 @@
-﻿Dicas Sublime
+﻿//Atalhos importantes (Menu Prefernces -> Key Bindings)
+localizar texto            -> ctrl + f
+replace                    -> ctrl + h
+mostrar sidebar 	   -> ctrl + k e depois ctrl + k
+adicionar projeto          -> Menu Project -> Add Folder to Project
+autocomplete               -> digite o início do código ou uma parte e pressione ctrl + space
+identar código             -> ctrl + ´ (recua) / ctrl + [ (avança)
+selecionar um texto igual  -> ctrl + d
+criar comentário           -> ctrl + ;
+duplicar linha             -> ctrl + shift + d
+mover linha                -> ctrl + shift + seta para cima / ctrl + shift + seta para baixo
+selecionar bloco html      -> ctrl + shift + a
 
-ctrl + f                   -> localizar texto;
-ctrl + h                   -> replace;
-ctrl + k e depois ctrl + k -> show sidebar;
-adicionar projeto          -> Project-Add Folder to Project;
-autocomplete               -> digite o início do código ou uma parte e pressione ctrl + space;
-identar código             -> ctrl + ` (recua) e ctrl + [ (avança);
-selecionar um texto igual  -> ctrl + d;
-criar comentário           -> ctrl + ;;
+
+//Pacote de Gerenciamento do Sublime Text
+ctrl + shift + p -> digite package -> escolha Install Package Control
+
+
+//Remover pacotes instalados
+ctrl + shift + p -> digite remove -> escolha Package Control: Remove Package -> escolha o pacote a ser desinstalado
+
+
+//Theme color (cores da sidebar e código)
+Monokai Pro
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite monokai pro -> escolha Theme - Monokai Pro
+ctrl + shift + p -> digite monokai -> escolha Monokai Pro: select theme -> escolha o tema de sua preferência
+
+
+//Color scheme (cor do código)
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite color sublime -> escolha Colorsublime
+ctrl + shift + p -> digite color -> escolha Colorsublime: Install Theme -> ecolha o tema de sua preferência (FreshCut, Toothpaste)
+
+
+//Alterar fonte (sidebar e código) e espaçamento
+Menu Preferences -> Settings -> na aba Preferences.sublime-settings - User -> cole acima de "ignored_packages": os seguintes comandos:
+"font_face": "Fira Code",
+"font_size": 14,
+"line_padding_bottom": 7,
+"monokai_pro_ui_font_face": "Fira Code",
+
+
+//Esconder o minimap
+ctrl + shift + p -> digite map -> escolha View: Toogle Minimap
+
+
+//Alterar os ícones da sidebar (não funciona)
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite a file icon -> escolha A File Icon
+
+
+//Auto indentar o código ao salvar o arquivo (Não funciona com HTML)
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite codeformatter -> escolha CodeFormatter
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite phpfmt -> escolha phpfmt
+Configurar o CodeFormatter 
+-> Menu Preferences -> Package Settings -> CodeFormatter -> Settings - Default ->
+-> copiar todo o conteúdo e cole em -> Menu Preferences -> Package Settings -> CodeFormatter -> Settings - User ->
+-> basta deletar os códigos que não serão utilizados 
+-> altere a linha "format_on_save": false -> "format_on_save": true
+-> para a formatação do php, exclua as seguintes linhas:
+"php55_compat": false,
+"psr1": false,
+"psr1_naming": false,
+"psr2": true,
+-> na linha "passes": [], poderá ser incluída várias configurações para formatar o código php no link abaixo:
+https://github.com/akalongman/sublimetext-codeformatter/blob/master/PHP-Transformations.md
+"passes": ["AutoSemicolon", "OrderAndRemoveUseClauses", "OrganizeClass", "ShortArray"],
+
+Obs: caso dê algum erro na hora de salvar o arquivo php, basta incluir 
+o caminho do servidor php na linha: "php_path": "C://xampp//php//php.exe",
+
+//Auto indentar o código em HTML
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite htmlbeautify -> escolha HTMLBeautify
+para utilizar -> ctrl + shift + p -> digite htmlbeautify -> escolha HTMLBeautify
+
+
+//Autocomplete
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite codeintel -> escolha SublimeCodeIntel
+ctrl + shift + p -> digite codeintel -> escolha SublimeCodeIntel:Enable Live Autocompletion for Currente Language
+Para entrar dentro de uma classe que está em outro arquivo, basta apertar ctrl + botão esquerdo do mouse em cima da classe
+
+
+//Criando pastas e arquivos
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite sidebarenhancements -> escolha SidebarEnhancements
+
+
+//Atalhos para criação de pastas e arquivos
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite advancednewfile -> escolha AdvancedNewFile
+Menu Preferences -> Package Settings -> AdvancedNewFile -> README -> visualize os atalhos:
+-> criar pastas -> ctrl + alt + n (Ex: digite teste/ na barra que aparecerá embaixo)
+-> criar arquivos -> ctrl + alt + n (Ex: digite teste/arquivo.php na barra que aparecerá embaixo)
+
+
+//Atalhos para renomear pastas e arquivos
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite file rename -> escolha File Rename
+Menu Preferences -> Key Bindings -> e digite os seguintes cógidos na aba Default.sublime-keymap-User:
+{"keys": ["ctrl+r"], "command": "side_bar_rename"} 
+
+
+//Acessar uma classe mais facilmente
+Menu Preferences -> Key Bindings -> e digite os seguintes cógidos na aba Default.sublime-keymap-User:
+{"keys": ["ctrl + b"], "command": "goto_definition"}, 
+
+
+//Importando classes com namespaces
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite phpcompanion -> escolha PHP Companion
+Acesse o link -> https://github.com/erichard/SublimePHPCompanion/blob/master/Default.sublime-keymap-sample -> copie as configurações as seguintes confugurações ->
+{ "keys": ["f6"], "command": "expand_fqcn" },
+{ "keys": ["shift+f6"], "command": "expand_fqcn", "args": {"leading_separator": true} },
+{ "keys": ["f5"], "command": "find_use" },
+{ "keys": ["f4"], "command": "import_namespace" },
+{ "keys": ["f3"], "command": "implement" },
+{ "keys": ["shift+f12"], "command": "goto_definition_scope" },
+{ "keys": ["f7"], "command": "insert_php_constructor_property" }
+-> e cole em -> Menu Preferences -> Key Bindings -> na aba Default.sublime-keymap - User
+-> altere a linha { "keys": ["f5"], "command": "find_use" }, para -> { "keys": ["ctrl+i"], "command": "find_use" },
+Para usar, coloque o ponteiro do mouse em cima da classe e aperte ctrl+i que automaticamente será criado importado o namespace da classe
+
+
+//Mostrar onde termina e começa o seu código
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite brackethighlighter -> escolha BracketHighlighter
+
+
+//Criando snippets
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite snippetMaker -> escolha SnippetMaker
+ctrl + shift + p -> digite snippet maker ou make -> escolha SnippetMaker: Make Snippet -> 
+-> irá aparecer uma caixa com nome Trigger -> para criar o atalho do snippet -> Ex: pub (para criar uma public function)
+-> depois irá aparecer uma caixa com o nome Description -> criar descrição do snippet
+-> depois irá aparecer uma caixa com o nome Scope -> pode deixar padrão
+-> depois irá aparecer uma caixa com o nome File Name -> pode deixar padrão
+-> depois irá aparecer uma aba -> abaixo de <content><![CDATA[ deve ser criado o snippet
+->Ex: 
+public function ${1}(){
+    ${2}
+}
+O ${1} significa a parada do cursor após a criação do snippet
+Para criar o snippet -> digite o que foi colocado em Trigger e aperte TAB
+
+
+//Importando libraries
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite cdnjs -> escolha Cdnjs
+clique onde queira chamar a biblioteca
+ctrl + shift + p -> digite cdnjs -> escolha Cdnjs: Search -> <script> tag -> na caixa embaixo digite a biblioteca -> escolha a versão
+
+
+//Sql no sublime
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite sqlto -> escolha SQLTools
+É preciso criar um arquivo com a extensão .sql dentro do seu projeto (Ex: sql.sql)
+Menu Preferences -> Package Settings -> SQLTools -> Settings e na aba SQLTools.sublime-settings - User cole os códigos abaixo:
+"show_result_on_window": true,  (para aparecer o resultado em uma janela/aba separado)
+ctrl + shift + p -> digite connection -> escolha ST: Setup Connections -> na aba SQLToolsConnections.sublime-settings - User -> 
+-> comente todos as configurações, com exceção do MySQL -> altera as seguintes linhas:
+"database": "nome do seu banco de dados",
+"username": "nome de usuário",
+"password": "senha",
+ctrl + shift + p -> digite connection -> escolha ST: Select Connection -> escolha Connection  MySQL (Seleciona a conexão com o DB)
+ctrl + shift + p -> digite exe -> escolha ST: Execute (Executa os comandos SQL)
+ctrl + shift + p -> digite sql -> escolha Set Syntax: SQL (formatção SQL)
+
+
+//Terminal no sublime (só funciona com linux e mac)
+
+
+//Gerenciando projetos
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite project manager -> escolha ProjectManager
+ctrl + shift + p -> digite project manager -> escolha ProjectManager: Add New Project
+ctrl + alt + p -> escolha o projeto
+Menu Project -> Project Manager -> várias opções
+
+
+
+
+
