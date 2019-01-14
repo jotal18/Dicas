@@ -6,6 +6,7 @@
 	"installed_packages":
 	[
 		"AdvancedNewFile",
+		"BracketHighlighter",
 		"cdnjs",
 		"CodeFormatter",
 		"Colorsublime",

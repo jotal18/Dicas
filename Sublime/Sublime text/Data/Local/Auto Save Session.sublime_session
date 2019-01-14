@@ -1,0 +1,815 @@
+{
+	"folder_history":
+	[
+		"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos",
+		"/C/xampp/htdocs/projetos"
+	],
+	"last_version": 3176,
+	"last_window_id": 20,
+	"log_indexing": false,
+	"settings":
+	{
+		"new_window_height": 453.0,
+		"new_window_settings":
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"nu",
+						"num2"
+					],
+					[
+						"num",
+						"num2〔argument〕"
+					],
+					[
+						"par",
+						"parseInt〔function〕"
+					],
+					[
+						"ope",
+						"operacao〔variable〕"
+					],
+					[
+						"oper",
+						"operacao〔argument〕"
+					],
+					[
+						"n",
+						"num1"
+					],
+					[
+						"cla",
+						"classificado〔variable〕"
+					],
+					[
+						"s",
+						"switch"
+					],
+					[
+						"met",
+						"meta\tTag"
+					],
+					[
+						"pro",
+						"prompt〔function〕"
+					],
+					[
+						"scir",
+						"script\tTag"
+					]
+				]
+			},
+			"build_system_choices":
+			[
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+					[
+						"ht",
+						"HTMLBeautify"
+					],
+					[
+						"ins",
+						"Package Control: Install Package"
+					],
+					[
+						"remo",
+						"Package Control: Remove Package"
+					],
+					[
+						"htm",
+						"HTMLBeautify"
+					],
+					[
+						"Package Control: ",
+						"Package Control: Install Package"
+					],
+					[
+						"insta",
+						"Package Control: Install Package"
+					],
+					[
+						"mon",
+						"Monokai Pro: select theme"
+					],
+					[
+						"install",
+						"Package Control: Install Package"
+					],
+					[
+						"col",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"project",
+						"Project Manager: Remove Project"
+					],
+					[
+						"cdn",
+						"Cdnjs: Search"
+					],
+					[
+						"make",
+						"SnippetMaker: Make Snippet"
+					],
+					[
+						"colo",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"codeintel ",
+						"SublimeCodeIntel: Enable Live Autocompletion for Current Language"
+					],
+					[
+						"inst",
+						"Package Control: Install Package"
+					],
+					[
+						"instal",
+						"Package Control: Install Package"
+					],
+					[
+						"map",
+						"View: Toggle Minimap"
+					],
+					[
+						"i",
+						"Package Control: Install Package"
+					],
+					[
+						"monok",
+						"Monokai Pro: select theme"
+					],
+					[
+						"packag",
+						"Install Package Control"
+					]
+				],
+				"width": 0.0
+			},
+			"console":
+			{
+				"height": 295.0,
+				"history":
+				[
+					"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"file_history":
+			[
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade4.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade3.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade2.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade1.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/atividade2.html",
+				"/C/Users/aecio/AppData/Local/Temp/Rar$DRa7224.5199/javascript/meu_script.js",
+				"/C/xampp/htdocs/projetos/Dicas/PHP/PHP.html",
+				"/C/xampp/htdocs/projetos/projeto-rgfalso/index.php",
+				"/C/xampp/htdocs/projetos/projeto-rgfalso/smarty/templates/cadastrar_rg.html",
+				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/User/Snippets/pub.sublime-snippet",
+				"/C/xampp/htdocs/projetos/projeto-rgfalso/vendor/RG/Page.php",
+				"/C/xampp/htdocs/projetos/curso-PHP7-Hcode/website/vendor/slim/slim/Slim/Slim.php",
+				"/C/xampp/htdocs/projetos/projeto-rgfalso/vendor/RG/Rg.php",
+				"/C/xampp/htdocs/projetos/teste.php",
+				"/C/xampp/htdocs/projetos/curso-Udemy-Caixa-eletronico-MVC/controller/loginController.php",
+				"/C/xampp/htdocs/projetos/curso-Udemy-Caixa-eletronico-MVC/model/Contas.class.php",
+				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
+				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/User/CodeFormatter.sublime-settings",
+				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/CodeFormatter/CodeFormatter.sublime-settings"
+			],
+			"find":
+			{
+				"height": 39.0
+			},
+			"find_in_files":
+			{
+				"height": 0.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+					"numero1",
+					"1",
+					")\n",
+					"massa"
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+				],
+				"reverse": false,
+				"show_context": true,
+				"use_buffer2": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"incremental_find":
+			{
+				"height": 39.0
+			},
+			"input":
+			{
+				"height": 72.0
+			},
+			"menu_visible": true,
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"pinned_build_system": "",
+			"replace":
+			{
+				"height": 74.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"show_minimap": false,
+			"show_open_files": true,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 419.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			}
+		},
+		"new_window_width": 634.0
+	},
+	"windows":
+	[
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"ord",
+						"ordenaNumeros〔function〕"
+					],
+					[
+						"list",
+						"lista_numeros〔variable〕"
+					],
+					[
+						"so",
+						"sort〔function〕"
+					],
+					[
+						"html",
+						"html\thtml"
+					],
+					[
+						"va",
+						"valor_campo"
+					],
+					[
+						"re",
+						"resultado"
+					],
+					[
+						"cal",
+						"calcular〔function〕"
+					],
+					[
+						"ca",
+						"calcular"
+					],
+					[
+						"onc",
+						"onclick\tAttr"
+					],
+					[
+						"fu",
+						"function"
+					],
+					[
+						"st",
+						"style\tAttr"
+					],
+					[
+						"text",
+						"texto"
+					],
+					[
+						"fo",
+						"form\tTag"
+					],
+					[
+						"nu",
+						"num2"
+					],
+					[
+						"num",
+						"num2〔argument〕"
+					],
+					[
+						"par",
+						"parseInt〔function〕"
+					],
+					[
+						"ope",
+						"operacao〔variable〕"
+					],
+					[
+						"oper",
+						"operacao〔argument〕"
+					],
+					[
+						"n",
+						"num1"
+					],
+					[
+						"cla",
+						"classificado〔variable〕"
+					],
+					[
+						"s",
+						"switch"
+					],
+					[
+						"met",
+						"meta\tTag"
+					],
+					[
+						"pro",
+						"prompt〔function〕"
+					],
+					[
+						"scir",
+						"script\tTag"
+					]
+				]
+			},
+			"buffers":
+			[
+				{
+					"file": "/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/array_ordenacao.html",
+					"settings":
+					{
+						"buffer_size": 740,
+						"encoding": "UTF-8",
+						"line_ending": "Windows"
+					}
+				}
+			],
+			"build_system": "",
+			"build_system_choices":
+			[
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+					[
+						"ins",
+						"Package Control: Install Package"
+					],
+					[
+						"htm",
+						"HTMLBeautify"
+					],
+					[
+						"ht",
+						"HTMLBeautify"
+					],
+					[
+						"remo",
+						"Package Control: Remove Package"
+					],
+					[
+						"Package Control: ",
+						"Package Control: Install Package"
+					],
+					[
+						"insta",
+						"Package Control: Install Package"
+					],
+					[
+						"mon",
+						"Monokai Pro: select theme"
+					],
+					[
+						"install",
+						"Package Control: Install Package"
+					],
+					[
+						"col",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"project",
+						"Project Manager: Remove Project"
+					],
+					[
+						"cdn",
+						"Cdnjs: Search"
+					],
+					[
+						"make",
+						"SnippetMaker: Make Snippet"
+					],
+					[
+						"colo",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"codeintel ",
+						"SublimeCodeIntel: Enable Live Autocompletion for Current Language"
+					],
+					[
+						"inst",
+						"Package Control: Install Package"
+					],
+					[
+						"instal",
+						"Package Control: Install Package"
+					],
+					[
+						"map",
+						"View: Toggle Minimap"
+					],
+					[
+						"i",
+						"Package Control: Install Package"
+					],
+					[
+						"monok",
+						"Monokai Pro: select theme"
+					],
+					[
+						"packag",
+						"Install Package Control"
+					]
+				],
+				"width": 0.0
+			},
+			"console":
+			{
+				"height": 295.0,
+				"history":
+				[
+					"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"expanded_folders":
+			[
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/projetoCalculadora"
+			],
+			"file_history":
+			[
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/array_pesquisa.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/projetoCalculadora/index.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade5.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade4.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade3.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade2.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade1.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/atividade2.html",
+				"/C/Users/aecio/AppData/Local/Temp/Rar$DRa7224.5199/javascript/meu_script.js",
+				"/C/xampp/htdocs/projetos/Dicas/PHP/PHP.html",
+				"/C/xampp/htdocs/projetos/projeto-rgfalso/index.php",
+				"/C/xampp/htdocs/projetos/projeto-rgfalso/smarty/templates/cadastrar_rg.html",
+				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/User/Snippets/pub.sublime-snippet",
+				"/C/xampp/htdocs/projetos/projeto-rgfalso/vendor/RG/Page.php",
+				"/C/xampp/htdocs/projetos/curso-PHP7-Hcode/website/vendor/slim/slim/Slim/Slim.php",
+				"/C/xampp/htdocs/projetos/projeto-rgfalso/vendor/RG/Rg.php",
+				"/C/xampp/htdocs/projetos/teste.php",
+				"/C/xampp/htdocs/projetos/curso-Udemy-Caixa-eletronico-MVC/controller/loginController.php",
+				"/C/xampp/htdocs/projetos/curso-Udemy-Caixa-eletronico-MVC/model/Contas.class.php",
+				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
+				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/User/CodeFormatter.sublime-settings",
+				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/CodeFormatter/CodeFormatter.sublime-settings"
+			],
+			"find":
+			{
+				"height": 39.0
+			},
+			"find_in_files":
+			{
+				"height": 0.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+					"frutas",
+					"white",
+					"yellow",
+					"numero1",
+					"1",
+					")\n",
+					"massa"
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+					""
+				],
+				"reverse": false,
+				"show_context": true,
+				"use_buffer2": true,
+				"whole_word": false,
+				"wrap": true
+			},
+			"folders":
+			[
+				{
+					"path": "C:\\xampp\\htdocs\\projetos\\curso-Udemy-19-cursos-20-projetos"
+				}
+			],
+			"groups":
+			[
+				{
+					"selected": 0,
+					"sheets":
+					[
+						{
+							"buffer": 0,
+							"file": "/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/array_ordenacao.html",
+							"semi_transient": false,
+							"settings":
+							{
+								"buffer_size": 740,
+								"regions":
+								{
+								},
+								"selection":
+								[
+									[
+										708,
+										708
+									]
+								],
+								"settings":
+								{
+									"auto_complete": false,
+									"bracket_highlighter.busy": false,
+									"bracket_highlighter.clone": -1,
+									"bracket_highlighter.locations":
+									{
+										"close":
+										{
+											"1":
+											[
+												701,
+												707
+											]
+										},
+										"icon":
+										{
+											"1":
+											[
+												"Packages/BracketHighlighter/icons/tag.png",
+												"region.orangish"
+											]
+										},
+										"open":
+										{
+											"1":
+											[
+												88,
+												94
+											]
+										},
+										"unmatched":
+										{
+										}
+									},
+									"bracket_highlighter.regions":
+									[
+										"bh_curly",
+										"bh_curly_center",
+										"bh_curly_open",
+										"bh_curly_close",
+										"bh_curly_content",
+										"bh_tag",
+										"bh_tag_center",
+										"bh_tag_open",
+										"bh_tag_close",
+										"bh_tag_content",
+										"bh_double_quote",
+										"bh_double_quote_center",
+										"bh_double_quote_open",
+										"bh_double_quote_close",
+										"bh_double_quote_content",
+										"bh_default",
+										"bh_default_center",
+										"bh_default_open",
+										"bh_default_close",
+										"bh_default_content",
+										"bh_c_define",
+										"bh_c_define_center",
+										"bh_c_define_open",
+										"bh_c_define_close",
+										"bh_c_define_content",
+										"bh_unmatched",
+										"bh_unmatched_center",
+										"bh_unmatched_open",
+										"bh_unmatched_close",
+										"bh_unmatched_content",
+										"bh_angle",
+										"bh_angle_center",
+										"bh_angle_open",
+										"bh_angle_close",
+										"bh_angle_content",
+										"bh_single_quote",
+										"bh_single_quote_center",
+										"bh_single_quote_open",
+										"bh_single_quote_close",
+										"bh_single_quote_content",
+										"bh_square",
+										"bh_square_center",
+										"bh_square_open",
+										"bh_square_close",
+										"bh_square_content",
+										"bh_regex",
+										"bh_regex_center",
+										"bh_regex_open",
+										"bh_regex_close",
+										"bh_regex_content",
+										"bh_round",
+										"bh_round_center",
+										"bh_round_open",
+										"bh_round_close",
+										"bh_round_content"
+									],
+									"open_with_edit": true,
+									"syntax": "Packages/HTML/HTML.sublime-syntax"
+								},
+								"translation.x": 0.0,
+								"translation.y": 0.0,
+								"zoom_level": 1.0
+							},
+							"stack_index": 0,
+							"type": "text"
+						}
+					]
+				}
+			],
+			"incremental_find":
+			{
+				"height": 39.0
+			},
+			"input":
+			{
+				"height": 72.0
+			},
+			"layout":
+			{
+				"cells":
+				[
+					[
+						0,
+						0,
+						1,
+						1
+					]
+				],
+				"cols":
+				[
+					0.0,
+					1.0
+				],
+				"rows":
+				[
+					0.0,
+					1.0
+				]
+			},
+			"menu_visible": true,
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"pinned_build_system": "",
+			"position": "0,2,3,-1,-1,-1,-1,721,182,182,838",
+			"project": "",
+			"replace":
+			{
+				"height": 74.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"selected_group": 0,
+			"settings":
+			{
+			},
+			"show_minimap": false,
+			"show_open_files": true,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 419.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			},
+			"window_id": 1,
+			"workspace_name": ""
+		}
+	],
+	"workspaces":
+	{
+		"recent_workspaces":
+		[
+			"/C/Users/aecio/Downloads/Sublime text/Data/Packages/User/Projects/teste.sublime-workspace"
+		]
+	}
+}

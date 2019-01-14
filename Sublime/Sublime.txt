@@ -10,7 +10,9 @@ criar comentário           -> ctrl + ;
 duplicar linha             -> ctrl + shift + d
 mover linha                -> ctrl + shift + seta para cima / ctrl + shift + seta para baixo
 selecionar bloco html      -> ctrl + shift + a
-
+comentar linhas            -> ctrl + ;
+esconder e mostrar código  -> ctrl + shift + ´ /  ctrl + shift + [
+ 
 
 //Pacote de Gerenciamento do Sublime Text
 ctrl + shift + p -> digite package -> escolha Install Package Control

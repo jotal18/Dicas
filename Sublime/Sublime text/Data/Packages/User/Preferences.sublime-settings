@@ -1,5 +1,5 @@
 {
-	"color_scheme": "Packages/Colorsublime - Themes/toothpaste.tmTheme",
+	"color_scheme": "Packages/Theme - Monokai Pro/Monokai Pro (Filter Machine).tmTheme",
 	"font_face": "Fira Code",
 	"font_size": 14,
 	"ignored_packages":
@@ -8,5 +8,5 @@
 	],
 	"line_padding_bottom": 7,
 	"monokai_pro_ui_font_face": "Fira Code",
-	"theme": "Monokai Pro (Filter Spectrum).sublime-theme"
+	"theme": "Monokai Pro (Filter Machine).sublime-theme"
 }
