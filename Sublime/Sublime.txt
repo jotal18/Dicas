@@ -47,7 +47,7 @@ Menu Preferences -> Settings -> na aba Preferences.sublime-settings - User -> co
 ctrl + shift + p -> digite map -> escolha View: Toogle Minimap
 
 
-//Alterar os ícones da sidebar (não funciona)
+//Alterar os ícones da sidebar
 ctrl + shift + p -> digite install -> escolha Package Control: Install Package
 ctrl + shift + p -> digite a file icon -> escolha A File Icon
 

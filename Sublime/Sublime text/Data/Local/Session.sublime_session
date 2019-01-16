@@ -5,289 +5,12 @@
 		"/C/xampp/htdocs/projetos"
 	],
 	"last_version": 3176,
-	"last_window_id": 20,
+	"last_window_id": 21,
 	"log_indexing": false,
 	"settings":
 	{
-		"new_window_height": 453.0,
+		"new_window_height": 480.0,
 		"new_window_settings":
-		{
-			"auto_complete":
-			{
-				"selected_items":
-				[
-					[
-						"nu",
-						"num2"
-					],
-					[
-						"num",
-						"num2〔argument〕"
-					],
-					[
-						"par",
-						"parseInt〔function〕"
-					],
-					[
-						"ope",
-						"operacao〔variable〕"
-					],
-					[
-						"oper",
-						"operacao〔argument〕"
-					],
-					[
-						"n",
-						"num1"
-					],
-					[
-						"cla",
-						"classificado〔variable〕"
-					],
-					[
-						"s",
-						"switch"
-					],
-					[
-						"met",
-						"meta\tTag"
-					],
-					[
-						"pro",
-						"prompt〔function〕"
-					],
-					[
-						"scir",
-						"script\tTag"
-					]
-				]
-			},
-			"build_system_choices":
-			[
-			],
-			"build_varint": "",
-			"command_palette":
-			{
-				"height": 0.0,
-				"last_filter": "",
-				"selected_items":
-				[
-					[
-						"ht",
-						"HTMLBeautify"
-					],
-					[
-						"ins",
-						"Package Control: Install Package"
-					],
-					[
-						"remo",
-						"Package Control: Remove Package"
-					],
-					[
-						"htm",
-						"HTMLBeautify"
-					],
-					[
-						"Package Control: ",
-						"Package Control: Install Package"
-					],
-					[
-						"insta",
-						"Package Control: Install Package"
-					],
-					[
-						"mon",
-						"Monokai Pro: select theme"
-					],
-					[
-						"install",
-						"Package Control: Install Package"
-					],
-					[
-						"col",
-						"Colorsublime: Install Theme"
-					],
-					[
-						"project",
-						"Project Manager: Remove Project"
-					],
-					[
-						"cdn",
-						"Cdnjs: Search"
-					],
-					[
-						"make",
-						"SnippetMaker: Make Snippet"
-					],
-					[
-						"colo",
-						"Colorsublime: Install Theme"
-					],
-					[
-						"codeintel ",
-						"SublimeCodeIntel: Enable Live Autocompletion for Current Language"
-					],
-					[
-						"inst",
-						"Package Control: Install Package"
-					],
-					[
-						"instal",
-						"Package Control: Install Package"
-					],
-					[
-						"map",
-						"View: Toggle Minimap"
-					],
-					[
-						"i",
-						"Package Control: Install Package"
-					],
-					[
-						"monok",
-						"Monokai Pro: select theme"
-					],
-					[
-						"packag",
-						"Install Package Control"
-					]
-				],
-				"width": 0.0
-			},
-			"console":
-			{
-				"height": 295.0,
-				"history":
-				[
-					"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
-				]
-			},
-			"distraction_free":
-			{
-				"menu_visible": true,
-				"show_minimap": false,
-				"show_open_files": false,
-				"show_tabs": false,
-				"side_bar_visible": false,
-				"status_bar_visible": false
-			},
-			"file_history":
-			[
-				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade4.html",
-				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade3.html",
-				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade2.html",
-				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade1.html",
-				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/atividade2.html",
-				"/C/Users/aecio/AppData/Local/Temp/Rar$DRa7224.5199/javascript/meu_script.js",
-				"/C/xampp/htdocs/projetos/Dicas/PHP/PHP.html",
-				"/C/xampp/htdocs/projetos/projeto-rgfalso/index.php",
-				"/C/xampp/htdocs/projetos/projeto-rgfalso/smarty/templates/cadastrar_rg.html",
-				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/User/Snippets/pub.sublime-snippet",
-				"/C/xampp/htdocs/projetos/projeto-rgfalso/vendor/RG/Page.php",
-				"/C/xampp/htdocs/projetos/curso-PHP7-Hcode/website/vendor/slim/slim/Slim/Slim.php",
-				"/C/xampp/htdocs/projetos/projeto-rgfalso/vendor/RG/Rg.php",
-				"/C/xampp/htdocs/projetos/teste.php",
-				"/C/xampp/htdocs/projetos/curso-Udemy-Caixa-eletronico-MVC/controller/loginController.php",
-				"/C/xampp/htdocs/projetos/curso-Udemy-Caixa-eletronico-MVC/model/Contas.class.php",
-				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
-				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/User/CodeFormatter.sublime-settings",
-				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/CodeFormatter/CodeFormatter.sublime-settings"
-			],
-			"find":
-			{
-				"height": 39.0
-			},
-			"find_in_files":
-			{
-				"height": 0.0,
-				"where_history":
-				[
-				]
-			},
-			"find_state":
-			{
-				"case_sensitive": false,
-				"find_history":
-				[
-					"numero1",
-					"1",
-					")\n",
-					"massa"
-				],
-				"highlight": true,
-				"in_selection": false,
-				"preserve_case": false,
-				"regex": false,
-				"replace_history":
-				[
-				],
-				"reverse": false,
-				"show_context": true,
-				"use_buffer2": true,
-				"whole_word": false,
-				"wrap": true
-			},
-			"incremental_find":
-			{
-				"height": 39.0
-			},
-			"input":
-			{
-				"height": 72.0
-			},
-			"menu_visible": true,
-			"output.find_results":
-			{
-				"height": 0.0
-			},
-			"pinned_build_system": "",
-			"replace":
-			{
-				"height": 74.0
-			},
-			"save_all_on_build": true,
-			"select_file":
-			{
-				"height": 0.0,
-				"last_filter": "",
-				"selected_items":
-				[
-				],
-				"width": 0.0
-			},
-			"select_project":
-			{
-				"height": 0.0,
-				"last_filter": "",
-				"selected_items":
-				[
-				],
-				"width": 0.0
-			},
-			"select_symbol":
-			{
-				"height": 0.0,
-				"last_filter": "",
-				"selected_items":
-				[
-				],
-				"width": 0.0
-			},
-			"show_minimap": false,
-			"show_open_files": true,
-			"show_tabs": true,
-			"side_bar_visible": true,
-			"side_bar_width": 419.0,
-			"status_bar_visible": true,
-			"template_settings":
-			{
-			}
-		},
-		"new_window_width": 634.0
-	},
-	"windows":
-	[
 		{
 			"auto_complete":
 			{
@@ -391,19 +114,6 @@
 					]
 				]
 			},
-			"buffers":
-			[
-				{
-					"file": "/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/array_ordenacao.html",
-					"settings":
-					{
-						"buffer_size": 740,
-						"encoding": "UTF-8",
-						"line_ending": "Windows"
-					}
-				}
-			],
-			"build_system": "",
 			"build_system_choices":
 			[
 			],
@@ -415,16 +125,16 @@
 				"selected_items":
 				[
 					[
+						"ins",
+						"Package Control: Install Package"
+					],
+					[
 						"htm",
 						"HTMLBeautify"
 					],
 					[
 						"ht",
 						"HTMLBeautify"
-					],
-					[
-						"ins",
-						"Package Control: Install Package"
 					],
 					[
 						"remo",
@@ -514,14 +224,10 @@
 				"side_bar_visible": false,
 				"status_bar_visible": false
 			},
-			"expanded_folders":
-			[
-				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos",
-				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT",
-				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/projetoCalculadora"
-			],
 			"file_history":
 			[
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/funcoes_anonimas.hmtl",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/array_ordenacao.html",
 				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/array_pesquisa.html",
 				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/projetoCalculadora/index.html",
 				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade5.html",
@@ -583,6 +289,541 @@
 				"whole_word": false,
 				"wrap": true
 			},
+			"incremental_find":
+			{
+				"height": 39.0
+			},
+			"input":
+			{
+				"height": 72.0
+			},
+			"menu_visible": true,
+			"output.find_results":
+			{
+				"height": 0.0
+			},
+			"pinned_build_system": "",
+			"replace":
+			{
+				"height": 74.0
+			},
+			"save_all_on_build": true,
+			"select_file":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_project":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"select_symbol":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+				],
+				"width": 0.0
+			},
+			"show_minimap": false,
+			"show_open_files": true,
+			"show_tabs": true,
+			"side_bar_visible": true,
+			"side_bar_width": 419.0,
+			"status_bar_visible": true,
+			"template_settings":
+			{
+			}
+		},
+		"new_window_width": 640.0
+	},
+	"windows":
+	[
+		{
+			"auto_complete":
+			{
+				"selected_items":
+				[
+					[
+						"cr",
+						"criaMosquitoTempo"
+					],
+					[
+						"cri",
+						"criaMosquitoTempo〔variable〕"
+					],
+					[
+						"op",
+						"option\tTag"
+					],
+					[
+						"di",
+						"div\tTag"
+					],
+					[
+						"el",
+						"else"
+					],
+					[
+						"cor",
+						"cronometro"
+					],
+					[
+						"c",
+						"cronometro"
+					],
+					[
+						"font",
+						"font-weight\tproperty"
+					],
+					[
+						"backg",
+						"background-color\tproperty"
+					],
+					[
+						"bor",
+						"border-top\tproperty"
+					],
+					[
+						"bac",
+						"background-size\tproperty"
+					],
+					[
+						"back",
+						"background-repeat\tproperty"
+					],
+					[
+						"u",
+						"url()\tbackground-image"
+					],
+					[
+						"ba",
+						"background-image\tproperty"
+					],
+					[
+						"mosqui",
+						"mosquito〔variable〕"
+					],
+					[
+						"lad",
+						"ladoAleatorio〔function〕"
+					],
+					[
+						"S",
+						"scaleX()\ttransform"
+					],
+					[
+						"TRAN",
+						"transform\tproperty"
+					],
+					[
+						"scalE",
+						"scaleX()\ttransform"
+					],
+					[
+						"tra",
+						"transform\tproperty"
+					],
+					[
+						"la",
+						"ladoAleatorio"
+					],
+					[
+						"con",
+						"console.log"
+					],
+					[
+						"cla",
+						"classe〔variable〕"
+					],
+					[
+						"po",
+						"posicaox"
+					],
+					[
+						"posicao",
+						"posicaoy"
+					],
+					[
+						"li",
+						"link\tTag"
+					],
+					[
+						"onr",
+						"onresize\tAttr"
+					],
+					[
+						"i",
+						"innerWidth〔variable〕"
+					],
+					[
+						"s",
+						"src\tAttr"
+					],
+					[
+						"set",
+						"setInterval〔function〕"
+					],
+					[
+						"for",
+						"for\tfor (…) {…}"
+					],
+					[
+						"lista",
+						"lista_frutas〔variable〕"
+					],
+					[
+						"func",
+						"function〔keyword〕"
+					],
+					[
+						"e",
+						"erro"
+					],
+					[
+						"ti",
+						"titulo"
+					],
+					[
+						"ca",
+						"callbackSucesso"
+					],
+					[
+						"cal",
+						"callbackErro〔function〕"
+					],
+					[
+						"F",
+						"Funções"
+					],
+					[
+						"f",
+						"fun\tFunction"
+					],
+					[
+						"ord",
+						"ordenaNumeros〔function〕"
+					],
+					[
+						"list",
+						"lista_numeros〔variable〕"
+					],
+					[
+						"so",
+						"sort〔function〕"
+					],
+					[
+						"html",
+						"html\thtml"
+					],
+					[
+						"va",
+						"valor_campo"
+					],
+					[
+						"re",
+						"resultado"
+					],
+					[
+						"onc",
+						"onclick\tAttr"
+					],
+					[
+						"fu",
+						"function"
+					],
+					[
+						"st",
+						"style\tAttr"
+					],
+					[
+						"text",
+						"texto"
+					],
+					[
+						"fo",
+						"form\tTag"
+					],
+					[
+						"nu",
+						"num2"
+					],
+					[
+						"num",
+						"num2〔argument〕"
+					],
+					[
+						"par",
+						"parseInt〔function〕"
+					],
+					[
+						"ope",
+						"operacao〔variable〕"
+					],
+					[
+						"oper",
+						"operacao〔argument〕"
+					],
+					[
+						"n",
+						"num1"
+					],
+					[
+						"met",
+						"meta\tTag"
+					],
+					[
+						"pro",
+						"prompt〔function〕"
+					],
+					[
+						"scir",
+						"script\tTag"
+					]
+				]
+			},
+			"buffers":
+			[
+			],
+			"build_system": "",
+			"build_system_choices":
+			[
+			],
+			"build_varint": "",
+			"command_palette":
+			{
+				"height": 0.0,
+				"last_filter": "",
+				"selected_items":
+				[
+					[
+						"ins",
+						"Package Control: Install Package"
+					],
+					[
+						"h",
+						"HTMLBeautify"
+					],
+					[
+						"cd",
+						"Cdnjs: Search"
+					],
+					[
+						"c",
+						"Cdnjs: Search"
+					],
+					[
+						"ht",
+						"HTMLBeautify"
+					],
+					[
+						"cdn",
+						"Cdnjs: Search"
+					],
+					[
+						"htm",
+						"HTMLBeautify"
+					],
+					[
+						"remo",
+						"Package Control: Remove Package"
+					],
+					[
+						"Package Control: ",
+						"Package Control: Install Package"
+					],
+					[
+						"insta",
+						"Package Control: Install Package"
+					],
+					[
+						"mon",
+						"Monokai Pro: select theme"
+					],
+					[
+						"install",
+						"Package Control: Install Package"
+					],
+					[
+						"col",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"project",
+						"Project Manager: Remove Project"
+					],
+					[
+						"make",
+						"SnippetMaker: Make Snippet"
+					],
+					[
+						"colo",
+						"Colorsublime: Install Theme"
+					],
+					[
+						"codeintel ",
+						"SublimeCodeIntel: Enable Live Autocompletion for Current Language"
+					],
+					[
+						"inst",
+						"Package Control: Install Package"
+					],
+					[
+						"instal",
+						"Package Control: Install Package"
+					],
+					[
+						"map",
+						"View: Toggle Minimap"
+					],
+					[
+						"i",
+						"Package Control: Install Package"
+					],
+					[
+						"monok",
+						"Monokai Pro: select theme"
+					],
+					[
+						"packag",
+						"Install Package Control"
+					]
+				],
+				"width": 0.0
+			},
+			"console":
+			{
+				"height": 295.0,
+				"history":
+				[
+					"import urllib.request,os,hashlib; h = '6f4c264a24d933ce70df5dedcf1dcaee' + 'ebe013ee18cced0ef93d5f746d80ef60'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+				]
+			},
+			"distraction_free":
+			{
+				"menu_visible": true,
+				"show_minimap": false,
+				"show_open_files": false,
+				"show_tabs": false,
+				"side_bar_visible": false,
+				"status_bar_visible": false
+			},
+			"expanded_folders":
+			[
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos"
+			],
+			"file_history":
+			[
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/projetoMataMosquito/index.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/projetoMataMosquito/app.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/projetoMataMosquito/fim_de_jogo.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/projetoMataMosquito/vitoria.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/projetoMataMosquito/estilo.css",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/projetoMataMosquito/jogo.js",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/index.html",
+				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/User/CodeFormatter.sublime-settings",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/bom_timing.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/bom_location.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/bom_screen.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/bom_window.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/tratamento_erros.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/funcoes_parametros_variaveis.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade6.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/teste.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/foreach.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/for_in.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/lacos_pratica_2.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/lacos_pratica_1.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/for.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIP/for.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/do_while.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/while.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/funcoes_callback.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/funcoes_anonimas.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/funcoes_anonimas.hmtl",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/array_ordenacao.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/array_pesquisa.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/projetoCalculadora/index.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade5.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade4.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade3.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade2.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/atividade1.html",
+				"/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/atividade2.html",
+				"/C/Users/aecio/AppData/Local/Temp/Rar$DRa7224.5199/javascript/meu_script.js",
+				"/C/xampp/htdocs/projetos/Dicas/PHP/PHP.html",
+				"/C/xampp/htdocs/projetos/projeto-rgfalso/index.php",
+				"/C/xampp/htdocs/projetos/projeto-rgfalso/smarty/templates/cadastrar_rg.html",
+				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/User/Snippets/pub.sublime-snippet",
+				"/C/xampp/htdocs/projetos/projeto-rgfalso/vendor/RG/Page.php",
+				"/C/xampp/htdocs/projetos/curso-PHP7-Hcode/website/vendor/slim/slim/Slim/Slim.php",
+				"/C/xampp/htdocs/projetos/projeto-rgfalso/vendor/RG/Rg.php",
+				"/C/xampp/htdocs/projetos/teste.php",
+				"/C/xampp/htdocs/projetos/curso-Udemy-Caixa-eletronico-MVC/controller/loginController.php",
+				"/C/xampp/htdocs/projetos/curso-Udemy-Caixa-eletronico-MVC/model/Contas.class.php",
+				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/SublimeCodeIntel/SublimeCodeIntel.sublime-settings",
+				"/C/Users/aecio/Downloads/Sublime text/Data/Packages/CodeFormatter/CodeFormatter.sublime-settings"
+			],
+			"find":
+			{
+				"height": 39.0
+			},
+			"find_in_files":
+			{
+				"height": 0.0,
+				"where_history":
+				[
+				]
+			},
+			"find_state":
+			{
+				"case_sensitive": false,
+				"find_history":
+				[
+					"normal",
+					"5",
+					"e 0:\n    \t\treturn 'mosquito1",
+					"x",
+					"largura",
+					"1",
+					"i",
+					"x",
+					"z",
+					"y",
+					"i",
+					"h1",
+					"frutas",
+					"white",
+					"yellow",
+					"numero1",
+					"1",
+					")\n",
+					"massa"
+				],
+				"highlight": true,
+				"in_selection": false,
+				"preserve_case": false,
+				"regex": false,
+				"replace_history":
+				[
+					""
+				],
+				"reverse": true,
+				"show_context": true,
+				"use_buffer2": true,
+				"whole_word": false,
+				"wrap": true
+			},
 			"folders":
 			[
 				{
@@ -592,45 +833,14 @@
 			"groups":
 			[
 				{
-					"selected": 0,
 					"sheets":
 					[
-						{
-							"buffer": 0,
-							"file": "/C/xampp/htdocs/projetos/curso-Udemy-19-cursos-20-projetos/JAVASCRIPT/array_ordenacao.html",
-							"semi_transient": false,
-							"settings":
-							{
-								"buffer_size": 740,
-								"regions":
-								{
-								},
-								"selection":
-								[
-									[
-										644,
-										644
-									]
-								],
-								"settings":
-								{
-									"auto_complete": false,
-									"open_with_edit": true,
-									"syntax": "Packages/HTML/HTML.sublime-syntax"
-								},
-								"translation.x": 0.0,
-								"translation.y": 90.0,
-								"zoom_level": 1.0
-							},
-							"stack_index": 0,
-							"type": "text"
-						}
 					]
 				}
 			],
 			"incremental_find":
 			{
-				"height": 39.0
+				"height": 63.0
 			},
 			"input":
 			{
@@ -664,7 +874,7 @@
 				"height": 0.0
 			},
 			"pinned_build_system": "",
-			"position": "0,2,3,-32000,-32000,-1,-1,721,182,182,838",
+			"position": "0,2,3,-32000,-32000,-1,-1,705,765,166,1421",
 			"project": "",
 			"replace":
 			{
@@ -706,7 +916,7 @@
 			"show_open_files": true,
 			"show_tabs": true,
 			"side_bar_visible": true,
-			"side_bar_width": 419.0,
+			"side_bar_width": 324.0,
 			"status_bar_visible": true,
 			"template_settings":
 			{
