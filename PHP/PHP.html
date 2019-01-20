@@ -1050,58 +1050,7 @@ Resumindo
 Pronto;
 
 ------------------------------------------------------------------------------------
-COMPOSER e AUTOLOAD PSR-4
 
-Composer -> É um gerenciador de dependências, mapea toda a estrutura da aplicação, recupera todas as classe contidas nos scripts e permite o acesso às classes por meio de namespaces;
-
-PSR-4 -> os namespaces devem ter o mesmo nome da pasta;
-
-//Download
-https://getcomposer.org/
-
-//executar o composer em um projeto específico
-1º clique em download na página acima e irá abrir outra página -> 
-2º abaixo de 'Command-line installation', copie o código -> php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" ;
-3º cole no cmd do windows, detalhe importante, no cmd o local do diretório já deve estar setado, conforme 'Resumindo' nos itens 1 e 2 da sessão MVC acima -> caso queira testar, basta copiar o seguinte código no cmd -> php -r "if (hash_file('SHA384', 'composer-setup.php') === '93b54496392c062774670ac18b134c3b3a95e5a5e5c8f1a9f115f203b75bf9a129d5daa8ba6a13e2cc8a1da0806388a8') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;" -> se der tudo certo aparecerá a seguinte mensagem -> Installer verified;
-4º para baixar o composer, copie o seguinte código para o cmd -> php composer-setup.php ;
-5º irá ser criado na pasta o arquivo chamado composer.phar ;
-6º após executar o comando acima, o arquivo composer-setup.php poderá ser deletado simplesmente apertando delete, ou executando o comando php -r "unlink('composer-setup.php');"
-no cmd;
-7º para instalar o composer dentro do projeto -> criar um arquivo na pasta do projeto chamado -> composer.json;
-8º dentro do arquivo composer.json digite:
-{
-	"name": miniframework, //nome do projeto
-	"require": { //define alguns critérios para o nosso projeto
-		"php": ">=7.0"
-	},
-	"authors": [ //autor do projeto
-		{
-			"name": "Jota",
-			"email": jota@teste,.com.br //opcional
-		}
-	],
-	"autoload": { //informa os diretórios que precisam se mapeados para carregar as classes do projeto
-		"psr-4": { //informa como os arquivos serão carregados
-			"APP\\": "App/", //namespace 'APP' que terá acesso a todas as classes localizada na pasta App da aplicação
-			"MF\\": "vendor/MF/" //namespace 'MF' que terá acesso às classes localizadas na pasta vendor/MF/
- 		}
-	}
-}
-8º agora, para instalar o composer, basta digitar no CMD -> php composer.phar install
-9º após a instalação, será criado os arquivos composer.lock e pasta a vendor
-
-1 - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-2 - php composer-setup.php
-3 - criar arquivo composer.json
-4 - digite as informaçãs e namespaces do projeto
-5 - php composer.phar install
-
-
-//autoload
-O arquivo autoload.php é responsável por carregar todas as classe da aplicação e é preciso fazer um require_once "../vendor/autoload.php";
-
-//extensão phtml (arquivos da pasta View->index)
-Extensão criada para arquivos que contenham php e html
 
 
 
