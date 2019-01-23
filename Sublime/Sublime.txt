@@ -187,6 +187,17 @@ ctrl + alt + p -> escolha o projeto
 Menu Project -> Project Manager -> várias opções
 
 
+//Highlight de sintaxe do ES6
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite html under -> escolha HTML Underscore Syntax
+para utilizar -> menu View -> Syntax -> HTML(Underscore)
+
+
+//Autocomplete para JavaScript
+ctrl + shift + p -> digite install -> escolha Package Control: Install Package
+ctrl + shift + p -> digite javascript completions  -> escolha Javascript Completions
+
+
 
 
 

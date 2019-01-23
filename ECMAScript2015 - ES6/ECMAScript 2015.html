@@ -1,0 +1,303 @@
+//Babel
+1 - Babel -> codifica o ES6 para o ES5, para que os browsers suportem esse tipo de versão de script
+2 - Link -> https://babeljs.io/ -> menu setup -> Prototyping(In the browser) -> 3 Usage (With babel-standalone
+) -> copiar o código entre <script src...>....</script> -> colar no arquivo html:
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+	<script type="text/babel">
+	const getMessage = () => "Hello World";
+	document.getElementById('output').innerHTML = getMessage();
+	</script>
+3 -> todo o código ES6 deve ficar dentro da tag <script type="text/babel">código ES6 aqui</script> 
+
+//Escopo
+-Var 
+1 - Escopo Global 	 -> as variáveis estão disponíveis em todo o script
+2 - Escopo de Função -> só podem ser acessadas dentro da função
+3 - Escopo de bloco  -> se a variável estiver dentro de bloco fora da função, estará disponível para todo o script (hoisting); 
+				     -> se o bloco estiver dentro de uma função, a variável do bloco só estará disponível dentro do escopo da função;
+-Let
+1 - Let -> preserva o escopo da variável, ou seja, se uma variável é criada dentro de um bloco, ela poderá ser acessada pelo bloco e não sofrerá hoisting
+2 - É interessante utilizar o Let no lugar do Var
+
+//Constante (const)
+1 - Não deve sofrer alteração de valores ao longo do script
+2 - É sempre boa prática utilizar caracteres maiúsculos para o nome da constante 
+3 - Segue as mesmas regras de escopos
+4 - sintaxe -> const SERIE = 'Friends'
+
+//Concatenação de String e variável
+1 - utiliza-se a crase ``  e ${variável / expressão numérica / função}
+2 - utiliza a quebra do código na exibição
+3 - sintaxe -> console.log(`Oi ${nome}, tudo bem?`)
+			-> console.log(`
+				Oi ${nome}, 
+				tudo bem?
+			`)  -> será mostrado na tela -> Oi nome,
+											tudo bem?
+			-> console.log(`7+7= ${7+7}`)
+			-> console.log(`7*7= ${calcular(7,7)}`)
+
+
+//Parâmetros Default em Função
+1 - sintaxe -> function calcularArea(altura = 2, largura = 3){ return altura * largura}
+2 - caso na chamada da função não haja nenhum parâmetro, a função utilizará os valores default
+3 - se chamar a função acima sem parêmetros, não apresentará erro do tipo undefined  e o resultado será -> calcularArea() -> resultado será 6
+4 - entretando, caso passe algum valor, este irá sobrepor o parâmetro default da função -> calcularArea(4,5) -> resultado será 20
+5 - caso não queira passar todos os parêmetros,  basta utilizar undefined -> calcularArea(undefined,5) -> resultado será 10, pois undefined=2(default)
+
+//Arrow function
+1 - novo forma de escrever função anônima
+2 - sintaxe com mais de um parâmetro                 -> let multiplicacao = (x,y) => {return x * y}
+3 - sintaxe sem parâmetro                            -> let multiplicacao = () => {return 3 * 3}
+4 - sintaxe com um único parâmetro                   -> let quadrado = x => {return x * x}
+5 - sintaxe com apenas um return (return implícito)  -> let quadrado = x => x * x
+--------------------------------------------------------------------------------------------------------
+//Orientação a Objetos
+1 - classe   -> class NomedaClasse { códido aqui }
+2 - atributo -> this.nomeDoAtributo = valor
+3 - método   -> nomeDoMétodo() { códido aqui }
+
+//Encapsulamento
+1 - O ES6 não suporta o private, protected, public
+2 - É utilizada uma convenção para mostrar ao programador que aquele atributo ou método é privado, ou seja, não impede o seu acesso direto, mas tão somente informa a intenção do criador do código, e deve ser usado o '_' antes do atributo
+3 - sintaxe -> this->_volume = 5
+
+//Getters e Setters
+1 - usado para acessar atributos/métodos com "_" 
+2 - devem ter o mesmo nome dos atributos
+3 - sintaxe -> get nomeDoAtributo() {return this.nomeDoAtributo}
+			-> set nomeDoAtributo(valor) {this.nomeDoAtributo = valor}
+4 - para utilizar -> let tv = new Tv()
+				  -> tv.nomeDoAtributo = 5 //usando o método set -> o ES/JS tem a inteligência de aplicar o método setter quando houver o '='
+				  -> tv.nomeDoAtributo //usando o método get -> o ES/JS sabe que deve ser utilizado o método get porque não tem o '='
+
+
+//Herança
+1 - herda atributos, métodos e classes da classe-pai
+2 - sintaxe -> class NomedaClasse extends NomedaClassePai {}
+3 - a classe-filha deve conter o operador super() antes da criação de qualquer atributo (this.nomeDoAtributo)
+4 - sintaxe -> class NomedaClasse extends NomedaClassePai { 
+					constructor() {
+						super() // deve ser sempre incluído aqui
+						this.nomeDoAtributo
+					}
+				}
+5 - o operador super() -> aponta para o constructor da classe-pai
+6 - sintaxe -> class Animal { 
+					constructor(cor, tamanho, peso) {
+						this.cor = cor
+						this.tamanho = tamanho
+						this.peso = peso
+					}
+
+					dormir() {
+						console.log('Dormir')
+					}
+				}
+
+				class Papagaio extends Animal {
+					constructor(sabeFalar, cor, tamanho, peso) {
+						super(cor, tamanho, peso) // essas informações estão sendo atribuídas ao constructor da classe Animal acima
+						this.sabeFalar = sabeFalar
+					}
+				}
+
+				let papagaio = new Papagaio()
+				console.log(papagaio)
+
+
+//Polimorfismo
+1 - alterar um método herdadod da classe-pai pela pela classe-filha
+2 - basta criar um método com o mesmo nome da classe-pai para sobrescrevela
+
+//Objeto literal
+1 - O objeto literal é outra opção de escrever um 'objeto', tem o mesmo resultado da escrita em forma de classe 
+2 - sintaxe -> let produtoLiteral = {
+					descricao: 'Notebook',
+					preco: 2200,
+					verDescricao: function() {
+						console.log(`${this.descricao} por apenas ${this.preco}`)	
+					}
+				}
+3 - sintaxe chamada -> produtoLiteral.verDescricao() // produtoLiteral.descricao
+4 - Exemplo de uso -> recupera os dados formulário e monta um objeto literal -> convertemos o objeto para JSON -> encaminhamos o objeto anexado a requisição HTTP -> para o servidor
+5 - melhoria na sintaxe a partir do ES6 -> as variáveis devem ter o mesmo nome dos atributos do objeto literal -> 
+							let nome = 'Pedro'
+						 	let idade = '20'
+							let sexo = 'Masculino'
+							let profissao = 'Programador'
+
+							let objeto2 = {
+									nome,
+									idade,
+									sexo,
+									profissao,
+									exibirResumo: function() {
+										console.log(`${this.nome}, ${this.idade} anos, ${this.sexo} é ${this.profissao}`)
+									}
+								}
+6 - modificando valores -> let pessoa = {
+								nome: 'José',
+								idade: 45
+							}
+
+							pessoa.nome = 'Fernanda'
+							pessoa.idade =32
+
+7 - criando pares/valor/função dinamicamente -> let pessoa = {
+													nome: 'Maria',
+													idade: 25
+												}
+
+												pessoa.sexo = 'Feminino' //criando um novo par/valor
+												pessoa.dizerOi = () => console.log('Olá, tudo bem?') //criando nova função
+
+8 - objeto literal único (atribuir um obj a uma variável) -> ambos acessam o objeto e podem modificá-lo ->
+ 	let assinatura = {
+		idCliente: 1000,
+		descricao: 'Acesso a Internet',
+		status() {
+			console.log('Ativo')
+		}
+	  }
+
+	let y = assinatura //atribuindo a uma variável
+	y.descricao //acessadndo
+	y.descricao = 'Tv' //modificando
+
+
+//Funções Construtoras
+1 - Outra forma escritura de objeto
+2 - sintaxe -> let Carro = function() {
+					this.cor = 'Amarelo' //atributos
+					this.modelo = 'Chevette'
+					this.velocidadeAtual = 0
+					this.velocidadeMaxima = 180
+
+					this.getVelocidadeAtual = function() { //método get
+						return this.velocidadeAtual
+					}
+
+					this.setVelocidadeAtual = function(velocidadeAtual) { //método set
+						this.velocidadeAtual = velocidadeAtual
+					}
+
+					this.acelerar = function() { //método
+
+						let velocidade = this.getVelocidadeAtual() + 10
+						this.setVelocidadeAtual(velocidade)
+
+					}
+				}
+
+				let carro = new Carro() //instanciar o objeto
+				console.log(carro.getVelocidadeAtual())
+				carro.acelerar() //chamar alguma método
+				carro.acelerar()
+				carro.acelerar()
+				console.log(carro.getVelocidadeAtual())
+
+3 - criar atributos e métodos privados -> basta criar variável do escopo de função
+4 - sintaxe -> let Carro2 = function() {
+				
+				var velocidadeMaxima = 180 //protegendo a variável, pois ela está definida no escopo de função
+				var quilometrosRodados = 0
+
+				this.cor = 'Amarelo' //atributos públicos
+				this.modelo = 'Chevette'
+				this.velocidadeAtual = 0
+
+				var setQuilometrosRodados = function(q) { //criando uma função e atribuindo a uma variável de escopo de função
+					quilometrosRodados += q
+				}
+			}
+
+//Função Factory
+1 - É um design pattern
+2 - sintaxe -> let bicicletaFactory = function(cor, marcha, aro) {
+					return {
+						cor: cor, //ou somente cor, pois o parâmetro é igual ao índice
+						marcha: marcha, 
+						aro: aro,
+						pedalar() { console.log('Método pedalar executado') }
+					}
+				}
+
+				let bicicleta3 = bicicletaFactory('Vermelho', '18', 26)
+
+//Object Prototype
+1 - Qualquer objeto criado é filho de object
+2 - para acessar um atributo/método de outro objeto (sem herança) -> usa __proto__
+3 - sintaxe ->  Object.prototype.attr50 = 'z' 
+
+				let animal = { attr1: 'a' } //como 'animal' não tem referência de protótipo (__proto__), por default, é o object, e herdará o atributo 'attr50' de Object.prototype
+				let vertebrado = { __proto__:animal, attr2: 'b' }
+				let ave = { __proto__: vertebrado, attr3: 'c' }
+
+				console.log(ave.attr1, ave.attr50) //ave consegue herdar o atributo 'attr50'
+
+//Operador Rest/Spread
+1 - usado, no contexto spread(espalhar), para incluir array dentro de outro array; separar cada letra de uma string em um índice (array); incluir atributos de um objeto em outro
+2 - sintaxe ->  //string
+				let tituloArtigo = 'Como utilizar o operador rest/spread'
+				console.log([...tituloArtigo]) //separa cada letra em um índice
+
+				// arrays
+				let listaCursos1 = ['NodeJs e MongoDB', 'ES6, TypeScript e Angular 4']
+				let listaCursos2 = ['Android/IOS', 'Introdução ao GNU/Linux']
+				let listaCursosCompleto = [...listaCursos2, 'Web Completo', 'Android Completo', ...listaCursos1] //inclui o array listaCursos1 e listaCursos2 no array listaCursosCompleto
+
+				// objetos
+				let pessoa = { nome: 'João', idade: 27 }
+				let clone = { endereco: 'Rua Abc', ...pessoa } //inclui os atributos do objeto pessoa
+
+3 - no contexto rest (juntar), é usado em parâmetro de função, permitindo passar vários valores em um array
+4 - sintaxe -> function soma(...param) { //param (parâmetro) no caso é um array
+					let resultado = 0
+					console.log(param)
+					param.forEach(v => resultado += v); //forEach usado para percorrer o array e realizar a soma
+					return resultado
+				}
+
+				console.log(soma(3,8,5,7))
+
+//Destructuring Assignment
+1 - tira valores de dentro de uma estrutura
+2 - no array -> sintaxe -> let frutas = ['Abacaxi', 'Uva', 'Pera', 'Mamão']
+						   let [a, b, , d] = frutas //sintaxe pulando um índice
+						   let [a, b = 'Abacate', c, d, e = 'Banana'] = frutas //sintaxe com valor default em caso de índice não existente
+						   let coisas = [['Abacaxi', 'Uva', 'Pera', 'Mamão'], ['José', 'Maria']]
+						   let [, [, n2]] = coisas // sintaxe array multidimensional
+
+3 - no objeto -> sintaxe -> let {descricao, preco} = produto //sintaxe padrão objeto
+							 console.log(descricao, preco)
+
+							 let {descricao: d, preco: p} = produto //sintaxe renomeando os atributos do objeto
+							 console.log(d, p)
+
+							 let {descricao: d, preco: p, desconto = 5} = produto //sintaxe com valor default em caso de atributo não existente
+							 console.log(d, p, desconto)
+
+							let {detalhes: {fabricante, modelo}} = produto //sintaxe objeto dentro de um atributo de outro objeto
+							console.log(fabricante, modelo)
+
+4 - com função -> sintaxe array -> let arr = [10, 20, 30, 40]
+
+									function teste([a, b, , c, d = 100]) {
+										console.log(a, b, c, d)
+									}
+
+									teste(arr)
+
+5 - com função -> sintaxe objeto -> let obj = {
+										a: 10,
+										b: 20,
+										c: 30,
+										d: 40
+									}
+
+									function teste({a:x, b, c, d}) {
+										console.log(x, b, c, d)
+									}
+
+									teste(obj)									
