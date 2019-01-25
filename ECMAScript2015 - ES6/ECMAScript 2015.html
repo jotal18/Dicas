@@ -300,4 +300,22 @@
 										console.log(x, b, c, d)
 									}
 
-									teste(obj)									
+									teste(obj)	
+
+
+//Converter Objeto Literal em uma string JSON e vice-versa
+1 - OBJ->JSON -> sintaxe -> JSON.stringify(objLiteral)
+1 - JSON->OBJ -> sintaxe -> JSON.parse(JSON)
+
+//JSON
+1 - sintaxe -> let JSON = '{"categoria": "Eletrodoméstico", "descricao": "Geladeira", "preco": 1999.00}'
+						  "{'categoria': 'Eletrodoméstico', 'descricao': 'Geladeira', 'preco': 1999.00}"
+
+//Array Filter
+1 - procura valores dentro de um array, em caso postivo, retorna um array de acordo com algum filtro estabelecido
+2 - permite vários filtros simultâneos
+3 - sintaxe1 -> array.filter(function(){lógica aqui}) -> somente um filtro
+4 - sintaxe2 -> array.filter(function(){lógica/filtro aqui}).filter(function(){outro filtro aqui}) -> dois filtros
+5 - Ex1: -> funcionarios.filter(function(f) {return f.salario < 2000}) // irá retornar um array com cujos salários sejam < 2000
+6 - Ex2: -> funcionarios.filter(function(f) {return f.salario < 2000}).filter(function(f) {return f.status == 'ativo'}) // irá retornar um array com cujos salários sejam < 2000
+7 - Ex2: -> funcionarios.filter(f => f.salario < 2000).filter(f => f.status == 'ativo') //com arrow function
