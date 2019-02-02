@@ -1,0 +1,35 @@
+1 - sintaxe  -> let obj = new XMLHttpRequest()
+				obj.open('GET', 'página.html') -> responsavel por configurar o método e qual a url que será requisitada
+				obj.send() //para processar
+2 - há 5 tipos de estados de requisição -> 0, 1, 2, 3, 4
+2.1 - sintaxe para verificar o estado da requisição -> obj.readyState
+3 - há vários tipos de status da requisição -> principais status -> 200 (requisição finalizada com sucesso); 404 (recurso solicitado, mas não encontrado)
+3.1 - link -> https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status
+3.2 - sintaxe para verificar o status da requisição -> obj.status
+4 - incluir a resposta da requisição na página - obj.responseText
+
+
+XML (linguagem de marcação)
+1 - O xml não é nativamente suportado pelo JS, mas o JSON é
+2 - sintaxe - 
+<?xml version="1.0" encoding="UTF-8"?> //a versão é obrigatória, mas o encoding não
+<bookstore> 								  //root (pai)
+  <book category="cooking">                   //filho + atributo
+    <title lang="en">Everyday Italian</title> //subfilho
+    <author>Giada De Laurentiis</author>      //subfilho
+    <year>2005</year>                         //subfilho
+    <price>30.00</price>                      //subfilho
+  </book>
+  <book category="children">
+    <title lang="en">Harry Potter</title>
+    <author>J K. Rowling</author>
+    <year>2005</year>
+    <price>29.99</price>
+  </book>
+  <book category="web">
+    <title lang="en">Learning XML</title>
+    <author>Erik T. Ray</author>
+    <year>2003</year>
+    <price>39.95</price>
+  </book>
+</bookstore>
