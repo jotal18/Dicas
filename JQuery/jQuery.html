@@ -1,0 +1,27 @@
+Há duas opções para utilizar o jQuery:
+1 -   baixar o arquivo jQuery (salvar link como) -> https://jquery.com/download/
+1.1 - a versão adequada para uso é 'Download the compressed, production jQuery ...'
+1.2 - incluir o código na tag <head></head> do arquivo -> <script src="local e nome do arquivo .js"></script>
+2 - incluir o link cdn no arquivo
+2.1 - link da página -> https://code.jquery.com/
+2.2 - é interessante utilizar a versão uncompressed
+2.3 - basta clicar em uma das opções e copiar o link parecido com o código abaixo e colar no arquivo html
+<script
+src="https://code.jquery.com/jquery-3.3.1.js"
+integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+crossorigin="anonymous">
+</script>
+
+$ -> utilizado para acessar os recursos do jQuery
+
+#Seletores
+1 - selecionar elemento por tag -> $(tag)
+2 - selecionar elemento por classe -> $(.classe)
+3 - selecionar elemento por id -> $(#id)
+4 - selecionar elementos por classe de tag específica -> $('div.exemplo1')
+5 - selecionar elementos por classe de classe específica -> $('.lista2 .exemplo2')
+6 - atuação sobre o array de retorno dos elementos selecionados -> $('.lista1 .exemplo2')
+7 - seleciona o primeiro item do array -> $('.lista1 .exemplo2:first')
+8 - seleciona o último elemento do array -> $('.lista1 .exemplo2:last')
+9 - seleciona os elementos com índices pares do array -> $('.lista1 .exemplo2:even')
+10 - seleciona os elementos com índices ímpares do array -> $('.lista1 .exemplo2:odd')
