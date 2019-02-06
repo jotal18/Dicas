@@ -25,3 +25,32 @@ $ -> utilizado para acessar os recursos do jQuery
 8 - seleciona o último elemento do array -> $('.lista1 .exemplo2:last')
 9 - seleciona os elementos com índices pares do array -> $('.lista1 .exemplo2:even')
 10 - seleciona os elementos com índices ímpares do array -> $('.lista1 .exemplo2:odd')
+
+#Sequencia de execução de código
+1 - independente de onde estiver o código, o script somente será executado após todos os elementos da página estiverem carregados 
+2 - sintaxe1 -> $(document).ready(function(){ 
+					function teste() {
+						console.log($('#exemplo'))
+					}
+				})
+2.1 - sintaxe2 -> function teste() {
+						console.log($('#exemplo'))
+					}
+
+					$(teste)
+
+2.2 - sintaxe3 -> $(function teste() {
+					console.log($('#exemplo'))
+				})
+
+#Manipulando os atributos dos elementos HTML
+1 - selecione o elemento html (id ($('#id'), classe ($('.classe')), tag ($('tag'))) seguido de .attr(<nome do atributo>, <definir valor do atributo opcional>) 
+2 - sintaxe -> <img src="esfera_1.png" border="5" /> //tag HTML com atributos
+				<div style="background-color: red; width: 100px; height: 100px"></div> //div com style
+				<input type="text" value="Eu sou um input"/>
+				$(document).ready(function() {
+					console.log($('img').attr('src')) ///selecionando o atributo da tag img
+					console.log($('img').attr('border', 20)) //definindo valor para o atributo border da tag img
+					console.log($('div').attr('style', 'background-color: blue; width: 300px; height: 100px')) //alterando o atributo style da div
+					console.log($('input').attr('value', 'teste')) //alterando o valor do input
+				})
