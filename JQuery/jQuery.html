@@ -54,3 +54,56 @@ $ -> utilizado para acessar os recursos do jQuery
 					console.log($('div').attr('style', 'background-color: blue; width: 300px; height: 100px')) //alterando o atributo style da div
 					console.log($('input').attr('value', 'teste')) //alterando o valor do input
 				})
+
+#Manipulando o conteúdo interno de elementos HTML
+1 - selecione o elemento html (id ($('#id'), classe ($('.classe')), tag ($('tag'))) seguido de .html(<opcional setar novo conteúdo>)
+2 - sintaxe -> <div id="div1" style="border:solid 1px #000; width:150px; height:150px  ">Div 1</div>
+
+				$(document).ready(() => {
+					console.log('conteudo div 1:', $('#div1').html()) //recuperando o conteúdo interno
+					console.log($('#div1').html('teste'))             //setando novo valor na div; substitui todo o conteúdo do elemento HTML
+				})
+
+#Recuperando e manipulando elementos HTML
+1 - sintaxe -> // val() -> capturar o value
+				// :checked -> capturar somente o selecionado
+
+				// $.each(array, callback(indice, valor)) //loop de repetição que percorre um array de elementos HTML
+
+				$('#nome').val() //selecionando value do campo text
+				$('#nome').val('Jota') //setando valores no campo text
+
+				$('#origem').val() //selecionando campo do select
+				$('#origem').val(3) //setando valores para o select
+
+				$('.sexo:checked').val() //selecionando (pela classe) valores selecionados do radio 
+
+				$('.interesse:checked').val() //selecionando (pela classe) valores selecionados do checkbox
+
+				$.each($('interesse:checked'), (indice, valor) => {
+					console.log(indice, valor)
+				})
+
+#Inserindo e removendo elementos HTML
+1 - sintaxe -> // append, prepend (inner tag) -> insere elemento dentro de um elemento com abertura e fechamento de tag
+				// append -> insere no final de um elemento
+				// prepend -> insere no início do elemento
+
+				$('#lista1').prepend('<li>Item antes</li>') //início
+				$('#lista1').append('<li>Item depois</li>') // final
+
+				$('#lista2').prepend('<div>Item antes</div>') //início
+				$('#lista2').append('<div>Item depois</div>') //final
+				
+				// after, before -> usado em tags que não encapsulam conteúdo
+				// after -> insere o elemento depois e fora de outro elemento HTML 
+				// before -> insere o elemento antes e fora de outro elemento HTML 
+
+				$('#lista2').before('<p>Eu fui inserido antes da div</p>') //inserindo parágrafo antes da div
+				$('#lista2').after('<p>Eu fui inserido depois após a div</p>') //inserindo parágrafo depois da div
+
+				// .html('valor') -> substitui todo o conteúdo do elemento
+				// $('#lista2').html('<p>Eu substitui todo o conteúdo que estava aqui</p>') 
+
+				// .remove() -> remove elemento HTML
+				$('.item2').remove() //o elemento com essa classe será removido
