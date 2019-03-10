@@ -1,0 +1,275 @@
+#Instalação do Homestead (servidor portátil - já vem com todos os aplicativos necessários: composer, laravel, php)
+1 - Instalar na sequência o -> Virtual BOX; Vagrant; git;
+2 - Verificar se o vagrant e git foram instalados corretamente -> cmd ->
+	->vagrant -v (retorna a versão)
+	->git --version (retorna a versão)
+3 - Instalar o homestead -> cmd -> vagrant box add laravel/homestead -> escolha (3) virtual box
+4 - verificar o homestead -> cmd -> vagrant box list -> retorna 
+laravel/homestead
+5 - Clonar o repositótio github do laravel -> cmd -> git clone https://github.com/laravel/homestead Homestead
+
+#Configurando o Homestead
+1 - cmd -> cd Homestead -> init.bat -> será criado um arquivo chamado Homestead.yaml
+2 - Abra o arquivo Homestead.yaml em um editor de texto -> 
+		-> ip, memory, cpus e provider: padrões
+		-> criar chave ssh -> gitbash -> acessar a home do usuário caso não tenha o ~ -> cd ~ -> ssh-keygen -t rsa -C "email que ficará vinculado à chave" -> enter 3 vezes -> para verificar se a chave foi criada corretamente -> verificar se a pasta .ssh foi criado contendo dois arquivos
+		-> após a criação das chaves -> authorize e keys do arquivo Homestead.yaml -> padrões
+		-> folders ->
+			-> map -> pasta da sua máquina que deseja sicronizar -> ~/Documents/Laravel/Sites
+			-> to -> onde dentro do homestead que você quer que aquela pasta esteja -> /home/vagrant/Sites
+		-> sites
+			-> map -> nome do domínio de teste do projto -> Ex: projeto1.test
+			-> to -> local para onde o domínio irá apontar dentro do servidor local -> /home/vagrant/Sites/projeto1/public
+		-> databases -> nome da base de dados -> projeto 1
+
+#Criando um projeto Laravel
+1 - cmd -> cd Homestead -> vagrant up -> (bug PowerShell - caso ocorra -> abra o PowerShell -> $PSVersionTable -> feche e volte para o cmd) -> (bug Timed out while waiting for the machine to boot -> ative o Intel Virtualization Technology na bios da placa-mãe) -> vagrant ssh
+2 - instalar a última versão do Laravel dentro da máquina virtual por meio do composer -> composer global require laravel/installer
+3 - listar a pastas do servidor local/máquina virtual -> cmd -> ls -la
+4 - entrar na pasta que iremos trabalhar -> cd Sites
+5 - criar o projeto laravel -> cmd -> laravel new projeto1
+6 - configurar o arquivo Homestead.yaml
+	...
+	-> sites
+		-> map -> nome do domínio de teste do projto -> Ex: projeto1.dev
+		-> to -> local para onde o domínio irá apontar dentro do servidor local -> /home/vagrant/Sites/projeto1/public
+7 - configurar o host do windows -> abra o bloco de notas como administrador -> localize o arquivo hosts -> C:\Windows\System32\drivers\etc\ -> incluir o ip padrão do homestead no final -> 192.168.10.10      projeto1.test
+8 - criar o nome do database -> Homestead.yaml -> 
+	...
+	-> databases -> projeto1
+9 - após configurar o projeto -> recarregar o homestead -> cmd -> exit -> vagrant reload --provision
+10 - testar o DB -> após o homestead está carregado -> cmd -> vagrant ssh -> mysql -u homestead -> deverá aparecer 'mysql>' -> show databases
+11 - desligar o homestead -> vagrant halt
+
+#Utilizando Homestead
+1 - utlizar o homestead -> cmd -> cd Homestead -> vagrant up -> vagrant ssh -> ls -la -> cd Sites/projeto1
+2 - sair dos ervidor -> cmd -> exit
+3 - desligar o homestead -> cmd -> vagrant halt
+
+#Rotas
+1 - pasta routes -> web.php -> 
+	-> 	Route::get('/', function () {
+			return view('welcome'); (não se coloca a extensão) ou return "Contato";
+		});
+	-> Route::resource('/contato', 'ContatoController'); (utilizando controllers)
+
+#View
+1 - pasta resources -> pasta views -> crie uma view
+
+#Controller
+1 - pasta Http -> Controllers 
+2 - criar controller pelo artisan -> cmd (deve estar dentro da pasta do projeto) -> php artisan make:controller NomedoController
+3 - exemplo de controller ->
+<?php
+
+namespace App\Http\Controllers;
+Ex1:
+class ContatoController extends Controller {
+	public function index() {
+		$data['titulo'] = "Minha página de contato";
+
+		return view('contato', $data); //joga os dados do array $data para a view contato
+	}
+}
+
+Ex2:
+class ContatoController extends Controller {
+	public function index() {
+		$data = ['hoje', 'ontem', 'amanhã']; array qualquer
+
+		return view('subpasta.contato', array('datas' => $data)); //nome da subpasta + nome da view sem extensão / passando o array $data pra view por meio do índice datas 
+	}
+}
+
+4 - para utilizar na view os dados do controller -> dentro da view -> exemplo
+	-> <h1>?php echo $titulo; ?</h1>
+
+5 - tipos de manipulação de dados no arquivo do controller -> pasta app -> Http -> Controllers ->
+	-> listar todos -> public function index() {
+					$produtos = Produtos::all(); //exibe todos os dados do model Produtos
+				} 
+	-> listar dado específico -> public function show($id) {
+							$produtos = Produtos::find($id); //exibe dados por id (domínio.com/produtos/1)
+						  }
+	-> cadastrar dados de um formulário em um BD 
+			->  public function create() {
+					return view('produtos.create');
+				}
+
+			-> public function store(Request $request) {
+					$produto = new Produtos();
+					$produto->sku = $request->input('sku');
+					$produto->titulo = $request->input('titulo');
+					$produto->descricao = $request->input('descricao');
+					$produto->preco = $request->input('preco');
+
+					if ($produto->save()) {
+						return redirect('produtos/create')->with('success', 'Produto cadastrado com sucesso!!!'); //caso queira passar uma informação para outra view, usase-se o ->with('')
+					}
+				}
+
+				Obs: caso queira recuperar os dados do with -> dentro da view -> utilizando o exemplo acima -> $message = Session::get('success').Na view, basta incluir {{$message}}.
+
+	-> editar dados de um formulário
+			->  public function edit($id) {
+					$produto = Produtos::find($id);
+					return view('produtos.edit', compact('produto', 'id'));
+				}
+
+			-> public function update(Request $request, $id) {
+
+					$produto = Produtos::find($id);
+
+					$this->validate($request, [
+						'sku' => 'required|min:3',
+						'titulo' => 'required|min:3',
+						'descricao' => 'required|min:10',
+						'preco' => 'required|numeric',
+					]);
+
+					$produto->sku = $request->get('sku');
+					$produto->titulo = $request->get('titulo');
+					$produto->descricao = $request->get('descricao');
+					$produto->preco = $request->get('preco');
+
+					if ($produto->save()) {
+						return redirect('produtos/' . $id . '/edit')->with('success', 'Produto atualizado com sucesso!!!');
+					}
+				}
+
+
+
+#Model e Migrations
+1 - model -> pasta app
+	migration -> pasta database -> migrations
+2 - criar model e migration pelo artisan -> cmd -> php artisan make:model NomedoModel --migration 
+3 - criar a estrutura da tabela no migration -> pasta database -> migrations -> localizar o arquivo referente ao model -> 
+	...
+	public function up() {
+		Schema::create('produtos', function (Blueprint $table) {
+			$table->bigIncrements('id'); //essa linha é padrão
+			$table->string('sku'); //criar as colunas da tabela
+			$table->string('titulo');
+			$table->longtext('descricao');
+			$table->float('preco', 8, 2);
+			$table->timestamps();
+		});
+	}
+4 - criar a tabela de fato -> cmd -> php artisan migrate
+
+
+#Nomenclaturas
+1 - Controllers (classe) -> ControllerContato
+2 - Models (classe) -> ModelContato
+3 - View -> contato.php
+
+#Conexão com BD
+1 - configuração com servidor web -> pasta config -> database.php
+2 - configuração com servidor local -> pasta raiz -> .env ->
+	->  DB_CONNECTION=mysql
+		DB_HOST=127.0.0.1
+		DB_PORT=3306
+		DB_DATABASE=homestead (alterar para o banco de dados criado no arquivo Homestead.yaml)
+		DB_USERNAME=homestead
+		DB_PASSWORD=secret
+	-> verificar se foi configurado corretamente -> cmd -> php artisan migrate:install (cria a tabela migrations) -> cmd -> mysql -u homestead projeto1 -> show tables;
+
+#Pack de tradução do Laravel
+1 - copie o arquivo da tradução -> pasta resources -> pasta lang
+2 - pasta config -> app.php -> altere -> 
+	-> 'locale' => 'en',             ->    'locale' => 'pt-BR',
+	-> 'fallback_locale' => 'en',    ->    'fallback_locale' => 'pt-BR',
+
+#Template View (Blade)
+1 - pasta resources -> views (é interessante criar uma pasta para cada model)
+2 - nomenclatura -> nomedaview.blade.php
+3 - {{}} -> significa que terá código php
+4 - laços de repetição ->
+ 	-> foreach -> 	@foreach ($produtos as $produto)
+ 						<li><a href="http://projeto1.test/produtos/{{$produto->id}}">{{$produto->titulo}}</a><li> //o {{}} equivale ao echo do php
+ 					@endforeach
+
+ 	-> if-> @if($message = Session::get('success'))
+				<div class="alert alert-success">
+					{{$message}}
+				</div>
+			@endif
+
+5 - criar view template -> pasta resources -> views -> @yield('nomedaseção') -> marcação do template blade -> 
+	<!DOCTYPE html>
+	<html lang="pt-br">
+	<head>
+		<meta charset="utf-8">
+		<title>Nosso Site - @yield('title')</title> //define uma seção de título do template
+	</head>
+	<body>
+		<div class="container">
+			@yield('content') //define uma seção de conteúdo do template
+		</div>
+	</body>
+	</html>
+
+6 - Utilizar template junto com view -> dentro das views -> 
+	-> @extends('subpasta.nomeview')
+	-> @section('title', 'Lista de produtos')
+	-> @section('content')
+		-> conteudo
+	-> @endsection
+
+#Instalação do Bootstrap via composer
+1- cmd - composer require twbs/bootstrap
+2 - os arquivos do bootsrap -> pasta vendor -> pasta twbs => bootstrap
+3 - mover a pasta dist (fica dentro da pasta twbs -> bootstrap) para a pasta public -> cmd -> cp -r vendor/twbs/bootstrap/dist public/
+4 - download jQuery -> https://jquery.com/download/ -> Download the compressed, production jQuery 3.3.1 -> salvao arquivo na pasta do projeto -> pasta public -> js
+5 - incluir o bootstrap e o jquery no template blade -> {{URL::to('caminho aqui')}} -> para evitar erro na localização dos arquivos
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="utf-8">
+	<title>Nosso Site - @yield('title')</title>
+	<link rel="stylesheet" type="text/css" href="{{URL::to('dist/css/bootstrap.min.css')}}">
+</head>
+<body>
+	<div class="container">
+		@yield('content')
+	</div>
+	<script type="text/javascript" src="{{URL::to('js/jquery.min.js')}}"></script>
+	<script type="text/javascript" src="{{URL::to('dist/js/bootstrap.min.js')}}"></script>
+</body>
+</html>
+
+#Fomulário 
+1 - tag action do form -> action="{{url('')}}"
+2 - @csrf -> cria um input do tipo hidden que evita ataques cross site e outros
+
+#Validação de formulário
+1 - exemplo de validação -> deve ser realizado no controller ->
+public function store(Request $request) {
+
+		$this->validate($request, [ //chamada para as validações
+			'sku' => 'required|unique:produtos|min:3', //nome do campo do formulário + tipos de validações (required -> requerido; unique:produtos ->significa que deve ser único dentro da tabela produtos;  min -> mínimo de caracteres)
+			'titulo' => 'required|min:3',
+			'descricao' => 'required|min:10',
+			'preco' => 'required|numeric',
+		]);
+
+		$produto = new Produtos();
+		$produto->sku = $request->input('sku');
+		$produto->titulo = $request->input('titulo');
+		$produto->descricao = $request->input('descricao');
+		$produto->preco = $request->input('preco');
+
+		if ($produto->save()) {
+			return redirect('produtos/create')->with('success', 'Produto cadastrado com sucesso!!!');
+		}
+	}
+2 - mostrar as mensagens de erro na view -> 
+@if(count($errors)>0)
+	<div class="alert alert-danger">
+		<ul>
+			@foreach($errors->all() as $error)
+				<li>{{$error}}</li>
+			@endforeach
+		</ul>
+	</div>
+@endif
