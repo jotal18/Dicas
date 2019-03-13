@@ -136,8 +136,96 @@ class ContatoController extends Controller {
 						return redirect('produtos/' . $id . '/edit')->with('success', 'Produto atualizado com sucesso!!!');
 					}
 				}
+	-> upload de imagens ->
+		public function update(Request $request, $id) {
 
+		$produto = Produtos::find($id);
 
+		$this->validate($request, [
+			'sku' => 'required|min:3',
+			'titulo' => 'required|min:3',
+			'descricao' => 'required|min:10',
+			'preco' => 'required|numeric',
+		]);
+
+		if ($request->hasFile('imgproduto')) {      //upload de imagem
+			$imagem = $request->file('imgproduto');
+			$nomearquivo = md5($id) . "." . $imagem->getClientOriginalExtension();
+			$imagem->move(public_path('./img/produtos/'), $nomearquivo);
+		}
+
+		$produto->sku = $request->get('sku');
+		$produto->titulo = $request->get('titulo');
+		$produto->descricao = $request->get('descricao');
+		$produto->preco = $request->get('preco');
+
+		if ($produto->save()) {
+			return redirect('produtos/' . $id . '/edit')->with('success', 'Produto atualizado com sucesso!!!');
+		}
+	}
+
+	<form method="POST" enctype="multipart/form-data" action="{{action('ProdutosController@update', $id)}}">
+	...
+		<div class="input-group mb-3">
+	 		<label for="imgproduto">Imagem</label>
+	 		<input type="file" id="imgproduto" name="imgproduto" class="form-control-file">
+	 	</div>
+	...
+	</form>
+
+	-> exclusão -> 
+	public function destroy($id) {
+		$produto = Produtos::find($id);
+
+		if (file_exists("./img/produtos/" . md5($id) . ".jpg")) {
+			unlink("./img/produtos/" . md5($id) . ".jpg");
+		}
+
+		$produto->delete();
+		return redirect()->back()->with('success', 'Produto Deletado com sucesso');
+	}
+
+	<form method="POST" enctype="multipart/form-data" action="{{action('ProdutosController@destroy', $produto->id)}}">
+		@csrf
+		<input type="hidden" name="_method" value="DELETE">
+		<a href="{{URL::to('produtos/' . $produto->id . '/edit')}}" class="btn btn-primary">Editar</a>
+		<button class="btn btn-danger">Excluir</button>
+	</form>
+
+	-> busca -> 
+	public function busca(Request $request) {
+		$buscaInput = $request->input('busca');
+		$produtos = Produtos::where('titulo', 'LIKE', '%' . $buscaInput . '%')
+			->orwhere('descricao', 'LIKE', '%' . $buscaInput . '%')
+			->get();
+		return view('produtos.index', ['produtos' => $produtos, 'buscar' => $buscaInput]);
+	}
+
+	-> paginação -> 
+	public function index() {
+		$produtos = Produtos::paginate(3); //incluir paginate
+		return view('produtos.index', ['produtos' => $produtos, 'buscar' => null]);
+	}
+
+	public function busca(Request $request) {
+		$buscaInput = $request->input('busca');
+		$produtos = Produtos::where('titulo', 'LIKE', '%' . $buscaInput . '%')
+			->orwhere('descricao', 'LIKE', '%' . $buscaInput . '%')
+			->paginate(3); //incluir paginate
+		return view('produtos.index', ['produtos' => $produtos, 'buscar' => $buscaInput]);
+	}
+
+	@extends('layout.app')
+	@section('title', 'Lista de produtos')
+	@section('content')
+		<h1>Produtos</h1>
+		@if($message = Session::get('success'))
+			...
+				</div>
+			@endforeach
+		</div>
+		{{$produtos->links()}} //incluir esse código 
+	@endsection
 
 #Model e Migrations
 1 - model -> pasta app
