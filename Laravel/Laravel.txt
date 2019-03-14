@@ -361,3 +361,48 @@ public function store(Request $request) {
 		</ul>
 	</div>
 @endif
+
+#Autenticação (Login, logout)
+1 - criação pelo artisan -> cmd -> php artisan make::auth
+2 - cria a pasta auth dentro da pasta view (resources/)  -> cria pasta layouts (contento as views de login, cadastro, etc..)
+3 - basta editar as views da pasta resources/views/layouts/app.blade.php e resources/views/auth/ e alterar para o português
+4 - proteger páginas para usuários logados -> 
+use Illuminate\Support\Facades\Auth;
+
+public function create() {
+	if (Auth::check()) {
+		return view('produtos.create');
+	} else {
+		return redirect('login');
+	}
+}
+
+Proteção parcial 
+@if(Auth::check())
+	<div class="mb-3">
+		<form method="POST" enctype="multipart/form-data" action="{{action('ProdutosController@destroy', $produto->id)}}">
+			@csrf
+			<input type="hidden" name="_method" value="DELETE">
+			<a href="{{URL::to('produtos/' . $produto->id . '/edit')}}" class="btn btn-primary">Editar</a>
+			<button class="btn btn-danger">Excluir</button>
+		</form>
+	</div>
+@endif
+
+5 - @guest (layouts/app.blade.php) -> não precisa estar autenticado para visualizar
+	@else (layouts/app.blade.php) -> precisa estar autenticado para visualizar
+
+6 - mudar o nome da aplicação - sidebar  
+
+		-> sistema em produção -> pasta config -> app.php -> 
+		...
+		'name' => env('APP_NAME', 'MeuSite'),
+		...
+
+		-> sistema em teste -> arquivo .env -> APP_NAME=MeuSite
+
+
+
+
+
+
