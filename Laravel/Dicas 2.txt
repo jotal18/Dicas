@@ -1,0 +1,308 @@
+instalar via composer -> cmd -> composer create-project --prefer-dist laravel/laravel nomedoProjeto
+----------------------------------------------------
+iniciar servidor laravel -> php artisan serve
+parar o servidor -> ctrl + c
+para acessar -> localhost:8000
+-------------------------------------------------
+iniciar via xampp -> colar a pasta do projeto na pasta htdocs -> acessar normalmente -> localhost/nomedoProjeto/public
+---------------------------------------
+a pasta vendor não vai para o git, para baixar em outro local -> composer install (vai ler o conteúdo do arquivo composer.json) 
+------------------------------------------
+configurar o projeto antes de enviar para o servidor -> php artisan cache:clear / php artisan route:clear / php artisan route:cache / apagar os arquivos dentro da pasta storage/framework/sessions
+------------------------------------------------------------------
+Rotas
+listar todas as rotas -> php artisan route:list
+rotas definidas no arquivo web.php da pasta routes
+
+Tipos de rotas
+Route::get('/', function () {
+	return "<h1>Laravel</h1>";
+});
+
+Route::get('/ola', function () {
+	return "<h1>Seja Bem-vindo!!!</h1>";
+});
+
+Route::get('/ola/sejabemvindo', function () {
+	return view('welcome');
+});
+
+Route::view('/hello', 'hello'); //forma abreviada chamando a rota e a view
+
+Route::view('/viewnome', 'hellonome', ['nome' => 'Nome', 'sobrenome' => 'Sobrenome']); //forma abreviada chamando a rota, a view e passando variáveis
+
+Route::get('/hellonome/{nome}/{sobrenome}', function ($nome, $sn) {
+	//forma normal chamando a rota, a view e passando variáveis
+	return view('hellonome', [
+		'nome' => $nome,
+		'sobrenome' => $sn,
+	]);
+});
+
+//o nome da variável não precisa ser igual ao do parâmetro da função callback
+//mas os dados deve estar na mesma ordem e na mesma quantidade das variáveis
+Route::get('/nome/{nome}/{sobrenome}', function ($nome, $sn) {
+	return "<h1>Ola, $nome, $sn!</h1>";
+});
+
+//criar restrição na passagem dos parâmetros da rota  por meio de expressão regular
+Route::get('/seunomecomregra/{nome}/{n}', function ($nome, $n) {
+	for ($i = 0; $i < $n; $i++) {
+		echo "<h1>Ola, $nome, $n!</h1>";
+	}
+	
+})->where('n', '[0-9]+')->where('nome', '[A-Za-z]+');
+
+Route::get('/seunomesemregra/{nome?}', function ($nome = null) {
+	// o ? torna o parâmetro opcional
+	if (isset($nome)) {
+		echo "<h1>Ola, $nome!</h1>";
+	} else {
+		echo 'Você não passou nenhum nome';
+	}
+});
+
+//agrupamento de rotas -> app/ -> app/profile/ -> app/about
+Route::prefix('app')->group(function () {
+	Route::get('/', function () {
+		return "Página principal do APP";
+	});
+	Route::get('profile', function () {
+		return "Página profile";
+	});
+	Route::get('about', function () {
+		return "Página about";
+	});
+});
+
+//redirecionamento de rotas (/aqui para /ola)
+Route::redirect('/aqui', '/ola', 301); 
+
+//outra forma de redirecionamento de rota
+Route::get('/redirecionarprodutos', function () {
+	return redirect()->route('meusprodutos'); 
+});
+
+//tipos de requisições (GET somente solicita algo do servidor, já os outros tipos alteram os arquivos do servidor)
+Route::get('/rest/hello', function () {
+	return "Hello (Get)";
+});
+
+Route::post('/rest/hello', function () {
+	return "Hello (Post)";
+});
+
+Route::delete('/rest/hello', function () {
+	return "Hello (Delete)";
+});
+
+Route::put('/rest/hello', function () {
+	return "Hello (Put)";
+});
+
+Route::patch('/rest/hello', function () {
+	return "Hello (Patch)";
+});
+
+Route::options('/rest/hello', function () {
+	return "Hello (Options)";
+});
+
+// utilizando o método post
+use Illuminate\Http\Request; //é necessário incluir essa linha de comando
+
+Route::post('/rest/imprimir', function (Request $req) {
+	$nome = $req->input('nome'); //pega os dados do campo do formulário
+	$idade = $req->input('idade'); //pega os dados do campo do formulário
+	return "Hello $nome ($idade)!";
+});
+
+// agrupando requisições em uma rota
+Route::match(['get', 'post'], '/rest/hello2', function () {
+	return "Hello World 2!";
+});
+
+// atende a qualquer requisição
+Route::any('/rest/hello3', function () {
+	return "Hello World 3!";
+});
+
+// nomear rotas
+Route::get('/produtos', function () {
+	echo "<h1>Produtos<h1>";
+	echo "<ol>";
+	echo "<li>Notebook</li>";
+	echo "<li>Impressora</li>";
+	echo "<li>Mouse</li>";
+	echo "</ol>";
+})->name('meusprodutos'); //nomeando a rota
+
+// utilizando a rota nomeada
+Route::get('/linkprodutos', function () {
+	$url = route('meusprodutos'); //utilizando a rota acima
+	echo '<a href="' . $url . '">Meus produtos</a>';
+});
+
+Route::get('/redirecionarprodutos', function () {
+	return redirect()->route('meusprodutos'); //outra forma de redirecionamento de rota
+}); 
+
+//para utilizar rota post é preciso utilizar -> use Illuminate\Http\Request;
+
+//limitar os métodos do resource
+Route::resource('produtos', 'ProdutoControlador')->only([
+    'index', 'store'
+]);
+Route::get('produto/{id}', 'ProdutoControlador@show')
+    ->where('id', '[0-9]+'); //filtrando os dados passados pela rota por meio de expressão regular
+Route::delete('produto/{id}', 'ProdutoControlador@destroy')
+    ->where('id', '[0-9]+');
+
+---------------------------------------
+verificar rotas -> instalar extensão -> Advanced REST client
+para acessar pelo chrome -> chrome://apps
+-------------------------------------
+permitir exceções de requisições -> pasta app/Http/Middleware/VerifyCsrfToken.php -> incluir a rota em ->
+protected $except = [
+		'/rest*', //rota aqui, o * é para pegar tudo após a rota
+	];
+---------------------------------------------------------
+#Controller
+criar controller -> php artisan make:controller MeuControlador
+criar controller com os métodos específicos para alterações/visualizações de dados (criará dentro do controlador os métodos -> index();  create(); store(Request $request); show($id); edit($id); update(Request $request, $id); destroy($id)) -> php artisan make:controller MeuControlador --resource
+localização dos controladores -> app/Http/Controllers
+configurar rota para o controlador -> 
+	controlador -> 
+		namespace App\Http\Controllers;
+
+		class MeuControlador extends Controller {
+			public function getNome() {
+				return "José da Silva";
+			}
+		}
+	rota -> Route::get('/nome', 'MeuControlador@getNome');
+
+utilizando a rota para chamar o controlador ->
+	Route::get('/nome', 'MeuControlador@getNome'); //utlizando o controlador
+	Route::get('/idade', 'MeuControlador@getIdade'); //utlizando o controlador
+	Route::get('/multiplicar/{n1}/{n2}', 'MeuControlador@multiplicar'); //passando parâmetros ao controlador
+	Route::get('/nomes/{id}', 'MeuControlador@getNomeByID'); //passando parâmetros ao controlador
+	Route::resource('/cliente', 'ClienteControlador'); //resource acessa os métodos específicos criados no controlador pelo comando php artisan make:controller MeuControlador --resource
+
+como fica no controlador -> 
+	public function getIdade() {
+		return "20 anos";
+	}
+
+	public function getNome() {
+		return "José da Silva";
+	}
+
+	public function getNomeByID($id) {
+		$v = ["Mario", "Edson", "Roberto", "Jean"];
+		if ($id >= 0 && $id < count($v)) {
+			return $v[$id];
+		} else {
+			return "Não encontrado";
+		}
+	}
+
+	public function multiplicar($n1, $n2) {
+		return $n1 * $n2;
+	}
+
+//modelos de controllers
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class ClienteControlador extends Controller {
+	//página de cadastro
+	public function create() {
+		return "Formulário para Cadastrar novo Cliente";
+	}
+
+	// deleta dados
+	public function destroy($id) {
+		return response("Apagado cliente com id $id", 200);
+	}
+
+	//página carrega dados para edição
+	public function edit($id) {
+		return "Formulário para Editar Cliente com ID " . $id;
+	}
+
+	// página inicial - padrão
+	public function index() {
+		return "Lista de todos os Clientes - Raiz";
+	}
+
+	// método não faz parte do resource
+	public function requisitar(Request $request) {
+		echo "nome: " . $request->input('nome');
+	}
+
+	// página que seleciona dados por id
+	public function show($id) {
+		$v = ["Mario", "Edson", "Roberto", "Jean"];
+		if ($id >= 0 && $id < count($v)) {
+			return $v[$id];
+		} else {
+			return "Não encontrado";
+		}
+	}
+
+	//salva dados
+	public function store(Request $request) {
+		$s = "Armazenar: ";
+		$s .= "Nome: " . $request->input('nome') . " e ";
+		$s .= "Idade: " . $request->input('idade');
+		return response($s, 201); //código para dados salvos com sucesso
+	}
+
+	// atualiza os dados
+	public function update(Request $request, $id) {
+		$s = "Atualizar Cliente com id $id: ";
+		$s .= "Nome: " . $request->input('nome') . " e ";
+		$s .= "Idade: " . $request->input('idade');
+		return response($s, 201); //código para dados salvos com sucesso
+	}
+
+//rotas para os controllers acima
+Route::get('/nome', 'MeuControlador@getNome'); //utlizando o controlador
+Route::get('/idade', 'MeuControlador@getIdade'); //utlizando o controlador
+Route::get('/multiplicar/{n1}/{n2}', 'MeuControlador@multiplicar'); //passando parâmetros ao controlador
+Route::get('/nomes/{id}', 'MeuControlador@getNomeByID'); //passando parâmetros ao controlador
+Route::resource('/cliente', 'ClienteControlador'); //resource acessa todos os métodos criados no controlador pelo comando --resource
+Route::post('/cliente/requisitar', 'ClienteControlador@requisitar'); //resource acessa todos os métodos criados no controlador pelo comando --resource
+---------------------------------------------------------
+Código 200 e 201
+200 -> O 200 serve para o servidor responder ao cliente que a requisição que ele fez foi atendida. Esse código de resposta acompanha o recurso que foi pedido pelo cliente, que pode ser uma página html, uma figura, ou um arquivo, por exemplo.
+
+201 -> Já o 201 é utilizado especificamente quando você faz um POST ao servidor para criar um novo registro na base de dados. Se esse registro foi criado com sucesso, o servidor retorna um 201, dizendo que um recurso foi criado.
+
+---------------------------------------------------------
+o PUT é para atualização total e o PATCH para atualização parcial de uma entidade.
+----------------------------------------------------------
+#View
+localização -> resources -> views
+receber dados na view -> 
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<title>Minha página</title>
+	</head>
+	<body>
+		<!-- recendo valores das rotas -->
+		<h1>Hello, {{$nome}} {{$sobrenome}}</h1>
+	</body>
+	</html>
+verificar se view existe ->
+	Route::get('/email/{email}', function ($email) {
+		if (View::exists('email')) {
+			return view('email', compact('email'));
+		} else {
+			return view('erro');
+		}
+	});
+rota padrão de erro do Laravel -> resources/views/errors/404.blade.php
