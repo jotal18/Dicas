@@ -306,3 +306,223 @@ verificar se view existe ->
 		}
 	});
 rota padrão de erro do Laravel -> resources/views/errors/404.blade.php
+
+template -> 
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Meu título - @yield('titulo')</title>
+</head>
+<body>
+	<div>
+		<!-- seção compartilhada entre pai e filho -->
+
+		@section('barralateral')
+			Esta seção é do template PAI
+		@show
+		<!-- o show mostra a seção no template filho-->
+
+		<!-- definindo seção -->
+		@yield('conteudo')
+	</div>
+</body>
+</html>
+
+página filho -> 
+<!-- herdando o template contido dentro da pasta layout -->
+@extends('layout.app')
+
+@section('titulo', 'Minha página - Filho')
+
+<!-- seção que existe também no template pai, para não sobrescrever deve-se usar  -->
+@section('barralateral')
+	@parent <!-- mostra a seção definida com o mesmo no template pai sem sobrescrever um ao outro -->
+	<p>Esta parte é da seção do template filho</p>
+@endsection
+
+@section('conteudo')
+	<p>Este é o conteúdo do filho</p>
+@endsection
+
+utilizando component ->
+<html>
+<head>
+	<title>Página do Bootstrap</title>
+	<!-- <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}"> -->
+	<link rel="stylesheet" type="text/css" href="{{URL::to('css/app.css')}}">
+</head>
+<body>
+	<!-- <script type="text/javascript" src="{{asset('js/app.js')}}"></script> -->
+	<!-- ou -->
+	@component('components.meucomponente')
+		<strong>Erro: </strong> Sua mensagem de erro.
+	@endcomponent
+	<script type="text/javascript" src="{{URL::to('js/app.js')}}"></script>
+</body>
+</html>
+
+pasta view/component/meucomponente.blade.php -> 
+<div class="alert alert-primary" role="alert">
+  {{$slot}}
+</div>
+
+passando parâmetros para componentes -> 
+	-> no component
+	<div class="alert alert-{{$tipo}}" role="alert">
+	  <div class="alert-title">{{$titulo}}</div>
+	  {{$slot}}
+	</div>
+
+	-> view ->
+	<body>
+		@component('components.meucomponente', ['tipo' => 'danger', 'titulo' => 'Erro fatal'])
+			<strong>Erro: </strong> Sua mensagem de erro.
+		@endcomponent
+
+		<script type="text/javascript" src="{{URL::to('js/app.js')}}"></script>
+	</body>
+
+customizando chamadas a componentes ->
+	-> app/Providers/AppServiceProvider.php -> editar ->
+		namespace App\Providers;
+		use Illuminate\Support\Facades\Blade;
+		use Illuminate\Support\ServiceProvider;
+		public function boot() {
+			Blade::component('components.meucomponente', 'alerta'); //nomeando o componente
+		}
+	-> utilizando o componente nomeado (já na view) -> 
+		@alerta(['tipo' => 'danger', 'titulo' => 'Erro fatal'])
+			<strong>Erro: </strong> Sua mensagem de erro.
+		@endalerta
+
+if e empty na view ->
+class ProdutoControlador extends Controller {
+	public function listar() {
+		$produtoss = [
+			"Notebook Asus i7 16GB",
+			"Mouse e teclado Microsoft USB",
+			"Monitor 21 - Samsung",
+			"Impressora HP",
+			"Disco SSD 512GB",
+		];
+
+		$produtos = [];
+
+		return view('/produtos', compact('produtos'));
+	}
+}
+
+<body>
+
+	@if(isset($produtos))
+
+		@if(count($produtos) == 0)
+			<h1>Nenhum produto</h1>
+		@elseif (count($produtos) === 1)
+			<h1>Um produto</h1>
+		@else
+			<h1>Temos vários produtos</h1>
+		@endif
+
+		@empty($produtos)
+			<h2>Nada em produtos</h2>
+		@endempty
+
+	@else
+		<h2>Variável produtos não foi passada como parâmetro</h2>
+	@endif
+
+	<script type="text/javascript" src="{{URL::to('js/app.js')}}"></script>
+</body>
+
+o método hasSection (só mostra a seção se esta existir) -> dentro do template
+	@hasSection('minha_secao_produtos') //verifica a seção da view normal
+	<div class="card">
+		<div class="card-body">
+			<h5 class="card-title">Produtos</h5>
+
+			<p class="card-text">
+				@yield('minha_secao_produtos')
+			</p>
+			<a href="#" class="card-link">Informações</a>
+			<a href="#" class="card-link">Ajuda</a>
+		</div>
+	</div>
+	@endif
+
+switch case -> 
+	na rota ->
+		public function mostrar_opcoes() {
+			return view('/mostrar_opcoes');
+		}
+
+		public function opcoes($opcao) {
+			return view('opcoes', compact('opcao'));
+		}
+
+	na view ->
+	@extends('layout.meulayout')
+
+	@section('minha_secao_produtos')
+		<a href="/opcoes/1" class="btn btn-primary btn-sm" role="button" aria-disable="true">Azul</a>
+		<a href="/opcoes/2" class="btn btn-danger btn-sm" role="button" aria-disable="true">Vermelho</a>
+		<a href="/opcoes/3" class="btn btn-success btn-sm" role="button" aria-disable="true">Verde</a>
+		<a href="/opcoes/4" class="btn btn-warning btn-sm" role="button" aria-disable="true">Amarelo</a>
+		<a href="/opcoes/5" class="btn btn-light btn-sm" role="button" aria-disable="true">Branco</a>
+	@endsection
+
+	@extends('layout.meulayout')
+
+	@section('minha_secao_produtos')
+		Voçê escolheu a opção:
+		@if(isset($opcao))
+			@switch($opcao)
+				@case(1)
+					<span class="badge badge-primary">Azul</span>
+					@break;
+				@case(2)
+					<span class="badge badge-danger">Vermelho</span>
+					@break;
+				@case(3)
+					<span class="badge badge-success">Verde</span>
+					@break;
+				@case(4)
+					<span class="badge badge-warning">Amarelo</span>
+					@break;
+				@default
+					<span class="badge badge-dark">Outra cor</span>
+			@endswitch
+		@endif
+	@endsection
+
+	no controlador ->
+
+	public function mostrar_opcoes() {
+		return view('/mostrar_opcoes');
+	}
+
+	public function opcoes($opcao) {
+		return view('opcoes', compact('opcao'));
+	}
+---------------------------------------------------------------------------------
+Instalar Bootstrap via npm
+cmd -> npm install (o arquivo package.json mostra as dependências que serão baixadas)
+editar o arquivo o arquivo resources/js/app.js e comentar tudo referente a vue
+cmd -> npm run dev (irá compilar os arquivos /js/app.js e /css/app.css na pasta public)
+dentro da view basta incluir os arquivos css e js -> 
+<html>
+<head>
+	<title>Página do Bootstrap</title>
+	<link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}"> //usar asset
+		ou
+	<link rel="stylesheet" type="text/css" href="{{URL::to('css/app.css')}}"> //usar URL::to
+</head>
+<body>
+	<div class="alert alert-primary" role="alert">
+	  Um simples alerta primary. Olha só!
+	</div>
+	<script type="text/javascript" src="{{asset('js/app.js')}}"></script> //usar asset
+	ou
+	<script type="text/javascript" src="{{URL::to('js/app.js')}}"></script> //usar URL::to
+</body>
+</html>
