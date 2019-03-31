@@ -328,7 +328,7 @@ public function run() {
 	]);
 ...
 6 - atualizar o seeder criado via composer -> cmd -> composer dump-autoload
-7 - auatlizar os dados criados na tabela via seed -> php artisan db:seed --class=ComentarioTableSeeder
+7 - autualizar os dados criados na tabela via seed -> php artisan db:seed --class=ComentarioTableSeeder
 8 - conferir se os dados foram inseridos com sucesso -> mysql -u homestead projeto1 -> select * from comentarios -> exit
 9 - criar o model referente à tabela criada -> php artisan make:model Comentario -> será criado um model dentro da pasta -> app/
 10 - dentro do model criado (que a possuí a chave estrangeira) -> 

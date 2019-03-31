@@ -85,19 +85,19 @@ Route::get('/redirecionarprodutos', function () {
 
 //tipos de requisições (GET somente solicita algo do servidor, já os outros tipos alteram os arquivos do servidor)
 Route::get('/rest/hello', function () {
-	return "Hello (Get)";
+	return "Hello (Get)"; //mostra dados
 });
 
 Route::post('/rest/hello', function () {
-	return "Hello (Post)";
+	return "Hello (Post)"; //altera os dados do servidor por meio de formulário
 });
 
 Route::delete('/rest/hello', function () {
-	return "Hello (Delete)";
+	return "Hello (Delete)"; //deleta dados
 });
 
 Route::put('/rest/hello', function () {
-	return "Hello (Put)";
+	return "Hello (Put)"; //atualiza dados
 });
 
 Route::patch('/rest/hello', function () {
@@ -504,8 +504,500 @@ switch case ->
 	public function opcoes($opcao) {
 		return view('opcoes', compact('opcao'));
 	}
+
+for -> 
+	Route::get('/loop/for/{n}', 'ProdutoControlador@loopFor');
+
+	@for($i=0; $i<$n; $i++)
+		<p> Numero {{$i}} </p>
+	@endfor
+
+foreach ->
+
+	Route::get('/loop/foreach', 'ProdutoControlador@loopForeach');
+
+	@foreach($produtos as $p)
+		<p>Nome: {{$p}}</p>
+	@endforeach
+
+	foreach associativo ->
+	Route::get('/loop/foreach', 'ProdutoControlador@loopForeach');
+	public function loopForeach() {
+		$produtos = [
+			["id" => 1, "nome" => "computador"],
+			["id" => 2, "nome" => "mouse"],
+			["id" => 3, "nome" => "impressora"],
+			["id" => 4, "nome" => "monitor"],
+			["id" => 5, "nome" => "teclado"],
+		];
+
+		return view('foreach', compact('produtos'));
+	}
+
+	@foreach($produtos as $p)
+		<p>{{$p['id']}}: {{$p['nome']}}</p>
+	@endforeach
+
+atributos dos laços ->
+	@foreach($produtos as $p)
+		<p>{{$p['id']}}: {{$p['nome']}}
+
+		@if($loop->first) //verifica o primeiro elemento do array
+			(primeiro)
+		@endif
+
+		@if($loop->last) //verifica o último elemento do array
+			(último)
+		@endif
+
+		<span class="badge badge-secondary">
+			{{$loop->index}} / {{$loop->count-1}} / {{$loop->remaining}} //verifica o índex / verifica o total de iterações/ verifica quantos faltam
+		</span>
+		<span class="badge badge-warning">
+			{{$loop->iteration}} / {{$loop->count}} //verifica o número da iteração 
+		</span>
+		</p>
+	@endforeach
 ---------------------------------------------------------------------------------
-Instalar Bootstrap via npm
+#Migrations
+configurar o arquivo .env -> 
+	...
+	DB_CONNECTION=mysql
+	DB_HOST=127.0.0.1
+	DB_PORT=3306
+	DB_DATABASE=vendas //conforme banco criado no phpmyadmin
+	DB_USERNAME=root //usuário
+	DB_PASSWORD= //senha
+	...
+pasta migrations -> database -> migrations
+criar migration -> php artisan make:migration criar_tabela_produtos (nome do script) --create=produtos (cria a tabela produtos)
+dentro da migration -> 
+	 public function up()
+    { 
+        //cria as migrations das antigas para a mais nova (aqui cria algo)
+         Schema::create('produtos', function (Blueprint $table) { //tabela criada pelo comando --create=produtos
+            $table->bigIncrements('id'); //criação de campos
+            $table->string('nome'); //criação de campos
+			$table->float('preco'); //criação de campos
+			$table->integer('estoque'); //criação de campos
+            $table->timestamps();
+        });
+    }
+
+     public function down()
+    { 
+        //serve para reverter as modificações feitas pelo up (aqui apaga algo)
+        Schema::dropIfExists('produtos'); //apaga tabela
+    }
+criar campos da tabela -> php artisan migrate
+acessar mysql pelo terminal linux -> mysql -u root -p
+desfazer a última alteração -> php artisan migrate:rollback
+apagar todas as tabelas e começar do zero -> php artisan migrate:fresh
+resetar tudo -> php artisan migrate:reset
+verifica status da migration (se foi executada ou não) -> php artisan migrate:status
+atualizar uma migration -> php artisan make:migration adicionar_categoria_id_em_produto --table=categorias
+atualizando dentro do arquivo da migration ->
+	public function up() {
+
+		Schema::table('produtos', function (Blueprint $table) {
+			$table->unsignedBigInteger('categoria_id')->unsigned(); //criando a chave estrangeira
+			$table->foreign('categoria_id')->references('id')->on('categorias'); //referenciando a chave estrangeira
+		});
+	}
+
+	public function down() {
+		Schema::table('produtos', function (Blueprint $table) {
+			$table->dropForeign(['categoria_id']); //deletando a chave estrangeira
+			$table->dropColumn(['categoria_id']); //deletando a coluna
+		});
+	}
+---------------------------------------------------------------------------------
+#Seed
+preenche as tabelas do DB
+criar seeder -> php artisan make:seeder CategoriasSeeder
+pasta das seed -> database/seed
+inserindo dados na tabela (dentro do arquivo seeder) ->
+	...
+	public function run() {
+		DB::table('categorias')->insert([ //inserindo 4 registros na tabela categorias
+			'nome' => 'Roupas',
+		]);
+
+		DB::table('categorias')->insert([
+			'nome' => 'Eletrônicos',
+		]);
+
+		DB::table('categorias')->insert([
+			'nome' => 'Perfumes',
+		]);
+
+		DB::table('categorias')->insert([
+			'nome' => 'Móveis',
+		]);
+	}
+	...
+dentro do arquivo DatabaseSeeder.php(database/seeds) -> acrescentar a seguinte linha ->
+...
+public function run() {
+		// $this->call(UsersTableSeeder::class);
+		$this->call(CategoriasSeeder::class);
+	}
+...
+executando a seed -> php artisan db:seed
+------------------------------------------------
+#Queries SQL
+listar dados -> routes -> 
+	use Illuminate\Support\Facades\DB;
+	Route::get('/categorias', function () {
+	$cats = DB::table('categorias')->get(); //lista os registros da tabela categorias
+	foreach ($cats as $c) {
+		echo "id: " . $c->id . "; ";
+		echo "nome: " . $c->nome . "<br /> ";
+	}
+
+	echo "<hr>";
+
+	$nomes = DB::table('categorias')->pluck('nome'); //retorna somente os registros da coluna nome da tabela categorias
+	foreach ($nomes as $nome) {
+		echo "$nome <br />";
+	}
+});
+
+cláusula where -> 
+	...
+	$cats = DB::table('categorias')->where('id', 1)->get(); //lista os registros da tabela quando o id for igual a 1 (Where)
+		foreach ($cats as $c) {
+			echo "id: " . $c->id . "; ";
+			echo "nome: " . $c->nome . "<br /> ";
+		}
+
+		echo "<hr>";
+
+		$cat = DB::table('categorias')->where('id', 1)->first(); //lista um único registro quando o id for igual a 1 (pega o primeiro resultado)
+		echo "id: " . $cat->id . "; ";
+		echo "nome: " . $cat->nome . "<br /> ";
+
+		echo "<hr>";
+
+		echo "</p>Retorna um array utilizando like</p>";
+		$cats = DB::table('categorias')->where('nome', 'like', '%o%')->get(); //utilizando o Like para buscar registros (pesquisar texto)
+		foreach ($cats as $c) {
+			echo "id: " . $c->id . "; ";
+			echo "nome: " . $c->nome . "<br /> ";
+		}
+
+		echo "</p>Sentenças lógicas (where/orwhere)</p>";
+		$cats = DB::table('categorias')->where('id', 1)->orwhere('id', 2)->get(); //utilizando o where/orwhere para buscar registros (ou um ou outro)
+		foreach ($cats as $c) {
+			echo "id: " . $c->id . "; ";
+			echo "nome: " . $c->nome . "<br /> ";
+		}
+
+		echo "</p>Intervalos (whereBetween)</p>";
+		$cats = DB::table('categorias')->whereBetween('id', [1, 3])->get(); //utilizando o whereBetween para buscar registros dentro de intervalo
+		foreach ($cats as $c) {
+			echo "id: " . $c->id . "; ";
+			echo "nome: " . $c->nome . "<br /> ";
+		}
+
+		echo "</p>Intervalos Negação (whereNotBetween)</p>";
+		$cats = DB::table('categorias')->whereNotBetween('id', [1, 3])->get(); //utilizando o whereNotBetween para buscar registros diferente do intervalo
+		foreach ($cats as $c) {
+			echo "id: " . $c->id . "; ";
+			echo "nome: " . $c->nome . "<br /> ";
+		}
+
+		echo "</p>Conjuntos (whereIn)</p>";
+		$cats = DB::table('categorias')->whereIn('id', [1, 3, 4])->get(); //lista os registros cujos id são 1,3 e 4 (whereIn)
+		foreach ($cats as $c) {
+			echo "id: " . $c->id . "; ";
+			echo "nome: " . $c->nome . "<br /> ";
+		}
+
+		echo "</p>Conjuntos Negação (whereNotIn)</p>";
+		$cats = DB::table('categorias')->whereNotIn('id', [1, 3, 4])->get(); //lista os registros cujos id são diferentes de 1,3 e 4 (whereNotIn)
+		foreach ($cats as $c) {
+			echo "id: " . $c->id . "; ";
+			echo "nome: " . $c->nome . "<br /> ";
+		}
+
+		echo "</p>Comparações</p>";
+		$cats = DB::table('categorias')->where('id', '>', 3)->get(); //lista os registros cujos id é maior que 3 (where >)
+		// $cats = DB::table('categorias')->where('id', '<', 3)->get(); //lista os registros cujos id é menor que 3
+		// $cats = DB::table('categorias')->where('id', '<=', 3)->get(); //lista os registros cujos id é menor e igual que 3
+		// $cats = DB::table('categorias')->where('id', '!=', 3)->get(); //lista os registros cujos id é diferente de 3
+		foreach ($cats as $c) {
+			echo "id: " . $c->id . "; ";
+			echo "nome: " . $c->nome . "<br /> ";
+		}
+
+		// echo "</p>Comparando Datas(whereDate)</p>";
+		// $cats = DB::table('produtos')->whereDate('data_cadastro', '2018-12-15')->get(); //comparando Datas
+		// // Produto::whereDate('data_cadastro', '2018-12-15');
+
+		echo "</p>Where (and)</p>";
+		$cats = DB::table('categorias')->where([ //listando dados quando id for igual a 1 AND nome igual a Roupas
+			['id', 1],
+			['nome', 'Roupas'],
+		])->get();
+		foreach ($cats as $c) {
+			echo "id: " . $c->id . "; ";
+			echo "nome: " . $c->nome . "<br /> ";
+		}
+		...
+	orderBy -> 
+	...
+	echo "</p>Ordenando por nome</p>";
+		$cats = DB::table('categorias')->orderBy('nome')->get(); //lista todos os dados ordenado por nome (orderBy)
+		foreach ($cats as $cat) {
+			echo "id: " . $cat->id . "; ";
+			echo "nome: " . $cat->nome . "<br /> ";
+		}
+
+		echo "</p>Ordenando por nome (decrescente)</p>";
+		$cats = DB::table('categorias')->orderBy('nome', 'desc')->get(); //lista todos os dados em ordem decrescente (orderBy, desc)
+		foreach ($cats as $cat) {
+			echo "id: " . $cat->id . "; ";
+			echo "nome: " . $cat->nome . "<br /> ";
+		}
+	...
+
+inserir dados -> 
+	...
+	Route::get('/novascategorias', function () {
+		// DB::table('categorias')->insert([           //inserindo registros
+		//     ['nome' => 'Carro'],
+		//     ['nome' => 'Informática'],
+		//     ['nome' => 'Cozinha'],
+		// ]);
+
+		$id = DB::table('categorias')->insertGetId( //inserindo um único registro e pegando o seu id
+			['nome' => 'Carros']
+		);
+
+		echo "Novo ID = $id <br />";
+	});
+	...
+
+atualizando dados -> 
+	...
+	Route::get('/atualizandocategorias', function () {
+	$cat = DB::table('categorias')->where('id', 1)->first();
+	echo "<p>Antes da atualização</p>";
+	echo "id: " . $cat->id . "; ";
+	echo "nome: " . $cat->nome . "<br /> ";
+
+	DB::table('categorias')->where('id', 1)->update([ //atualizando registros
+		'nome' => 'Roupas infantis',
+	]);
+
+	$cat = DB::table('categorias')->where('id', 1)->first();
+	echo "<p>Depois da atualização</p>";
+	echo "id: " . $cat->id . "; ";
+	echo "nome: " . $cat->nome . "<br /> ";
+
+	});
+	...
+apagando dados -> 
+Route::get('/removendocategorias', function () {
+
+	echo "<p>Antes da remoção</p>";
+	$cats = DB::table('categorias')->get();
+	foreach ($cats as $cat) {
+		echo "id: " . $cat->id . "; ";
+		echo "nome: " . $cat->nome . "<br /> ";
+	}
+
+	echo "<hr />";
+
+	DB::table('categorias')->where('id', 2)->delete();
+
+	echo "<p>Depois da remoção</p>";
+	$cats = DB::table('categorias')->get();
+	foreach ($cats as $cat) {
+		echo "id: " . $cat->id . "; ";
+		echo "nome: " . $cat->nome . "<br /> ";
+	}
+
+});
+-------------------------------------------------------------------------------
+#Eloquent / ORM
+criando modelo + migration -> php artisan make:model Categoria -m
+listando dados -> 
+use App\Categoria;
+...
+$categorias = Categoria::all(); //listar dados 
+	foreach ($categorias as $c) {
+		echo "id:" . $c->id . ', ';
+		echo "nome: " . $c->nome . '<br />';
+	}
+...
+apagando dados ->
+use App\Categoria;
+...
+$cat = New Categoria();
+$cat->nome = $nome;
+$cat->save(); //salvar dados
+return redirect('/');
+...
+recuperando registro por id -> 
+use App\Categoria;
+...
+$cat = Categoria::find($id); //seleciona registro por id
+	// $cat = Categoria::findOrFail($id); //caso queira mostrar a página de erro do Laravel (Not Found 404)
+	if (isset($cat)) {
+		echo "id:" . $cat->id . ', ';
+		echo "nome: " . $cat->nome . '<br />';
+	} else {
+		echo "<h1>Categoria nao encontrada</h1>";
+	}
+...
+
+atualizando registro -> 
+...
+	$cat = Categoria::find($id); //seleciona dado por id
+	if (isset($cat)) {
+		$cat->nome = $nome;
+		$cat->save();
+		return redirect('/');
+	} else {
+		echo "<h1>Categoria nao encontrada</h1>";
+	}
+...
+removendo registro ->
+...
+	$cat = Categoria::find($id); //seleciona registro por id
+	if (isset($cat)) {
+		$cat->delete(); //deleta registro
+		return redirect('/');
+	} else {
+		echo "<h1>Categoria nao encontrada</h1>";
+	}
+...
+
+cláusula where -> 
+...
+Route::get('/categoriapornome/{nome}', function ($nome) {
+	$categorias = Categoria::where('nome', $nome)->get(); //filtrando dados com Where (=)
+	foreach ($categorias as $c) {
+		echo "id:" . $c->id . ', ';
+		echo "nome: " . $c->nome . '<br />';
+	}
+});
+
+Route::get('/categoriaidmaiorque/{id}', function ($id) {
+	$categorias = Categoria::where('id', '>=', $id)->get(); //filtrando dados com Where por meio de comparação
+	foreach ($categorias as $c) {
+		echo "id:" . $c->id . ', ';
+		echo "nome: " . $c->nome . '<br />';
+	}
+	$count = Categoria::where('id', '>', $id)->count(); //realiza a contagem de elementos retornados com filtro
+	$count = Categoria::count(); //realiza a contagem de elementos retornados
+	echo "<h1>Count: $count </h1>";
+
+	$max = Categoria::where('id', '>', $id)->max('id'); //pega o valor máximo retornado, no caso o id
+	echo "<h1>Máximo: $max </h1>";
+});
+
+Route::get('/ids123/{id}', function ($id) {
+	$categorias = Categoria::find([1, 2, 3]); //retornando registros que possuem o id igual a 1,2,3
+	// $categorias = Categoria::whereIn('id', [1, 2, 3])->get(); //parecido com o find()
+	foreach ($categorias as $c) {
+		echo "id:" . $c->id . ', ';
+		echo "nome: " . $c->nome . '<br />';
+	}
+});
+...
+-----------------------------------------------------------------------
+#Soft Deletes
+soft deletes (não é deletado de fato) -> dentro da migration -> 
+...
+public function up() {
+		Schema::create('categorias', function (Blueprint $table) {
+			$table->bigIncrements('id');
+			$table->string('nome');
+			$table->softDeletes(); //criando campo que registra se um arquivo foi deletado (na tabela é criado o campo 'deleted_at')
+			$table->timestamps();
+		});
+	}
+...
+
+esxecuta o comando -> php artisan migrate (para atualizar a tabela)
+dentro do arquivo model (app/NomeDoModel.php) -> 
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\softDeletes; //incluir esta linha
+
+class Categoria extends Model {
+	use softDeletes; //incluir esta linha
+	protected $dates = ['deleted_at'];  	//incluir esta linha
+}
+
+para deletar -> normal, como se fosse deletar sem o sofdelete
+mostrar todos os registros, inclusive os apagados -> 
+	...
+	$categorias = Categoria::withTrashed()->get(); //listar todos os registros, inclusive os que foram apagados
+		foreach ($categorias as $c) {
+			echo "id:" . $c->id . ', ';
+			echo "nome: " . $c->nome;
+			if ($c->trashed()) {    //verifica se um elemento foi apagado
+				echo " (apagado) <br />";
+			} else {
+				echo '<br>';
+			}
+		}
+	...
+buscar registros apagados -> 
+	// $categorias = Categoria::withTrashed()->find($id); //lista o registro que foi apagado por id
+	$cat = Categoria::withTrashed()->where('id', $id)->get()->first(); //lista o registro que foi apagado por id (outra forma)
+	if (isset($cat)) {
+		echo "id: " . $cat->id . ', ';
+		echo "nome: " . $cat->nome . '<br>';
+	} else {
+		echo "<h1>Categoria nao encontrada</h1>";
+	}
+
+	$categorias = Categoria::onlyTrashed()->get(); //lista somente os registros que foram apagados
+	foreach ($categorias as $c) {
+		echo "id:" . $c->id . ', ';
+		echo "nome: " . $c->nome;
+		if ($c->trashed()) { //verifica se um elemento foi apagado
+			echo " (apagado) <br />";
+		} else {
+			echo '<br>';
+		}
+	}
+
+restaurando registros apagados ->
+...
+$cat = Categoria::withTrashed()->find($id); //lista o registro que foi apagado por id (outra forma)
+	if (isset($cat)) {
+		$cat->restore(); //restaura o registro deletado
+		echo "Categoria restaurada: " . $cat->id . '<br />';
+		echo "<a href=\"/\">Listar todas</a>";
+	} else {
+		echo "<h1>Categoria nao encontrada</h1>";
+	}
+...
+
+apagando registros permanentemente -> 
+...
+$cat = Categoria::withTrashed()->find($id); //lista o registro que foi apagado por id (outra forma)
+if (isset($cat)) {
+	$cat->forceDelete(); //deleta o registro permanentemente independente do softdelete estar habilitado
+	return redirect('/todas');
+} else {
+	echo "<h1>Categoria nao encontrada</h1>";
+}
+...
+-----------------------------------------------------
+#Tinker 
+uma espécie de terminal do laravel -> php artisan tinker -> utilizado para executar códigos de manipulação de registros do DB
+
+-----------------------------------------------------------------------------
+#Instalar Bootstrap via npm
 cmd -> npm install (o arquivo package.json mostra as dependências que serão baixadas)
 editar o arquivo o arquivo resources/js/app.js e comentar tudo referente a vue
 cmd -> npm run dev (irá compilar os arquivos /js/app.js e /css/app.css na pasta public)
