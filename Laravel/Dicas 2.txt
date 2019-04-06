@@ -922,7 +922,7 @@ public function up() {
 	}
 ...
 
-esxecuta o comando -> php artisan migrate (para atualizar a tabela)
+executa o comando -> php artisan migrate (para atualizar a tabela)
 dentro do arquivo model (app/NomeDoModel.php) -> 
 
 namespace App;
@@ -997,6 +997,596 @@ if (isset($cat)) {
 uma espécie de terminal do laravel -> php artisan tinker -> utilizado para executar códigos de manipulação de registros do DB
 
 -----------------------------------------------------------------------------
+#Validação
+campo requerido ->
+(controlador)
+public function store(Request $request) {
+
+		$request->validate([
+			'nome' => 'required', //o campo é requerido
+		]);
+
+		$cliente = new Cliente();
+		$cliente->nome = $request->input('nome');
+		$cliente->idade = $request->input('idade');
+		$cliente->endereco = $request->input('endereco');
+		$cliente->email = $request->input('email');
+		$cliente->save();
+	}
+(view)
+<!-- se existir qualquer erro -->
+	@if($errors->any())
+	<div class="card-footer">
+		<!-- pegar cada erro de validação -->
+		@foreach($errors->all() as $error)
+		<div class="alert alert-danger" role="alert">
+			{{$error}}
+		</div>
+		@endforeach
+	</div>
+	@endif
+
+min/máx ->
+...
+public function store(Request $request) {
+	$request->validate([
+		'nome' => 'required|min:5|max:10', //o campo é requerido / valor mínimo / valor máximo
+	]);
+...
+
+unique -> 
+...
+public function store(Request $request) {
+	$request->validate([
+		'nome' => 'required|min:5|max:10|unique:clientes', //o campo é requerido / valor mínimo / valor máximo / valor único (unique:nomeTabela)
+	]);
+...
+
+multicampos -> 
+...
+public function store(Request $request) {
+	$request->validate([
+		//o campo é requerido / valor mínimo / valor máximo / valor único (unique:nomeTabela)
+		'nome' => 'required|min:5|max:10|unique:clientes',
+		'idade' => 'required|',
+		'endereco' => 'required|min:5',
+		'email' => 'requerid|email', //verifica se um campo é do tipo email
+	]);
+...
+
+email -> 
+..
+public function store(Request $request) {
+	$request->validate([
+		//o campo é requerido / valor mínimo / valor máximo / valor único (unique:nomeTabela)
+		'email' => 'requerid|email', //verifica se um campo é do tipo email
+	]);
+...
+
+customizar mensagem de erro -> 
+...
+/* Uma opção de customizar mensagem
+$regras = [
+	'nome' => 'required|min:5|max:10|unique:clientes',
+	'idade' => 'required|',
+	'endereco' => 'required|min:5',
+	'email' => 'required|email',
+];
+
+$mensagens = [
+	'required' => 'O atributo :attribute não pode estar em branco.', //criando mensagem genérica para o campo required
+	'nome.required' => 'O nome é requerido',
+	'nome.min' => 'É necessário no mínimo três caracteres no nome',
+	'email.required' => 'Digite um endereço de email válido',
+];
+
+$request->validate($regras, $mensagens);
+
+	/* Outra opção de customizar mensagem
+
+	    $mensagens = [
+	    'nome.required' => 'O nome é requerido',
+	    'nome.min' => 'É necessário no mínimo três caracteres no nome',
+	    'email.required' => 'Digite um endereço de email válido',
+	    ];
+
+	    $request->validate([
+	    //o campo é requerido / valor mínimo / valor máximo / valor único (unique:nomeTabela)
+	    'nome' => 'required|min:5|max:10|unique:clientes',
+	    'idade' => 'required|',
+	    'endereco' => 'required|min:5',
+	    'email' => 'required|email', //verifica se um campo é do tipo email
+	    ], $mensagens);
+	*/
+
+customizar mensagem campo a campo -> 
+...
+<form action="/cliente" method="POST">
+	@csrf
+	<div class="form-group">
+		<label for="nome">Nome do Cliente</label>
+		<input type="text" name="nome" id="nome" placeholder="Nome do cliente" class="form-control {{$errors->has('nome') ? 'is-invalid' : ''}}" value="{{old('nome')}}"> //classe para o input
+		@if($errors->has('nome')) //verifica se há erro na validação
+		<div class="invalid-feedback">
+			{{$errors->first('nome')}} //retorna o primeiro erro
+		</div>
+		@endif
+	</div>
+	<div class="form-group">
+		<label for="idade">Idade do Cliente</label>
+		<input type="text" name="idade" id="idade" placeholder="Idade do cliente" class="form-control {{$errors->has('idade') ? 'is-invalid' : ''}}">
+		@if($errors->has('idade'))
+		<div class="invalid-feedback">
+			{{$errors->first('idade')}}
+		</div>
+		@endif
+	</div>
+	<div class="form-group">
+		<label for="endereco">Endereço do Cliente</label>
+		<input type="text" name="endereco" id="endereco" placeholder="endereço do cliente" class="form-control {{$errors->has('endereco') ? 'is-invalid' : ''}}">
+		@if($errors->has('endereco'))
+		<div class="invalid-feedback">
+			{{$errors->first('endereco')}}
+		</div>
+		@endif
+	</div>
+	<div class="form-group">
+		<label for="email">E-mail do Cliente</label>
+		<input type="text" name="email" id="email" placeholder="E-mail do cliente" class="form-control {{$errors->has('email') ? 'is-invalid' : ''}}">
+		@if($errors->has('email'))
+		<div class="invalid-feedback">
+			{{$errors->first('email')}}
+		</div>
+		@endif
+	</div>
+	<button type="submit" class="btn btn-primary">Salvar</button>
+	<button type="cancel" class="btn btn-warning">Cancelar</button>
+</form>
+
+...
+mantendo as informações no formulário ->
+<input type="text" name="nome" id="nome" placeholder="Nome do cliente" class="form-control {{$errors->has('nome') ? 'is-invalid' : ''}}" value="{{old('nome')}}"> //value="{{old('nome')}}
+--------------------------------------------------------------------------
+#Relacionamento-Um-para-Um
+na migration da tabela principal ->
+...
+public function up() {
+	Schema::create('clientes', function (Blueprint $table) {
+		$table->bigIncrements('id');
+		$table->string('nome');
+		$table->string('telefone');
+		$table->timestamps();
+	});
+}
+...
+
+na migration da tabela secundária ->
+...
+public function up() {
+		Schema::create('enderecos', function (Blueprint $table) {
+			$table->Biginteger('cliente_id')->unsigned(); 					//cria o campo
+			$table->foreign('cliente_id')->references('id')->on('clientes'); //cria a chave estrangeira
+			$table->primary('cliente_id'); 									//cria o campo acima como primário
+			$table->string('rua');
+			$table->string('numero');
+			$table->string('bairro');
+			$table->string('cidade');
+			$table->string('uf');
+			$table->string('cep');
+			$table->timestamps();
+		});
+	}
+...
+uma forma de relacionamento -> no controller ->
+...
+	$clientes = Clientes::all();
+	foreach ($clientes as $c) {
+		echo '<p>Id:' . $c->id . '</p>';
+		echo '<p>Nome:' . $c->nome . '</p>';
+		echo '<p>Telefone:' . $c->telefone . '</p>';
+		$e = Enderecos::where('cliente_id', $c->id)->first(); //é uma solução, mas não a recomendada
+		echo '<p>Rua:' . $e->rua . '</p>';
+		echo '<p>Número:' . $e->numero . '</p>';
+		echo '<p>Bairro:' . $e->bairro . '</p>';
+		echo '<p>Cidade:' . $e->cidade . '</p>';
+		echo '<p>UF:' . $e->uf . '</p>';
+		echo '<p>CEP:' . $e->cep . '</p>';
+		echo '<hr>';
+	}
+
+	$enderecos = Enderecos::all();
+	foreach ($enderecos as $e) {
+		echo '<p>Rua:' . $e->rua . '</p>';
+		echo '<p>Número:' . $e->numero . '</p>';
+		echo '<p>Bairro:' . $e->bairro . '</p>';
+		echo '<p>Cidade:' . $e->cidade . '</p>';
+		echo '<p>UF:' . $e->uf . '</p>';
+		echo '<p>CEP:' . $e->cep . '</p>';
+		echo '<hr>';
+	}
+...
+
+a melhor forma de relacionamento -> no Model cuja tabela é a principal -> hasOne -> tabela principal para estrangeira
+
+	namespace App;
+
+	use Illuminate\Database\Eloquent\Model;
+
+	class Clientes extends Model {
+		public function enderecos() {
+			return $this->hasOne('App\Enderecos'); //relacionamento um-para-um
+		}
+	}
+
+	no controller ->
+	...
+	$clientes = Clientes::all();
+		foreach ($clientes as $c) {
+			echo '<p>Id:' . $c->id . '</p>';
+			echo '<p>Nome:' . $c->nome . '</p>';
+			echo '<p>Telefone:' . $c->telefone . '</p>';
+			echo '<p>Rua:' . $c->enderecos->rua . '</p>'; //forma correta de relacionar um-para-um
+			echo '<p>Número:' . $c->enderecos->numero . '</p>';
+			echo '<p>Bairro:' . $c->enderecos->bairro . '</p>';
+			echo '<p>Cidade:' . $c->enderecos->cidade . '</p>';
+			echo '<p>UF:' . $c->enderecos->uf . '</p>';
+			echo '<p>CEP:' . $c->enderecos->cep . '</p>';
+			echo '<hr>';
+		}
+	...
+
+	caso a primary key da tabela principal não seja 'id' ->
+
+	namespace App;
+
+	use Illuminate\Database\Eloquent\Model;
+
+	class Clientes extends Model {
+		public function enderecos() {
+			// caso o campo primary key da tabela endereços não fosse 'id', 
+			// o primeiro refere-se ao nome do campo da tabela estrangeira e o segundo ao 
+			// nome do campo da própria tabela (enderecos)
+			return $this->hasOne('App\Enderecos', 'clientes_id', 'id'); 
+		}
+	}
+
+a melhor forma de relacionamento -> no Model cuja tabela é a principal -> belongsTo -> tabela estrangeira para principal
+	-> no model ->
+	...
+	namespace App;
+
+	use Illuminate\Database\Eloquent\Model;
+
+	class Enderecos extends Model {
+		public function clientes() {
+			return $this->belongsTo('App\Clientes', 'clientes_id', 'id'); //tabela estrangeira para a tabela principal
+		}
+	}
+	...
+
+	-> no controller ->
+	...
+	$enderecos = Enderecos::all();
+	foreach ($enderecos as $e) {
+		echo '<p>Rua:' . $e->rua . '</p>';
+
+		echo '<p>Nome:' . $e->clientes->nome . '</p>'; //tabela estrangeira para tabela principal
+		echo '<p>Telefone:' . $e->clientes->telefone . '</p>'; //tabela estrangeira para tabela principal
+
+		echo '<p>Número:' . $e->numero . '</p>';
+		echo '<p>Bairro:' . $e->bairro . '</p>';
+		echo '<p>Cidade:' . $e->cidade . '</p>';
+		echo '<p>UF:' . $e->uf . '</p>';
+		echo '<p>CEP:' . $e->cep . '</p>';
+		echo '<hr>';
+	}
+	...
+
+inserindo registros através dos relacionamentos -> no controller ->
+	...
+	$c = new Clientes();
+	$c->nome = 'Francisco';
+	$c->telefone = '666-5555';
+	$c->save();
+
+	$e = new Enderecos();
+	$e->rua = 'José Bonifácio';
+	$e->numero = 44;
+	$e->bairro = 'Maiobão';
+	$e->cidade = 'São José';
+	$e->uf = 'MA';
+	$e->cep = '65110-000';
+
+	$e->clientes_id = $c->id; //uma forma de inserir dados em tabelas relacionadas
+	$c->enderecos()->save($e); //forma ideal de relacionar
+	...
+
+Eager Loading vs Lazy Loading -> no controller -> 
+	...
+	// $clientes = Clientes::all(); // método Lazy loading - não carrega todos os dados (método padrão)
+
+	//método Eager Loading(dentro de with() coloca-se o nome do outro relacionamento)
+	$clientes = Clientes::with(['enderecos'])->get();
+	return $clientes->toJson();
+	...
+---------------------------------------------------
+#Relacionamento-Um-para-Muitos
+no model filho -> 
+	...
+	namespace App;
+
+	use Illuminate\Database\Eloquent\Model;
+
+	class Produto extends Model {
+		public function categoria() {
+			return $this->belongsTo('App\Categoria'); //relacionamento filho-pai
+		}
+	}
+	...
+no controller ->
+	...
+	$pro = Produto::all();
+		if (count($pro) === 0) {
+			echo "<h4>Você não possui nenhum produto cadastrada</h4>";
+		} else {
+			echo "<table>";
+			echo "<thead><tr><td>Nome</td><td>Estoque</td><td>Preco</td><td>Categoria</td></tr></thead>";
+			foreach ($pro as $p) {
+				echo "<tr>";
+				echo "<td>" . $p->nome . "</td>";
+				echo "<td>" . $p->estoque . "</td>";
+				echo "<td>" . $p->preco . "</td>";
+				echo "<td>" . $p->categoria->nome . "</td>"; //relacionado entre as tabelas (filha-pai)
+				echo "</tr>";
+			}
+		}
+	...
+
+no model pai -> 
+...
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Categoria extends Model {
+	public function produtos() {
+		return $this->hasMany('App\Produto'); //relacionamento pai-filho
+	}
+}
+...
+
+no controller -> 
+...
+$cat = Categoria::all();
+	if (count($cat) === 0) {
+		echo "<h4>Você não possui nenhuma categoria cadastrada</h4>";
+	} else {
+		foreach ($cat as $c) {
+			echo "<p>" . $c->id . ' - ' . $c->nome . "</p>";
+
+			$produtos = $c->produtos; //relacionamento pai-filho
+			echo "<ul>";
+			foreach ($produtos as $p) {
+				echo "<li>" . $p->nome . "</li>";
+			}
+			echo "</ul>";
+		}
+	}
+...
+
+Eager Loading -> no controller ->
+...
+$cats = Categoria::with('produtos')->get();
+	return $cats->toJson();
+...
+
+Criando e removendo associações -> filho-pai
+	...
+	Route::get('/adicionarproduto', function () {
+		/* Uma forma de incluir registro em tabelas relacionadas (associar registros)
+			    $p = new Produto();
+			    $p->nome = "Meu novo produto";
+			    $p->estoque = 10;
+			    $p->preco = 100;
+			    $p->categoria_id = 1; //uma forma de incluir registro em tabela relacionada
+			    $p->save();
+		*/
+
+		$c = Categoria::find(1);
+		$p = new Produto();
+		$p->nome = "Meu novo produto 2";
+		$p->estoque = 10;
+		$p->preco = 100;
+		$p->categoria()->associate($c); //outra forma (elegante) de incluir registro em tabela
+		$p->save();
+		return $p->toJson();
+	});
+
+	Route::get('/removerprodutocategoria', function () {
+
+		$p = Produto::find(1);
+		if (isset($p)) {
+			$p->categoria()->dissociate(); //disassociar registros entre tabelas
+			$p->save();
+			return $p->toJson();
+		}
+		return '';
+	});
+	...
+
+Save-> pai-filho -> 
+	...
+	Route::get('/adicionarproduto/{catid}', function () {
+		//pai-filho
+		$c = Categoria::with('produtos')->find(1); //como se fosse join por id
+
+		$p = new Produto();
+		$p->nome = "Meu novo produto 3";
+		$p->estoque = 40;
+		$p->preco = 500;
+
+		if (isset($c)) {
+			$c->produtos()->save($p); //outra forma de saver registros em tabelas relacionadas
+		}
+
+		$c->load('produtos'); //atualiza os registros do relacionamento
+		return $c->toJson();
+	});
+	...
+------------------------------------------
+#Relacionamento-Muitos-para-Muitos
+tabela 1 migration ->
+public function up() {
+		Schema::create('desenvolvedores', function (Blueprint $table) {
+			$table->bigIncrements('id');
+			$table->string('nome');
+			$table->string('campo');
+			$table->timestamps();
+		});
+	}
+
+tabela 2 migration -> 
+public function up() {
+		Schema::create('projetos', function (Blueprint $table) {
+			$table->bigIncrements('id');
+			$table->string('nome');
+			$table->integer('estimativa_horas');
+			$table->timestamps();
+		});
+	}
+
+tabela 3  migration-> junção -> 
+public function up() {
+		Schema::create('alocacoes', function (Blueprint $table) {
+			$table->bigInteger('desenvolvedor_id')->unsigned();
+			$table->foreign('desenvolvedor_id')->references('id')->on('desenvolvedores');
+			$table->bigInteger('projeto_id')->unsigned();
+			$table->foreign('projeto_id')->references('id')->on('projetos');
+			$table->timestamps();
+			$table->integer('horas_semanais');
+			$table->primary(['projeto_id', 'desenvolvedor_id']);
+		});
+	}
+
+relacionando as tabelas -> 
+	-> no model ->
+	...
+	namespace App;
+
+	use Illuminate\Database\Eloquent\Model;
+
+	class Desenvolvedor extends Model {
+		protected $table = 'desenvolvedores'; //incluir linha para fugir do padrão de nomenclarura de nome de tabelas
+
+		public function projetos() {
+			return $this->belongsToMany('App\Projeto', 'alocacoes'); //relação de muitos para muitos
+		}
+	}
+	...
+
+	-> no controller ->
+	...
+	$desenvolvedor = Desenvolvedor::with('projetos')->get(); //relação de muitos para muitos
+
+	foreach ($desenvolvedor as $d) {
+		echo "<p>Nome do Desenvolvedor: " . $d->nome . "</p>";
+		echo "<p>Cargo: " . $d->cargo . "</p>";
+		if (count($d->projetos) > 0) { //fazendo o relacionamento entre as tabelas
+			echo "Projetos: <br>";
+			echo "<ul>";
+			foreach ($d->projetos as $p) {
+				echo "<li>";
+				echo "Nome: " . $p->nome . "|";
+				echo "Estimativa de Horas: " . $p->estimativa_horas;
+				echo "</li>";
+			}
+			echo "</ul>";
+		}
+
+		echo "<hr>";
+	}
+	...
+
+obtendo campos pivôs (tabelas do meio) -> pivo refere-se aos dados da tabela do meio ->
+	no model -> 
+	...
+	namespace App;
+
+	use Illuminate\Database\Eloquent\Model;
+
+	class Desenvolvedor extends Model {
+		protected $table = 'desenvolvedores'; //incluir linha para fugir do padrão de nomenclarura de nome de tabelas
+
+		public function projetos() {
+			return $this->belongsToMany('App\Projeto', 'alocacoes')->withPivot('horas_semanais'); //relação de muitos para muitos e retornando os campos da tabela  pivô (faz a ligação entre as duas)
+		}
+	}
+	...
+
+	no controller -> 
+	...
+	$desenvolvedor = Desenvolvedor::with('projetos')->get(); //relação de muitos para muitos
+
+	foreach ($desenvolvedor as $d) {
+		echo "<p>Nome do Desenvolvedor: " . $d->nome . "</p>";
+		echo "<p>Cargo: " . $d->cargo . "</p>";
+		if (count($d->projetos) > 0) {
+			//fazendo o relacionamento entre as tabelas
+			echo "Projetos: <br>";
+			echo "<ul>";
+			foreach ($d->projetos as $p) {
+				echo "<li>";
+				echo "Nome: " . $p->nome . " | ";
+				echo "Estimativa de Horas: " . $p->estimativa_horas . " | ";
+				echo "Horas trabalhadas: " . $p->pivot->horas_semanais; //acessando os campos da tabela pivo (une as duas)
+				echo "</li>";
+			}
+			echo "</ul>";
+		}
+
+		echo "<hr>";
+	}
+
+	return $desenvolvedor->toJson();
+	...
+
+alocando registro de uma tabela a outra ->
+	...
+	$proj = Projeto::find(4);
+		if (isset($proj)) {
+			$proj->desenvolvedores()->attach(1, ['horas_semanais' => 50]); //alocando um registro de uma tabela a outra
+			$proj->desenvolvedores()->attach([ //alocando vários registros de uma tabela a outra
+				2 => ['horas_semanais' => 50],
+				3 => ['horas_semanais' => 60],
+			]);
+		}
+	...
+
+desalocando registro entre tabelas ->
+	...
+	Route::get('/desalocar', function () {
+	$proj = Projeto::find(4);
+	if (isset($proj)) {
+		$proj->desenvolvedores()->detach([1, 2, 3]); //desalocando vários relacionamentos entre as tabelas
+		// $proj->desenvolvedores()->detach(1); //desalocando um único relacionamento entre as tabelas
+		// $proj->desenvolvedores()->detach(2);
+		// $proj->desenvolvedores()->detach(3);
+		}
+	});
+...
+-----------------------------------------------
+#deletar registros em cascata em relacionamentos
+no campo da migration (tabela filha ) ->
+	...
+	$table->foreign('venda_id')->references('id')->on('vendas')->onDelete('cascade'); //deleta em cascata
+	...
+
+no controller ->
+...
+$c = Desenvolvedor::find(2);
+$c->projetos()->delete();
+...
+------------------------------------------------------
 #Instalar Bootstrap via npm
 cmd -> npm install (o arquivo package.json mostra as dependências que serão baixadas)
 editar o arquivo o arquivo resources/js/app.js e comentar tudo referente a vue
@@ -1008,6 +1598,7 @@ dentro da view basta incluir os arquivos css e js ->
 	<link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}"> //usar asset
 		ou
 	<link rel="stylesheet" type="text/css" href="{{URL::to('css/app.css')}}"> //usar URL::to
+	<meta name="csrf-token" content="{{ csrf_token() }}"> //evitar erro do formulário 
 </head>
 <body>
 	<div class="alert alert-primary" role="alert">
@@ -1018,3 +1609,20 @@ dentro da view basta incluir os arquivos css e js ->
 	<script type="text/javascript" src="{{URL::to('js/app.js')}}"></script> //usar URL::to
 </body>
 </html>
+--------------------------------------
+#Nomes das tabelas 
+-> o nome da tabela deve ser o nome do modelo + s -> 
+	-> model -> Cliente
+	-> tabela -> clientes
+
+-> informar o laraval sobre alteração de nomes das tabelas (fugindo do padrão) -> dentro de cada modelo ->
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Alocacao extends Model {
+	protected $table = 'desenvolvedores'; //incluir linha para fugir do padrão de nomenclarura de nome de tabelas
+}
+
