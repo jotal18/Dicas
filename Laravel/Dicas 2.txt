@@ -1587,6 +1587,299 @@ $c = Desenvolvedor::find(2);
 $c->projetos()->delete();
 ...
 ------------------------------------------------------
+#Middlewares
+
+receptar requisiçõe http
+
+local das middlewares -> app/Http/Middleware
+
+criar middlewares -> php artisan make:middleware NomeDoMiddlweare 
+	-> na rota ->
+	use App\Http\Middleware\PrimeiroMiddleware;
+
+	//antes de chamar o controlador deve passar pelo middleware 'PrimeiroMiddleware'
+	Route::get('/usuario', 'UsuarioControlador@index')->middleware(PrimeiroMiddleware::class);
+
+
+	-> na middleware -> 
+	namespace App\Http\Middleware;
+
+	use Closure;
+	use Log; //usa a classe Log
+
+	class PrimeiroMiddleware {
+
+		public function handle($request, Closure $next) {
+			Log::debug('passou pelo middleware'); //registra log
+			return $next($request);
+		}
+	}
+
+salvar informação no debug / log -> 
+
+	use Closure;
+	use Log; 		//usa a classe Log
+
+	class PrimeiroMiddleware {
+
+		public function handle($request, Closure $next) {
+			Log::debug('passou pelo middleware'); 		//registra log
+			return $next($request);
+		}
+	}
+	...
+	-> o arquivo de log fica em -> storage -> logs ->
+
+registrando nome para a middleware -> 
+	-> arquivo app/Http/Kernel.php ->
+	...
+		protected $routeMiddleware = [
+        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+        'can' => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'primeiro' => \App\Http\Middleware\PrimeiroMiddleware::class //cria o nome e o caminho para middleware
+    ];
+	...
+
+	-> na rota ->
+	use App\Http\Middleware\PrimeiroMiddleware;
+
+	Route::get('/usuario', 'UsuarioControlador@index')->middleware('primeiro'); //aqui é usado somente o nome e não o caminho
+
+chamando middleware pelo construtor do controlador ->
+	
+	na rota ->
+	use App\Http\Middleware\PrimeiroMiddleware;
+	Route::get('/usuario', 'UsuarioControlador@index'); //aqui no caso a middleware será chamada dentro do controlador
+
+	no controller -> 
+	namespace App\Http\Controllers;
+
+	class UsuarioControlador extends Controller {
+
+		public function __construct() {
+			$this->middleware('primeiro'); //utilizando a middleware dentro do controlador
+		}
+
+
+		public function index() {
+			return '<h3>Lista de usuários</h3>' .
+				'<ul>' .
+				'<li>Joao</li>' .
+				'<li>Maria</li>' .
+				'<li>José</li>' .
+				'<li>Marcos</li>' .
+				'</ul>';
+		}
+	}
+
+aplicando middleware a todas as rotas ->
+	-> no arquivo app/Http/Kernel.php ->
+	...
+	 protected $middlewareGroups = [
+        'web' => [
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            \Illuminate\Session\Middleware\StartSession::class,
+            // \Illuminate\Session\Middleware\AuthenticateSession::class,
+            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \App\Http\Middleware\VerifyCsrfToken::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
+            \App\Http\Middleware\PrimeiroMiddleware::class //criando middleware para todos as rotas (routes/web.php)
+        ],
+
+        'api' => [
+            'throttle:60,1',
+            'bindings',
+        ],
+    ];
+    ...
+
+    -> na rota ->
+    //aqui no caso a middleware será chamada automaticamente, pois foi definida no arquivo app/Http/Kernel.php
+	Route::get('/usuario', 'UsuarioControlador@index'); 
+
+
+adicionando e utlizando várias middlewares -> 
+	-> crie um novo middleware -> php artisan make:middleware SegundoMiddleware
+
+	-> arquivo kernel.php (nomeando) -> 
+	...
+	protected $routeMiddleware = [
+        'auth' => \App\Http\Middleware\Authenticate::class,
+        'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
+        'can' => \Illuminate\Auth\Middleware\Authorize::class,
+        'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
+        'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
+        'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        'primeiro' => \App\Http\Middleware\PrimeiroMiddleware::class, //cria o nome e o caminho para middleware
+        'segundo' => \App\Http\Middleware\SegundoMiddleware::class //cria o nome e o caminho para middleware
+    ];
+	...
+
+	-> na rota -> 
+	// utilizando vários middlewares 
+	Route::get('/usuario', 'UsuarioControlador@index')->middleware('primeiro', 'segundo'); 
+
+parar a cadeia de chamada de middleware -> dentro da middleware ->
+	namespace App\Http\Middleware;
+
+	use Closure;
+	use Log;
+
+	class PrimeiroMiddleware {
+
+		public function handle($request, Closure $next) {
+			Log::debug('passou pelo primeiro middleware'); //registra log
+			// return $next($request); //o $next iria chamar o próximo middleware, conforme arquivo Kernel.php
+	        return response('parando a cadeia de chamada'); //caso queira que não seja chamada a próxima middleware
+		}
+	}
+
+passando parâmetros ->
+	cria a middleware (kernel.php ) ->
+	... 
+	'terceiro' => \App\Http\Middleware\TerceiroMiddleware::class //cria o nome e o caminho para middleware
+	...
+
+	na middleware ->
+	...
+	public function handle($request, Closure $next, $nome, $idade) //passando parâmetro para a middleware
+    {
+        Log::debug("Passou pela terceira middleware [nome = $nome, $idade]");  //passando parâmetro para a middleware
+        return $next($request);
+    }
+    ...
+
+    na rota ->
+    ...
+    Route::get('/terceiro', function(){
+		return 'Passou pelo terceiro middleware';
+	})->middleware('terceiro: João, 20'); 
+    ...
+
+lógica de execução das middlewares -> tudo o que estiver antes do $next($request); será executado antes de chegar na aplicação/controlador
+								  -> depois do $next($request); a aplicação já tratou a requisição e retornou a resposta
+
+
+middleware Login -> 
+		...
+		Route::get('/produtos', 'ProdutoControlador@index');
+
+		Route::get('/negado', function(){
+			return 'Acesso Negado. Você precisa estar logado para acessar esta página';
+		})->name('negado');
+
+		Route::get('/negadologin', function(){
+			return 'Prezado usuário, você precisa ser administrador para acessar este conteúdo.';
+		})->name('negadologin');
+
+		Route::post('/login', function(Request $req){
+			$login_ok = false;
+			$admin = false;
+
+			// criando usuários e senhas para teste de login
+			switch ($req->input('user')) {
+				case 'Joao':
+					$login_ok = $req->input('passwd') === 'senhajoao';
+					$admin = true;
+					break;
+				
+				case 'Maria':
+					$login_ok = $req->input('passwd') === 'senhamaria';
+					break;
+
+				default:
+					$login_ok = false;
+			}
+
+			// verificando se os dados do usuário estão corretos
+			if ($login_ok) {
+				//criando a sessão para o usuário LOGIN
+				$login = ['user' => $req->input('user'), 'admin' => $admin]; //salvando o nome do usuário e verificando se ele é admin em uma variável
+				$req->session()->put('login', $login); //salvando na sessão o nome do usuário e se este é admin (LOGANDO)
+				return response('Login Ok', 200);
+			}else {
+				$req->session()->flush(); //apaga todos os dados da sessão
+				return response('Erro no login', 404);
+			}
+		});
+
+		// LOGOUT
+		Route::get('/logout', function(Request $req){
+			$req->session()->flush(); //deslogando o usuário
+			return response('Deslogado com sucesso', 200);
+		});
+		...
+
+
+	-> no controller ->
+	...
+	namespace App\Http\Controllers;
+
+	use Illuminate\Http\Request;
+
+	class ProdutoControlador extends Controller
+	{
+
+		public function __construct(){
+			$this->middleware(\App\Http\Middleware\ProdutoAdmin::class); //chamando a middleware que verifica a sessão
+		}
+
+		private $produtos = ['Televisao 40', 'Notebook Acer', 'Impressora HP', 'HD externo'];
+
+	    public function index() {
+	    	echo "<h3>Produtos</h3>";
+	    	echo "<ol>";
+	    	foreach ($this->produtos as $p) {
+	    		echo "<li>" . $p . "</li>";
+	    	}
+	    	echo "</ol>";
+	    }
+	}
+	...
+
+	-> na middleware ->
+
+	namespace App\Http\Middleware;
+
+	use Closure;
+
+	class ProdutoAdmin
+	{
+	    /**
+	     * Handle an incoming request.
+	     *
+	     * @param  \Illuminate\Http\Request  $request
+	     * @param  \Closure  $next
+	     * @return mixed
+	     */
+	    public function handle($request, Closure $next)
+	    {
+	        if ($request->session()->exists('login')) { //verificando se a sessão do usuário existe
+	            $login = $request->session()->get('login');
+	            if ($login['admin']) {
+	                return $next($request);
+	            }else{
+	                return redirect()->route('negadologin');
+	            }
+	        }
+
+	        return redirect()->route('negado'); //redirecionando a rota
+	    }
+	}
+
+------------------------------------------------------------------------------------------
 #Instalar Bootstrap via npm
 cmd -> npm install (o arquivo package.json mostra as dependências que serão baixadas)
 editar o arquivo o arquivo resources/js/app.js e comentar tudo referente a vue
@@ -1609,7 +1902,7 @@ dentro da view basta incluir os arquivos css e js ->
 	<script type="text/javascript" src="{{URL::to('js/app.js')}}"></script> //usar URL::to
 </body>
 </html>
---------------------------------------
+----------------------------------------------------------------------------------------------------
 #Nomes das tabelas 
 -> o nome da tabela deve ser o nome do modelo + s -> 
 	-> model -> Cliente
