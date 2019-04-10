@@ -1857,13 +1857,7 @@ middleware Login ->
 
 	class ProdutoAdmin
 	{
-	    /**
-	     * Handle an incoming request.
-	     *
-	     * @param  \Illuminate\Http\Request  $request
-	     * @param  \Closure  $next
-	     * @return mixed
-	     */
+	  
 	    public function handle($request, Closure $next)
 	    {
 	        if ($request->session()->exists('login')) { //verificando se a sessão do usuário existe
@@ -1878,7 +1872,90 @@ middleware Login ->
 	        return redirect()->route('negado'); //redirecionando a rota
 	    }
 	}
+---------------------------------------------------------
+#Login
 
+criar a estrutura de login -> php artisan make:auth -> 
+	->cria o HomeController / 
+	->várias rotas referente ao login (arquivo web.php)
+		Auth::routes(); //cria todas as rotas adicionais de login
+
+	->cria as migrations users / table
+é preciso rodar o comando -> php artisan make:migrate
+
+protegendo no controlador (mostrar view somente para usuários logados) -> php artisan make:controller NomeControlador
+	-> no controlador ->
+	...
+	public function __construct() {
+		$this->middleware('auth');
+	}
+	
+    public function index() {
+    	echo "<h4>Lista de Produtos</h4>";
+    	echo "<ul>";
+    	echo "<li>Macarrão</li>";
+    	echo "<li>Feijão</li>";
+    	echo "<li>Carne Bovina</li>";
+    	echo "<li>Arroz</li>";
+    	echo "<li>Leite</li>";
+    	echo "</ul>";
+    }
+    ...
+
+protegendo na rota(mostrar view somente para usuários logados) -> 
+			-> Route::get('/produtos', 'ProdutoControlador@index')->middleware('auth');
+
+redirecionando a tela home/registro/reset/esqueceu a senha do laravel para outra view 
+	-> arquivo app/Http/Controllers/Auth/LoginController.php ->
+	-> arquivo app/Http/Controllers/Auth/ForgotPasswprdController.php ->
+	-> arquivo app/Http/Controllers/Auth/RegisterController.php ->
+	-> arquivo app/Http/Controllers/Auth/ResetController.php ->
+	-> arquivo app/Http/Controllers/Auth/VerificationController.php ->
+		-> protected $redirectTo = '/home'; //aqui você coloca a rota para qual será redirecionada após o login
+
+verificando se o usuário está logado -> no controlador ->
+	namespace App\Http\Controllers;
+
+	use Illuminate\Http\Request;
+	use Illuminate\Support\Facades\Auth;
+
+	class DepartamentoControlador extends Controller
+	{
+	    public function index(){
+	    	echo "<h4>Lista de Categorias</h4>";
+	    	echo "<ul>";
+	    	echo "<li>Alimentos</li>";
+	    	echo "<li>Eletrônicos</li>";
+	    	echo "<li>Móveis</li>";
+	    	echo "<li>Informática</li>";
+	    	echo "</ul>";
+
+	    	// verifica se o usuário está logado
+	    	if (Auth::check()) { 
+	    		$user = Auth::user();
+	    		echo "<h4>Você está logado!</h4>";
+	    		echo "<p>" . $user->name . "</p>";
+	    		echo "<p>" . $user->email . "</p>";
+	    		echo "<p>" . $user->id . "</p>";
+	    	}else {
+	    		echo "<h4>Você não está logado!</h4>";
+	    	}
+	    }
+	}
+
+verificando se o usuário está logado -> na view ->
+
+	@auth
+		<h4>Você está logado!</h4>
+		<p>{{ Auth::user()->name }} </p>
+		<p>{{ Auth::user()->email }} </p>
+		<p>{{ Auth::user()->id }} </p>
+	@endauth
+
+	@guest
+		<h4>Você não está logado!</h4>
+	@endguest
+	
 ------------------------------------------------------------------------------------------
 #Instalar Bootstrap via npm
 cmd -> npm install (o arquivo package.json mostra as dependências que serão baixadas)
@@ -1918,4 +1995,143 @@ use Illuminate\Database\Eloquent\Model;
 class Alocacao extends Model {
 	protected $table = 'desenvolvedores'; //incluir linha para fugir do padrão de nomenclarura de nome de tabelas
 }
+--------------------------------------
+#Erros
 
+SQLSTATE 42000: Syntax error or access violation: 1071 Specified key was too long; max key length is 767 bytes com PHP ->
+	-> link -> 
+		https://pt.stackoverflow.com/questions/245432/sqlstate-42000-syntax-error-or-access-violation-1071-specified-key-was-too-lon
+		https://translate.googleusercontent.com/translate_c?depth=1&hl=pt-BR&prev=search&rurl=translate.google.com&sl=en&sp=nmt4&u=https://laravel-news.com/laravel-5-4-key-too-long-error&xid=17259,15700022,15700186,15700191,15700253,15700255&usg=ALkJrhiyBESkKAZIPFitbpM7HqiZ1afykw
+---------------------------------------------------------
+Criando API e acessando via jQuery e Javascript
+
+criando um modal com bootstrap + jQuery + Javascript
+@extends('layout.app', ["current" => "produtos" ])
+
+@section('body')
+    <h4>Página de produtos</h4>
+    <div class="card border">
+    <div class="card-body">
+        <h5 class="card-title">Cadastro de Categorias</h5>
+
+        <table class="table table-ordered table-hover">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome da Categoria</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+	    //botão que chama o modal
+        <button  class="btn btn-sm btn-primary" role="button" onclick="novoProduto()">Nova categoria</button> 
+    </div>
+
+    //criação do modal
+    <div class="modal" tabindex="-1" role="dialog" id="dlgProdutos">
+    	<div class="modal-dialog" role="document">
+    		<div class="modal-content">
+    			<form class="form-horizontal" id="formProduto">
+    				<div class="modal-header">
+    					<h4 class="modal-title">Novo Produto</h4>
+    				</div>
+    				<div class="modal-body">
+
+    					<input type="hidden" id="id" class="form-control">
+    					<div class="form-group">
+    						<label class="control-label" for="nomeProduto">Nome do Produto</label>
+    						<div class="input-group">
+    							<input type="text" id="nomeProduto" class="form-control" placeholder="Nome do Produto">
+    						</div>
+    					</div>
+
+    					<div class="form-group">
+    						<label class="control-label" for="precoProduto">Preço do Produto</label>
+    						<div class="input-group">
+    							<input type="number" id="precoProduto" class="form-control" placeholder="Preço do Produto">
+    						</div>
+    					</div>
+
+    					<div class="form-group">
+    						<label class="control-label" for="quantidadeProduto">Quantidade do Produto</label>
+    						<div class="input-group">
+    							<input type="number" id="quantidadeProduto" class="form-control" placeholder="Quantidade do Produto">
+    						</div>
+    					</div>
+
+    					<div class="form-group">
+    						<label class="control-label" for="quantidadeProduto">Departamento do Produto</label>
+    						<div class="input-group">
+    							<select id="departamentoProduto" class="form-control"></select>
+    						</div>
+    					</div>
+    				</div>
+
+    				<div class="modal-footer">
+    					<button type="submit" class="btn btn-primary">Salvar</button>
+    					<button type="cancel" class="btn btn-secondary" data-dissmiss="modal">Cancelar</button>
+    				</div>
+    			</form>
+    		</div>
+    	</div>
+    </div>
+@endsection
+
+@section('javascript') //seção de javascript
+	<script type="text/javascript">
+		function novoProduto() {
+			$('#nomeProduto').val('') //limpando os campos do modal
+			$('#precoProduto').val('') //limpando os campos do modal
+			$('#quantidadeProduto').val('') //limpando os campos do modal
+			$('#dlgProdutos').modal('show') //limpando os campos do modal
+		}
+	</script>
+@endsection
+
+
+Rotas api/
+-> arquivo routes/api.php
+-> cria a rota no arquivo api.php
+-> para acessar no navegador -> 
+	->	Route::get('/categorias', 'ControladorCategoria@indexJson'); 
+	-> colocar /api/categorias
+
+Retornar Json
+-> public function indexJson()
+    {
+        $cats = Categoria::all();
+        return json_encode($cats); //função que retorna como json
+    }
+-> O laravel automaticamente converte pra Json o retorno de variáveis. Não é obrigatório usar 'json_encode'
+
+Carregando dados por meio de javascript
+-> 
+@section('javascript')
+	<script type="text/javascript">
+		function novoProduto() {
+			$('#nomeProduto').val('')
+			$('#precoProduto').val('')
+			$('#quantidadeProduto').val('')
+			$('#dlgProdutos').modal('show')
+		}
+
+		function carregarCategorias(data) {
+		//pega os dados da rota Api que por meio do controlador recebe os dados no formato JSON
+			$.getJSON('api/categorias', function(data){ 
+				for(i=0; i<data.length; i++){
+					opcao = '<option value="' +  data[i].id + '">' + data[i].nome + '</option>';
+					$('#departamentoProduto').append(opcao);   //inclui os dados dentro do select
+				}
+			})
+		}
+
+		$(function(){ //dadod os dados dentro select assim que a página é carregada
+			carregarCategorias()
+		})
+	</script>
+@endsection
