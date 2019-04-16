@@ -2106,32 +2106,89 @@ Retornar Json
     {
         $cats = Categoria::all();
         return json_encode($cats); //função que retorna como json
+
+        //outra opção
+        return $cats->toJson();
     }
 -> O laravel automaticamente converte pra Json o retorno de variáveis. Não é obrigatório usar 'json_encode'
 
 Carregando dados por meio de javascript
--> 
+-> rotas ->
+	Route::get('/categorias', 'ControladorCategoria@indexJson'); //para acessar no navegador basta colocar /api/categorias
+	Route::resource('/produtos', 'ControladorProduto'); 
+
+-> no controller -> 
+	 public function indexView()
+	    {
+	        return view('produtos');
+	    }
+
+    public function index()
+    {
+        $prod = Produto::all();
+        return $prod->toJson();
+    }
+
+-> na view ->
 @section('javascript')
 	<script type="text/javascript">
+
+		// CSRF Setup TOKEN
+		$.ajaxSetup({
+			headers: {
+				'X-CSRF-TOKEN': "{{ csrf_token() }}"
+			}
+		});	
+
+		//função que antes de mostrar o modal limpa os seus campos
 		function novoProduto() {
-			$('#nomeProduto').val('')
-			$('#precoProduto').val('')
-			$('#quantidadeProduto').val('')
-			$('#dlgProdutos').modal('show')
+			$('#nomeProduto').val('') //limpa os campos
+			$('#precoProduto').val('') //limpa os campos
+			$('#quantidadeProduto').val('') //limpa os campos
+			$('#dlgProdutos').modal('show') //mostra o modal
 		}
 
+		// função que carrega os dados no select do modal da página produtos
 		function carregarCategorias(data) {
-		//pega os dados da rota Api que por meio do controlador recebe os dados no formato JSON
-			$.getJSON('api/categorias', function(data){ 
+			$.getJSON('api/categorias', function(data){
 				for(i=0; i<data.length; i++){
 					opcao = '<option value="' +  data[i].id + '">' + data[i].nome + '</option>';
-					$('#departamentoProduto').append(opcao);   //inclui os dados dentro do select
+					$('#departamentoProduto').append(opcao);  
 				}
 			})
 		}
 
-		$(function(){ //dadod os dados dentro select assim que a página é carregada
-			carregarCategorias()
+		// função que cria a linha que será usada pela função carregarProdutos()
+		function montaLinha(p){
+			var linha = "<tr>" +  
+				"<td>" + p.id + "</td>" +
+				"<td>" + p.nome + "</td>" +
+				"<td>" + p.estoque + "</td>" +
+				"<td>" + p.preco + "</td>" +
+				"<td>" + p.categoria_id + "</td>" +
+				"<td>" + 
+					'<button class="btn btn-sm btn-primary">Editar</button> ' + 
+					'<button class="btn btn-sm btn-danger">Apagar</button>' +
+				"</td>" +
+			"</tr>"
+
+			return linha
+		}
+
+		//função que carrega os dados na tabela da página produtos
+		function carregarProdutos(){
+			$.getJSON('/api/produtos', function(produtos){ //retorna um array
+				for (i=0; i<produtos.length; i++) {
+					linha = montaLinha(produtos[i])
+					$('#tabelaProdutos>tbody').append(linha)
+				}
+			})
+		}
+
+		//ao carregar a página chama as duas funções abaixo
+		$(function(){
+			carregarCategorias() //carrega as categorias no select do modal
+			carregarProdutos() //carrega os dados da tabela da página de produtos
 		})
 	</script>
 @endsection
