@@ -6,7 +6,13 @@ para acessar -> localhost:8000
 -------------------------------------------------
 iniciar via xampp -> colar a pasta do projeto na pasta htdocs -> acessar normalmente -> localhost/nomedoProjeto/public
 ---------------------------------------
+#Utilizar projeto Laravel em outro computador via git
+-> depois de baixar o projeto pelo git -> composer install
 a pasta vendor não vai para o git, para baixar em outro local -> composer install (vai ler o conteúdo do arquivo composer.json) 
+-> php artisan key:generate
+-> renomear o arquivo .env.exemple para .env e incluir os dados do DB, senha, usuário ....
+-> criar o DB na máquina atual
+-> php artisan migrate
 ------------------------------------------
 configurar o projeto antes de enviar para o servidor -> php artisan cache:clear / php artisan route:clear / php artisan route:cache / apagar os arquivos dentro da pasta storage/framework/sessions
 ------------------------------------------------------------------
@@ -799,27 +805,43 @@ atualizando dados ->
 	});
 	...
 apagando dados -> 
-Route::get('/removendocategorias', function () {
+	Route::get('/removendocategorias', function () {
 
-	echo "<p>Antes da remoção</p>";
-	$cats = DB::table('categorias')->get();
-	foreach ($cats as $cat) {
-		echo "id: " . $cat->id . "; ";
-		echo "nome: " . $cat->nome . "<br /> ";
+		echo "<p>Antes da remoção</p>";
+		$cats = DB::table('categorias')->get();
+		foreach ($cats as $cat) {
+			echo "id: " . $cat->id . "; ";
+			echo "nome: " . $cat->nome . "<br /> ";
+		}
+
+		echo "<hr />";
+
+		DB::table('categorias')->where('id', 2)->delete();
+
+		echo "<p>Depois da remoção</p>";
+		$cats = DB::table('categorias')->get();
+		foreach ($cats as $cat) {
+			echo "id: " . $cat->id . "; ";
+			echo "nome: " . $cat->nome . "<br /> ";
+		}
+
+	});
+
+recuperar o último id salvo ->
+	// salva os dados no DB
+	public function store(Request $request) {
+		$prods = new Produto();
+		$prods->nome = $request->input('nome');
+		$prods->preco = $request->input('preco');
+		$prods->estoque = $request->input('estoque');
+		$prods->categoria_id = $request->input('categoria_id');
+		$prods->save();
+
+		//pega o último id save
+		$id = $prods->id;
+		$teste = Produto::with('categoria')->where('id', $id)->first();
+		return json_encode($teste);
 	}
-
-	echo "<hr />";
-
-	DB::table('categorias')->where('id', 2)->delete();
-
-	echo "<p>Depois da remoção</p>";
-	$cats = DB::table('categorias')->get();
-	foreach ($cats as $cat) {
-		echo "id: " . $cat->id . "; ";
-		echo "nome: " . $cat->nome . "<br /> ";
-	}
-
-});
 -------------------------------------------------------------------------------
 #Eloquent / ORM
 criando modelo + migration -> php artisan make:model Categoria -m
@@ -1957,7 +1979,187 @@ verificando se o usuário está logado -> na view ->
 	@endguest
 	
 ------------------------------------------------------------------------------------------
+#Paginação
+
+-> no controller ou na rota ->
+
+	 public function index()
+	    {
+	        // criando paginação no laravel
+	        // no caso abaixo será mostrado 10 registros por vez
+	        $cliente = Clientes::paginate(10);
+	        return view('index', compact('cliente'));
+	    }
+	
+na view -> 
+	<div class="card-footer">
+        <!-- mostrar os botões de paginação -->
+        {{$cliente->links()}}
+    </div>
+
+alguns dados da paginação ->
+	{{$cliente->count()}} -> acessa o total de registros por página
+	{{$cliente->total()}} -> acessa o total retornado do banco de dados
+	{{$cliente->firstItem()}} -> acessa o primeiro item de cada paginação (não necessariamente é igual ao id do registro)
+	{{$cliente->lastItem()}} -> retorna o último item retornando do banco de dados
+
+paginação com javascript ->
+
+-> na rota -> 
+	// rota que mostrará a view da paginação
+	Route::get('/', 'ClienteControlador@indexjs');
+
+	// rota que retorna os dados do DB via JSON
+	Route::get('/json', 'ClienteControlador@indexjson');
+
+-> no controller ->
+	...
+	public function indexjs()
+    {
+        // retorna a view com a paginação
+        return view('indexjs');
+    }
+
+    public function indexjson()
+    {   
+        // retornar a quantidade de registros por página via json
+        return Clientes::paginate(10);
+    }
+    ...
+
+-> na view -> 
+	-> código bootstrap que devem ser inseridas na view
+		<div class="card-footer">
+            <nav id="paginator">
+                <ul class="pagination">
+                    
+                </ul>
+            </nav>
+        </div>
+
+    -> no código javascript
+	     <script type="text/javascript" src="{{URL::to('js/app.js')}}"></script>
+	        <script type="text/javascript">
+
+	            // cria o botão 'Anterior' da paginação
+	            function getItemAnterior(data) {
+	                i = data.current_page - 1;
+	                if (1 == data.current_page)
+	                    s = '<li class="page-item disabled">'
+	                else
+	                    s = '<li class="page-item">'
+
+	                s += '<a class="page-link" pagina="' + i + '"href="javascript:void(0);">Anterior</a></li>';
+	                return s;
+	                
+	            }
+
+	            // cria o botão 'Próximo' da paginação
+	            function getItemProximo(data) {
+	                i = data.current_page + 1;
+	                if (data.last_page == data.current_page)
+	                    s = '<li class="page-item disabled">'
+	                else
+	                    s = '<li class="page-item">'
+
+	                s += '<a class="page-link" pagina="' + i + '"href="javascript:void(0);">Proximo</a></li>';
+	                return s;
+	                
+	            }
+
+	            // crias os botões com números das páginas e ativa ou não o botão
+	            function getItem(data, i) {
+	                if (i == data.current_page)
+	                    s = '<li class="page-item active">'
+	                else
+	                    s = '<li class="page-item">'
+
+	                s += '<a class="page-link" pagina="' + i + '"href="javascript:void(0);">' + i +'</a></li>';
+	                return s;
+	                
+	            }
+
+
+	            // monta a estrututra de paginação (botão anterior, botões com números das páginas,
+	            // botão próximo)
+	            function montarPaginator(data) {
+	                // remove todos os botões antes de criar a paginação via ajax e jQuery
+	                $('#paginator>ul>li').remove();
+
+	                // inclui o botão 'Anterior'
+	                $('#paginator>ul').append(getItemAnterior(data));
+
+	                // define a quantidade de páginas mostradas
+	                n = 10;
+	                if (data.current_page - n/2 <= 1) {
+	                    inicio = 1;
+	                } else if (data.last_page - data.current_page < n) {
+	                    inicio = data.last_page - n + 1; 
+	                } else {
+	                    inicio = data.current_page - n/2;
+	                }
+	                fim = inicio + n - 1;
+
+	                // inclui os botões de paginação
+	                for (i = inicio; i <= fim; i ++) {
+	                    s = getItem(data, i);
+	                    // console.log(s);
+	                    $('#paginator>ul').append(s);
+	                }
+
+	                // inclui o botão 'Próximo'
+	                $('#paginator>ul').append(getItemProximo(data));
+	            }
+
+	            // monta cada linha da view de paginação
+	            function montarLinha(cliente) {
+	                return '<tr>' + 
+	                    '<td>' + cliente.id + '</td>' +
+	                    '<td>' + cliente.nome + '</td>' +
+	                    '<td>' + cliente.sobrenome + '</td>' +
+	                    '<td>' + cliente.email + '</td>' +
+	                '</tr>';
+	            }
+
+	            // monta toda a tabela da view de paginação
+	            function montarTabela(data) {
+	                $("#tabelaCliente>tbody>tr").remove();
+	                for (i=0; i<data.data.length; i++) {
+	                    s = montarLinha(data.data[i]);
+	                    $("#tabelaCliente>tbody").append(s);
+
+	                }
+	            }
+
+	            // criar toda a estrutura da página
+	            // pega os dados via JSON
+	            // cria a tabela
+	            // cria a paginação
+	            // cria os links para cada página
+	            // mostra o título do card-reader
+	            function carregarClientes(pagina){
+	                $.get('/json', {page: pagina}, function(resp) {
+	                    console.log(resp);
+	                    montarTabela(resp);
+	                    montarPaginator(resp);
+	                    $('#paginator>ul>li>a').click(function(){
+	                        carregarClientes($(this).attr('pagina'));
+	                    });
+	                    $('#cardTitle').html('Exibindo ' + resp.per_page + ' clientes de ' + resp.total + ' (' + resp.from + ' a ' + resp.to + ')');
+	                });
+	            }
+	            
+	            // ao carregar a página, carregará a função abaixo
+	            // que é responsável por montar toda a estrutura da página
+	            // recebendo o valor da página
+	            $(function() {
+	                carregarClientes(1);
+	            });
+
+	        </script>
+------------------------------------------------------------------------
 #Instalar Bootstrap via npm
+instalar o npm -> https://nodejs.org/en/download/
 cmd -> npm install (o arquivo package.json mostra as dependências que serão baixadas)
 editar o arquivo o arquivo resources/js/app.js e comentar tudo referente a vue
 cmd -> npm run dev (irá compilar os arquivos /js/app.js e /css/app.css na pasta public)
@@ -2118,30 +2320,97 @@ Carregando dados por meio de javascript
 	Route::resource('/produtos', 'ControladorProduto'); 
 
 -> no controller -> 
-	 public function indexView()
-	    {
-	        return view('produtos');
-	    }
+	class ControladorProduto extends Controller {
+	public function indexView() {
+		return view('produtos');
+	}
 
-    public function index()
-    {
-        $prod = Produto::all();
-        return $prod->toJson();
-    }
+	public function index() {
+		$prod = Produto::with('categoria')->get();
+		return $prod->toJson();
+	}
+
+	
+	public function create() {
+		//
+	}
+
+	// salva os dados no DB
+	public function store(Request $request) {
+		$prods = new Produto();
+		$prods->nome = $request->input('nome');
+		$prods->preco = $request->input('preco');
+		$prods->estoque = $request->input('estoque');
+		$prods->categoria_id = $request->input('categoria_id');
+		$prods->save();
+
+		//pega o último id save
+		$id = $prods->id;
+		$teste = Produto::with('categoria')->where('id', $id)->first();
+		return json_encode($teste);
+	}
+
+	//pega os dados por id para edição
+	public function show($id) {
+		$prods = Produto::find($id);
+		if (isset($prods)) {
+			// return $prods->toJson();
+			return json_encode($prods); //retorna como JSON
+		}
+		return response('Produto não encontrado', 404);
+	}
+
+	public function edit($id) {
+
+	}
+
+	//atualiza os dados
+	public function update(Request $request, $id) {
+
+		$prod = Produto::find($id);
+		if (isset($prod)) {
+			$prod->nome = $request->input('nome');
+			$prod->preco = $request->input('preco');
+			$prod->estoque = $request->input('estoque');
+			$prod->categoria_id = $request->input('categoria_id');
+			$prod->save();
+
+			//pega o último id save
+			$id = $prod->id;
+			$teste = Produto::with('categoria')->where('id', $id)->first();
+			return json_encode($teste);
+
+		}
+
+		return response('Produto não encontrado', 404);
+	}
+
+	public function destroy($id) {
+		$prod = Produto::find($id);
+		if (isset($prod)) {
+			$prod->delete();
+			return response('OK', 200);
+		}
+
+		return response('Produto não encontrado', 400);
+	}
 
 -> na view ->
 @section('javascript')
 	<script type="text/javascript">
 
-		// CSRF Setup TOKEN
+		// CSRF Setup TOKEN - precisa das linhas abaixo 
+        // quando se utiliza ajax e caso não queira incluir
+        // manualmente em cada requisição
 		$.ajaxSetup({
 			headers: {
 				'X-CSRF-TOKEN': "{{ csrf_token() }}"
 			}
-		});	
+		});
 
 		//função que antes de mostrar o modal limpa os seus campos
 		function novoProduto() {
+            $('#id').val('') //limpa os campos
 			$('#nomeProduto').val('') //limpa os campos
 			$('#precoProduto').val('') //limpa os campos
 			$('#quantidadeProduto').val('') //limpa os campos
@@ -2153,22 +2422,22 @@ Carregando dados por meio de javascript
 			$.getJSON('api/categorias', function(data){
 				for(i=0; i<data.length; i++){
 					opcao = '<option value="' +  data[i].id + '">' + data[i].nome + '</option>';
-					$('#departamentoProduto').append(opcao);  
+					$('#departamentoProduto').append(opcao);
 				}
 			})
 		}
 
 		// função que cria a linha que será usada pela função carregarProdutos()
 		function montaLinha(p){
-			var linha = "<tr>" +  
+			var linha = "<tr>" +
 				"<td>" + p.id + "</td>" +
 				"<td>" + p.nome + "</td>" +
 				"<td>" + p.estoque + "</td>" +
 				"<td>" + p.preco + "</td>" +
-				"<td>" + p.categoria_id + "</td>" +
-				"<td>" + 
-					'<button class="btn btn-sm btn-primary">Editar</button> ' + 
-					'<button class="btn btn-sm btn-danger">Apagar</button>' +
+				"<td>" + p.categoria.nome + "</td>" +
+				"<td>" +
+					'<button class="btn btn-sm btn-primary" onclick="editar(' + p.id + ')">Editar</button> ' +
+					'<button class="btn btn-sm btn-danger" onclick="apagar('+ p.id +')">Apagar</button>' +
 				"</td>" +
 			"</tr>"
 
@@ -2184,6 +2453,122 @@ Carregando dados por meio de javascript
 				}
 			})
 		}
+
+        //apaga os produtos cadastrados via ajax (sem refresh da página)
+        function apagar(id){
+            $.ajax({
+                type: "DELETE",
+                url: "/api/produtos/" + id,
+                context: this,
+                /* caso não tenha sido informado acima, 
+                será necessário informar para cada requisição ajax
+                headers: {
+                'X-CSRF-TOKEN': "{{ csrf_token() }}"
+                }
+                */
+
+                // em caso de sucesso irá deletar os dados da view, já que os dados
+                // de fato são apagados pelo controlador (function destroy)
+                success: function() {
+                    console.log('Apagou OK') //exibe mensagem no console caso tenha apagado
+                    linha = $("#tabelaProdutos>tbody>tr") //pega todas as linhas da tabela
+                    // localiza a linha referente ao id
+                    e = linha.filter(function(i, elemento) {
+                        return elemento.cells[0].textContent == id
+                    })
+
+                    // apaga a linha que foi deletada por meio do botão 'apagar'
+                    e.remove()
+                },
+                error: function(error) {
+                    console.log(error) //mostra o erro no console do navegador
+                }
+            })
+        }
+
+        // função que carrega os dados no modal para edição
+        function editar(id) {
+            $.getJSON('/api/produtos/' + id, function(produtos){ //retorna um array
+                $('#id').val(produtos.id); //insere dados nos campos vindos do controlador
+                $('#nomeProduto').val(produtos.nome);
+                $('#precoProduto').val(produtos.preco);
+                $('#quantidadeProduto').val(produtos.estoque);
+                $('#dlgProdutos').modal('show');
+            });
+        }
+
+		// função que pega os dados do modal(formulário) e salva no DB
+		function criarProduto(){
+			prods = {
+				nome: $("#nomeProduto").val(), //pega os dados do modal
+				preco: $("#precoProduto").val(), //pega os dados do modal
+				estoque: $("#quantidadeProduto").val(), //pega os dados do modal
+				categoria_id: $("#departamentoProduto").val() //pega os dados do modal
+			};
+
+			$.post("/api/produtos", prods, function(data){  //pega os dados do formulário e envia à rota api/controladorProdutos
+				produtos = JSON.parse(data);
+                console.log(produtos);
+                linha = montaLinha(produtos);
+                $('#tabelaProdutos>tbody').append(linha)
+			})
+		}
+
+        //função que edita os dados do modal e envia aoa controller
+        function salvarProduto(){
+            //objeto que pega os dados do modal
+            prod = {
+                id: $("#id").val(),
+                nome: $("#nomeProduto").val(),
+                preco: $("#precoProduto").val(),
+                estoque: $("#quantidadeProduto").val(),
+                categoria_id: $("#departamentoProduto").val()
+            };
+
+            //utiliza ajax para enviar os dados ao ControladorProduto
+            $.ajax({
+                type: "PUT",
+                url: "/api/produtos/" + prod.id,
+                context: this,
+                data: prod,
+                success: function(data) {
+                    prod = JSON.parse(data);
+                    linhas = $("#tabelaProdutos>tbody>tr"); //pega todas as linhas da tabela
+                    // localiza a linha referente ao id
+                    e = linhas.filter(function(i, e) {
+                        return e.cells[0].textContent == prod.id;
+                    });
+
+                    if (e) {
+                        e[0].cells[0].textContent = prod.id;
+                        e[0].cells[1].textContent = prod.nome;
+                        e[0].cells[2].textContent = prod.estoque;
+                        e[0].cells[3].textContent = prod.preco;
+                        e[0].cells[4].textContent = prod.categoria_id;
+                    }
+                    console.log('Salvou');
+
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            })
+        }
+
+        // função é executada ao clicar no botão de salvar/enviar
+		$("#formProduto").submit(function(event){
+			event.preventDefault(); //evita que a página recarregue após cada clique no botão Salvar
+            // verifica o valor do campo value
+            // se for vazio -> o modal será utilizado para salvar
+            // se não for vazio -> o modal será utilizado para editar 
+            if ($('#id').val() != ''){
+                salvarProduto(); //edita os dados do modal
+            }
+            else{
+    			criarProduto(); //salva os dados no DB e mostra na view
+            }
+			$("#dlgProdutos").modal('hide') //esconde o formulário(modal) após clicar no botão Salvar
+		});
 
 		//ao carregar a página chama as duas funções abaixo
 		$(function(){
