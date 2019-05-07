@@ -2157,6 +2157,159 @@ paginação com javascript ->
 	            });
 
 	        </script>
+---------------------------------------------------------------------
+#upload 
+
+configurações de upload dentro do laravel -> pasta config/ -> filesystems.php
+	...
+	//define o local onde os arquivos serão salvos
+	'default' => env('FILESYSTEM_DRIVER', 'local'),
+	...
+	//as possibilidade de salvar aquivos de upload
+	'disks' => [
+
+        'local' => [
+            'driver' => 'local',
+            'root' => storage_path('app'),
+        ],
+
+        'public' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        's3' => [
+            'driver' => 's3',
+            'key' => env('AWS_ACCESS_KEY_ID'),
+            'secret' => env('AWS_SECRET_ACCESS_KEY'),
+            'region' => env('AWS_DEFAULT_REGION'),
+            'bucket' => env('AWS_BUCKET'),
+            'url' => env('AWS_URL'),
+        ],
+
+    ],
+    ...
+o laravel trabalha com 3 opções ->
+	-> local -> salva arquivos dentro de -> pasta storage/app/ (este é o padrão do laravel)
+	-> public -> salva arquivos dentro de -> pasta storage/app/ (por padrão os arquivos dessa pasta não são acessíveis) 
+	public
+	-> s3 -> salva na nuvem (amazon)
+
+acessar a pasta storage/app/public de upload por meio da pasta public/ ->
+	-> php artisan storage:link
+	-> cria uma pasta storage dentro da pasta public
+
+upload -> 
+	-> na rota ->
+		Route::post('/', 'PostControlador@store');
+
+	-> no controller ->  
+	use App\Post;
+	public function store(Request $request)
+	    {   
+	        // especifica o local onde o arquivo será salvo(upload)
+	        $path = $request->file('arquivo')->store('imagens', 'public');
+
+	        // pega os dados do formulário
+	        $post = new Post(); 
+	        $post->email = $request->input('email');
+	        $post->mensagem = $request->input('mensagem');
+	        // salva no DB o caminho do aqruivo
+	        $post->arquivo = $path; 
+
+	        // salva os dados no DB
+	        $post->save();
+
+	        // redireciona para o index da aplicação
+	        return redirect('/');
+	    }
+
+	-> na view -> 
+	 <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row">
+              @foreach($posts as $p)
+                <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                    <img class="card-img-top figure-img img-fluid rounded" src="/storage/{{$p->arquivo}}">
+                    <div class="card-body">
+                      <p class="card-text">{{$p->email}}</p>
+                      <p class="card-text">{{$p->mensagem}}</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <!--button type="button" class="btn btn-sm btn-outline-secondary">Download</button-->
+                          <a type="button" class="btn btn-sm btn-outline-secondary" href="#">Download</a>
+                          <form action="/{{$p->id}}" method="post">
+                            @csrf
+                            <input type="hidden" name="_method" value="delete">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Apagar</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              @endforeach
+          </div>
+        </div>
+      </div>
+
+deletando arquivo ->
+	-> na rota ->
+		Route::delete('/{id}', 'PostControlador@destroy');
+
+	-> no controller ->
+	namespace App\Http\Controllers;
+	use Illuminate\Http\Request;
+	use App\Post;
+	use Illuminate\Support\Facades\Storage;
+	public function destroy($id)
+    {
+        // pega o dado pelo id
+        $post = Post::find($id);
+        // verifica se existe o elemento a ser excluído
+        if (isset($post)) {
+            // pega o caminho do arquivo a ser deletado
+            $arquivo = $post->arquivo;
+            // deleta o arquivo da pasta Storage/app/public
+            Storage::disk('public')->delete($arquivo);
+            // deleta os dados do DB
+            $post->delete();
+        }
+
+        // redireciona para a index
+        return redirect('/');
+    }
+
+    -> na view -> 
+    <form action="/{{$p->id}}" method="post">
+	    @csrf
+	    <input type="hidden" name="_method" value="delete">
+	    <button type="submit" class="btn btn-sm btn-outline-danger">Apagar</button>
+	  </form>
+
+download de arquivo -> 
+	-> na rota ->
+		Route::get('/download/{id}', 'PostControlador@download');
+	-> no controller ->
+		public function download($id) {
+	        $post = Post::find($id);
+	        if (isset($post)) {
+
+	            // deve-se pegar o caminho absoluto do arquivo
+	           $path = Storage::disk('public')->getDriver()->getAdapter()->applyPathPrefix($post->arquivo);
+	           // efetua o download do arquivo
+	           return response()->download($path); 
+	        }
+
+	        return redirect('/');
+	    }
+	-> na view ->
+	...
+		<a type="button" class="btn btn-sm btn-outline-secondary" href="/download/{{$p->id}}">Download</a>
+	...
 ------------------------------------------------------------------------
 #Instalar Bootstrap via npm
 instalar o npm -> https://nodejs.org/en/download/
@@ -2207,7 +2360,7 @@ SQLSTATE 42000: Syntax error or access violation: 1071 Specified key was too lon
 ---------------------------------------------------------
 Criando API e acessando via jQuery e Javascript
 
-criando um modal com bootstrap + jQuery + Javascript
+-> criando um modal com bootstrap + jQuery + Javascript
 @extends('layout.app', ["current" => "produtos" ])
 
 @section('body')
@@ -2577,3 +2730,66 @@ Carregando dados por meio de javascript
 		})
 	</script>
 @endsection
+
+----------------------------------------------------
+#Dicas
+
+-> criar controller/model/migrate ao mesmo tempo -> php artisan make:model NomeModel -mcr
+-------------------------------------------------------------------------
+#Criar menu active Navbar
+
+-> na página padrão (app.blade.php) ->
+	<div class="container">
+			//recebe o valor referente a cada página para usar 
+			//dentro do navbar e utilizar o active ou não
+			@component('navbar',  ["current" => $current]) 
+			@endcomponent
+		<main role="main">
+			//spmente irá mostrar a seção se esta existir
+			@hasSection('body')
+				//cria uma seção		
+				@yield('body')
+			@endif
+		</main>
+	</div>
+
+-> nas seções que herdaram a página principal ->
+	
+	//extende da página principal e passa para o layout principal o valor da 
+	// variável que será usado dentro da navbar
+	@extends('layout.app', ["current" => 'categorias'])
+	
+	//cria a seção 	
+	@section('body')
+		<h4>Página de categoria</h4>
+	@endsection 
+
+-> na navbar -> 
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="navbar">
+	    <ul class="navbar-nav mr-auto">
+
+	    	//recebe o valor da variável da página principal (app.blade.php) e aplica o
+	    	//active ou não conforme o seu valor
+	      <li @if($current == 'home') class="nav-item active" @else class="nav-item" @endif>
+	        <a class="nav-link" href="/">Home</a>
+	      </li>
+
+	      //recebe o valor da variável da página principal (app.blade.php) e aplica o
+	    	//active ou não conforme o seu valor
+	      <li @if($current == 'produtos') class="nav-item active" @else class="nav-item" @endif>
+	        <a class="nav-link" href="/produto">Produtos</a>
+	      </li>
+
+	      //recebe o valor da variável da página principal (app.blade.php) e aplica o
+	    	//active ou não conforme o seu valor
+	      <li @if($current == 'categorias') class="nav-item active" @else class="nav-item" @endif>
+	        <a class="nav-link" href="/categoria">Categorias</a>
+	      </li>
+	  </div>
+	</nav>
