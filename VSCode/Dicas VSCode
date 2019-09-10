@@ -1,0 +1,27 @@
+ctrl + shift + m -> terminal/sidebar
+ctrl +f -> busca
+ctrl + p -> navega
+ctrl + shitf + p / f1 -> Command Palleter
+f5 -> start debbug
+f12 -> vai para a definição (clico em cima de uma classe/arquivo e ele redireciona para o local original da classe/arquivo)
+ctrl + clique com o mouse no arquivo -> abrir arquivo lado a lado
+ctrl + shift + g -> abrir git
+ctrl + shitf + e -> abrir explorador
+ctrl + k, z -> zen mode (tela full; para sai do modo, clique duas vezes o ESC)
+ctrl + shift + ´ -> abre o terminal
+
+
+--------------------------------------
+
+Lista de extensões
+
+bookmarks
+indent-rainbow
+pomodoro-timer
+bracket-pair-colored
+git-lens
+vscode-faker
+TODO-parser
+wakatime
+minify
+change-case

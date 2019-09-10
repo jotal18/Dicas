@@ -1,0 +1,25 @@
+ls -> lista diretórios
+pwd -> mostra o caminho do diretório atual
+cd -> altera o diretório
+mkdir -> criar diretórios
+rm -> remover arquivos e pasta
+mv -> move arquivos e diretórios / renomear diretórios
+cp -> copiar arquivos e diretórios
+locate -> localizar arquivos em uma base dados
+find -> procura arquivos dentro de um diretório
+shutdown -> desliga o pc em segurança
+passwd -> altera a senha de um usuário
+tar -> empacota ou extrai arquivos compactados
+gzip -> compacta arquivos
+gunzip -> descompacta arquivos compactados pelo gzip
+clear -> limpa a tela do terminal
+top -> exibe os processo que estão sendo executados / aferir uso da CPU e memória
+vi -> editor de texto
+write -> troca de mensagens entre usuários de um mesmo sistema
+du -> exibe o tamanho de arquivos e/ou diretórios
+file -> identifica o tipo de arquivo indicado pelo usuário
+cat -> mostra o conteúdo do arquivo no terminal
+head -> exibe as primeiras dez linhas de um arquivo de texto
+tail -> exibe as últimas linhas de um arquivo de texto 
+touch -> cria um novo arquivo vazio com a data e hora atual
+ 
