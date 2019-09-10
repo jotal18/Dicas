@@ -21,5 +21,5 @@ file -> identifica o tipo de arquivo indicado pelo usuário
 cat -> mostra o conteúdo do arquivo no terminal
 head -> exibe as primeiras dez linhas de um arquivo de texto
 tail -> exibe as últimas linhas de um arquivo de texto 
-touch -> cria um novo arquivo vazio com a data e hora atual sss
+touch -> cria um novo arquivo vazio com a data e hora atual
  
