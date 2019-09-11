@@ -1,6 +1,18 @@
+~ -> /home/usuário/
 ls -> lista diretórios
+ls ~ /usr /var -> o comando ls permite listar mais de um diretório ao mesmo tempo
+ls -l ou ll -> lista em forma de coluna (lista organizada)
+ls -la -> lista todos os arquivos, inclusive os ocultos
+ls -lt -> ordena por data e em ordem decrescente
+ls -lt --reverse -> ordena por data e em ordem crescente
+ls -lS -> lista por tamanho, do maior para o menor
+ls -lh -> lista de forma a facilitar a visualização para humanos 
+ls -laSh --reverse -> lista todos os arquivos ocultos, por tamanho do menor para o maior e com o h
 pwd -> mostra o caminho do diretório atual
-cd -> altera o diretório
+cd -> altera o diretório (só cd volta para o diretório home do usuário)
+cd . -> diretório atual
+cd .. -> sobe um nível
+cd - -> funciona como a seta da interface gráfica
 mkdir -> criar diretórios
 rm -> remover arquivos e pasta
 mv -> move arquivos e diretórios / renomear diretórios
@@ -12,7 +24,7 @@ passwd -> altera a senha de um usuário
 tar -> empacota ou extrai arquivos compactados
 gzip -> compacta arquivos
 gunzip -> descompacta arquivos compactados pelo gzip
-clear -> limpa a tela do terminal
+clear ou ctrl + l -> limpa a tela do terminal
 top -> exibe os processo que estão sendo executados / aferir uso da CPU e memória
 vi -> editor de texto
 write -> troca de mensagens entre usuários de um mesmo sistema
@@ -22,4 +34,5 @@ cat -> mostra o conteúdo do arquivo no terminal
 head -> exibe as primeiras dez linhas de um arquivo de texto
 tail -> exibe as últimas linhas de um arquivo de texto 
 touch -> cria um novo arquivo vazio com a data e hora atual
+less -> mostra o conteúdo do arquivo em paginação (use pagup/pagdown para navegar; enter e seta pra cima/baixo pula uma linha; G vai para última linha; g vai para o início do arquivo)
  
