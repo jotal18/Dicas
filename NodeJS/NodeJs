@@ -1,0 +1,496 @@
+#NodeJS
+baixar a versão estável LTS -> nodejs.org
+verifica a versão -> node -v
+verifica a versão -> npm -v
+rodar o node -> node nomedoarquivo
+módulos/export ->  
+            var div = function(a,b){
+                return a/b;
+            }
+            
+            module.exports = div;
+
+            const Sequelize = require('sequelize')
+            //Conexão com o banco de dados MySql
+            const sequelize = new Sequelize('test', 'root', '123456', {
+                host: "localhost",
+                dialect: "mysql"
+            })
+        
+            module.exports = {
+                Sequelize: Sequelize,
+                sequelize: sequelize
+            }
+
+módulos/import -> var soma = require("./nomedoarquivo")
+criar servidor com nodejs -> 
+            const http = require('http')
+            http.createServer(function(req, res){
+                res.send("OLá")            
+            }).listen(8081)
+            console.log("Servidor Rodando")    
+acessar servidor -> localhost:8081
+fechar servidor (toda alteração deve reiniciar o servidor) -> ctrl + c
+instalar express (framework de rotas) -> expressjs.com / npm install express --save (o save serve para salvar os arquivos dentro do projeto)
+gerenciador de pacote npm -> npmjs.com / npm install nomdedopacote
+utilizar o express ->
+            
+            //import
+            const express = require("express")
+            const app = express()
+            
+            //rota
+            app.get("/", function(){  
+                res.send("Seja bem-vindo!!!")
+            })
+
+            app.post("/add", function(){  
+                res.send("Formuláro enviado!!!")
+            })
+
+            //rota com parâmetro
+            app.get("/ola/:nome/:cargo", function(){  
+                res.send("Seja bem-vindo!!!")
+            })
+
+            //capturar parâmetro (req.params / req.params.nome)
+            app.get("/ola/:nome/:cargo", function(){  
+                res.send(req.params.nome)
+            })
+
+            app.listen(8081, function(){
+                console.log("Servidor Rodando")            
+            }) (deve ser a última linha)
+instalando o nodemon (não precisa reiniciar o servidor) -> npm install nodemon -g (o g instala globalmente e não somente no projeto)
+executar o nodemon -> nodemon nomedoscript
+exibindo HTML -> 
+            app.get('/blog', function(res, req){
+                res.sendFile(__dirname + "/html/sobre.html")            
+            })
+instalando Sequelize (ORM - manipular banco MySQL com o nodejs) -> npm install --save sequelize 
+instalando módulo MySql do Sequelize -> npm install --save mysql2
+conexão com o banco de dados MySql -> 
+            const Sequelize = require('sequelize')
+            const sequelize = new Sequelize('nomedatabase', 'nomeusuario', 'senha', {
+                host: "localhost",
+                dialect: 'mysql'
+            })
+
+            sequelize.authenticate().then(function(){
+                console.log("Conectado com sucesso!")
+            }).catch(function(erro){
+                console.log("Falha ao se conectar: " + erro)
+            }) 
+criar model(tabela no database) com sequelize ->
+            //define os campos da tabela (cria automaticamente o createdAt e o updateAt)
+            const Postagem = sequelize.define('postagens', {
+                titulo: {
+                    type: Sequelize.STRING,
+                },
+                conteudo: {
+                    type: Sequelize.TEXT                
+                }
+            })
+            
+            //cria a tabela no MySql (após a criação da tabela, comentar a linha abaixo)
+            Postagem.sync({force: true})
+            ----------------------------------------------
+            const db = require('./db')
+            
+            const Post = db.sequelize.define('postagens', {
+                titulo: {
+                    type: db.Sequelize.STRING
+                },
+                conteudo: {
+                    type: db.Sequelize.STRING    
+                }
+            })
+            
+            //(após a criação da tabela, comentar a linha abaixo)
+            Post.sync({force: true})
+            
+            module.exports = Post
+inserir dados com Sequelize -> 
+            Postagem.create({
+                titulo: "Um título",
+                conteudo: "isso é um conteúdo"            
+            })
+instalando Handlebars (é um template engine) -> handlebar.js / npm install --save express-handlebars
+utilizando handlebars -> 
+            -> criar pasta chamada views -> criar subpasta chamada layouts -> criar arquivo com nome main.handlebars (será o padrão). Cada conteúdo deve ser criado dentro de outro arquivo com a extensão .handlebars e dentro da pasta views. Ex: formulario.handlebars (colocar o código HTML)
+            ->código HTML
+                <body>
+                    //o > serve para indicar que o arquivo está dentro da pasta views/partials
+                    {{>_navbar}}
+                    {{{body}}}            
+                <body>
+
+            -> código formulario.handlebars
+                <form action="/nomedarota" method="">
+                    ...
+                </form>
+
+            ->código navbar dentro da pasta views/partials/navbar.handlebars
+                código do navbar
+            -> o nome dos arquivos dentro da pasta partial deve ter _. Ex: _navbar.handlebars    
+            const express = require("express")            
+            const app = express();
+            const handlebars = require('express-handlebars')
+            
+            //config
+            app.engine('handlebars', handlebars({defaultLayout: 'main'}))
+            app.set('view engine', 'handlebars')
+            
+            //Conexão com o banco de dados MySql
+            const sequelize = new Sequelize('nomedatabase', 'nomeusuario', 'senha', {
+                host: "localhost",
+                dialect: 'mysql'
+            })
+            
+
+            //Rotas (indicar o nome do arquivo que será inserido dentro do arquivo main.handlebars
+            app.get('/cad', function(req, res){
+                res.render('formulario')        
+            })
+            
+            app.listen(8081, function(){
+                console.log("Servidor Rodando")            
+            }) (deve ser a última linha)
+instalando Body parser (receber dados via post) -> npm install--save body-parser
+utilizando bodyparser -> 
+            const bodyParser = require('body-parser')
+            
+            //config
+            app.engine('handlebars', handlebars({defaultLayout: 'main'}))
+            app.set('view engine', 'handlebars')
+            //Body Parser
+            app.use(bodyparser.urlencoded({extended: false}))
+            app.use(bodyparser.json())
+pegar dados do formulário com Body parser -> req.body.nomedocamponoHTML
+            //Rota
+            app.post('/add', function(req,res){
+                console.log(req.body.titulo)             
+            })
+            ---------------------
+               app.post('/add', function(req, res){
+                    Post.create({
+                        titulo: req.body.titulo,
+                        conteudo: req.body.conteudo        
+                    }).then(function(){
+                        res.send("Post criado com sucesso!")        
+                    }).catch(function(erro){
+                        res.send("Houve um erro: " + erro)
+                    })
+               })
+
+listando dados ->
+            //Rota (.all retorna tudo)
+            app.get('/', function(req, res){
+                Post.all().then(function(posts){
+                    res.render('home', {
+                        posts: posts            
+                    })
+                })
+            })
+            
+            //Ordenar
+                Post.all({orde: [['id', 'ASC']]}).then(function(posts){
+                    res.render('home', {
+                        posts: posts            
+                    })
+                })
+            })
+
+            //arquivo qualquer chamado home.handlebars
+            <h1>Lista de posts: </h1>
+            // iteração do handlebars
+            {{#each posts}}
+                <h1>{{titulo}}</h1>
+                <p>{{conteudo}}</p>
+                <hr>
+            {{/each}}
+deletando dados ->
+            //arquivo qualquer chamado home.handlebars
+            <h1>Lista de posts: </h1>
+            // iteração do handlebars
+            {{#each posts}}
+                <h1>{{titulo}}</h1>
+                <p>{{conteudo}}</p>
+                <a href="/deletar/{{id}}"><button>Deletar</button></a>
+                <hr>
+            {{/each}}
+
+            //Rota
+            app.get('/deletar/:id', function(req, res){
+                Post.destroy({where: {'id': req.params.id}}).then(function(){
+                    res.send("Postagem deletada com sucesso!")
+                }).catch(function(erro){
+                    res.send("Esta postagem não existe!")            
+                })
+            })
+                      
+rotas ->    
+            //Rotas em arquivos separados
+            const express = require("express")
+            const router = express.Router()
+
+            router.get('/', () => {
+                res.send("Página principal")
+            })
+
+            module.exports = router
+
+            //Importando rotas
+               ...
+            const admin = require('./routes/admin')
+            ....
+            //o /admin é um prefixo de rotas
+            app.use('/admin', admin)            
+
+          //rota
+            app.get("/", function(){  
+                res.send("Seja bem-vindo!!!")
+            })
+
+            app.post("/add", function(){  
+                res.send("Formuláro enviado!!!")
+            })
+
+            //rota com parâmetro
+            app.get("/ola/:nome/:cargo", function(){  
+                res.send("Seja bem-vindo!!!")
+            })
+
+            //capturar parâmetro (req.params / req.params.nome)
+            app.get("/ola/:nome/:cargo", function(){  
+                res.send(req.params.nome)
+            })    
+
+            //Redirecionamento de rota
+            app.post('/add', function(req, res){
+                    Post.create({
+                        titulo: req.body.titulo,
+                        conteudo: req.body.conteudo        
+                    }).then(function(){
+                        res.redirect('/')        
+                    }).catch(function(erro){
+                        res.send("Houve um erro: " + erro)
+                    })
+               })
+
+manipular pastas/diretórios do projeto com nodejs ->
+
+            arquivos js e css de algum framework devem ficar dentro da pasta public
+            ...
+            const path = require("path")
+            ...
+            app.use(express.static(path.join(__dirname, "public")))
+
+            //importar bootstrap
+            ... dentro do <head>
+            <link rel="stylesheet" href="/css/bootstrap.css">
+            ...
+            abaixo do body
+            <script src="...jquery">
+            <script src="...popper">
+            <script src="/js/bootstrap.js"></script>            
+criando Middlewares ->
+            //next(deve ter no middleware para passar a requisição)
+            app.use((req, res, next) => {
+                console.log("Middleware")
+                next()
+            })
+configurar sessões -> npm install --save express-session / npm install --save connect-flash
+            const session = require("express-session")
+            const flash = require("connect-flash")
+            ...
+            //Sessão
+            app.use(session({
+                secret: "cursodenode",
+                resave: true,
+                saveUninitialized: true    
+            }))
+            app.use(flash())
+            //Flash messages / Middlewares
+            app.use((req, res, next) => {
+                res.locals.success_msg = req.flash("success_msg")
+                res.locals.error_msg = req.flash("error_msg")
+            })
+validação manual de formulário -> 
+            router post("/categorias/nova", (req, res) => {
+                var erros = []
+                   
+                if(!req.body.nome || typeof req.body.nome == undefined || req.body.nome == null){
+                    erros.push({texto: "Nome inválido"})
+                }
+
+                if(req.body.nome.length < 2){
+                    erros.push({texto: "Nome da categoria é pequeno"})
+                }
+                
+                //passando a mensagem de erro para o template engine handlebars
+                if(erros.length < 2){
+                    res.render("addcategorias", {erros: erros})                
+                }else{
+                    const novaCategoria = {
+                        nome: req.body.nome,
+                        slug: req.body.slug,
+                    }
+                    
+                    new Categoria(novaCategoria).save().then(() => {
+                        req.flash("success_msg", "Categoria criada com sucesso!")
+                        req.redirect("/admin/categorias")
+                    }).catch((err)=> {
+                        req.flash("error_msg", "Houve um erro ao salvar a categoria!")
+                        res.redirect("/admin")
+                    })
+                }
+            })
+            
+            //arquivo addcategorias.handlebars
+            {{#each erros}}
+                   <div class="alert alert-danger">{{texto}}</div>
+            {{else}}            
+            
+            {{/each}}
+
+            //template handlebars - pasta partials (cria espécie de componente)
+            views/partiasl/_msg.handlebars
+            -> {{#if success_msg}}
+                   <div class="alert alert-sucess">{{success_msg}}</div>
+               {{/if}}
+                
+               {{#if error_msg}}
+                   <div class="alert alert-danger">{{error_msg}}</div>
+               {{/if}}
+
+            //layout/main.handlebars
+            ...
+            <div class="container mt-4">
+                {{>_msg}}
+                {{{body}}}
+            </div>
+
+configurando passport (middleware de autenticação para o express) -> 
+            passportjs.org / npm install --save passport / npm install --save passport-local
+            autenticação local usar -> passport-local
+            //criar pasta config/auth.js
+            const localStrategy = require("passport-local").Strategy
+            const mongoose = require("mongoose")
+            const bcrypt = require("bcryptjs") //comparar senhas 
+            
+            //Model do usuário                                                        
+            require("../models/Usuario")                                                      
+            const Usuario = mongoose.model("usuarios")
+            
+            module.exports = function(passport) {
+
+                passport.use(new localStrategy({usernameField: 'email', passwordField: 'senha'}, (email, senha, done) => {
+                    Usuario.findOne({email: email}).then((usuario)=> {
+                        if(!usuario){
+                            return done(null, false, {message: "Esta conta não existe"})
+                        }
+                    })
+
+                    bcrypt.compare(senha, usuario.senha, (erro, batem) => {
+                        if(batem){
+            
+                            return done(null, usuario)
+ 
+                        }else{
+                            return done(null, false, {message: "Senha incorreta"})
+                        }
+                    })
+                }))
+
+                passport.serializeUser((usuario, done)=>{
+                    done(null,usuario.id)                
+                })
+                
+                passport.deserializeUser((id, done) => {
+                    Usuario.findById(id, (err, usuario) => {
+                        done(err, usuario)
+                    })
+                })
+                    
+            }
+
+            //importar no arquivo app.js(ou index.js)
+            const passport = require("passport")
+            require("./config/auth.js")(passport)
+            
+            ...
+            //Sessão
+            app.use(session({
+                secret: "cursonode",
+                resave: true,
+                saveUninitialized: true
+            }))
+
+            //configurar o passport
+            app.use(passport.initialize()) //é importe que fique nesta ordem
+            app.use(passport.session())        
+            
+            //configurar o flash
+            app.use(flash())
+
+
+            //arquivo de rota (routes/usuario.js)
+            ...
+            const passport = require("passport")
+            ...
+            router.post("/login", () => {
+                passport.authenticate("local", {
+                    successRedirect: "/",
+                    failureRedirect: "usuarios/login",
+                    failureFlash: true        
+                })
+            })(req, res, next)
+
+            //controlando acesso
+            dentro do arquivo app.js
+            //Middleware -> definindo varáveis globais
+            app.use((req, res, next) => {
+                res.locals.success_msg = req.flash("success_msg")
+                res.locals.error_msg = req.flash("error_msg")
+                res.locals.error = req.flash("error")
+                res.locals.user = req.user || null        
+            })
+
+            //criar helper para impedir que o usuário acesse rotas indevidamente
+            helpers/eAdmin.js
+            module.exports{
+
+                eAdmin: function(req, res, next){
+                    if(req.isAuthenticate() && req.user.eAdmin == 1){
+                        return next()                    
+                    }
+
+                    req.flash("error_msg", "Você precisa ser Admin!!")
+                    res.redirect("/")
+                }
+            
+            }
+
+            //No arquivo routes/admin.js
+            ...
+            const {eAdmin} = require("../helpers/eAdmin")
+            ...
+            //colocar eAdmin em todas as rotas
+            router.get('/posts', eAdmin, (req, res) => {
+                res.send("Página de posts")
+            })
+
+            //Logout
+            criar rota logout
+            router.get("/logout", (req, res) => {
+                req.logout()
+                req.flash('success_msg', "Deslogado com sucesso!")
+                res.redirect('/')
+            })
+
+
+
+
+
+

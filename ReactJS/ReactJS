@@ -1,0 +1,5 @@
+instalar -> nodejs, npm (gerenciador de dependências), yarn (gerenciador de dependências do facebook)
+executar ->  npm install -g create-react-app (configuração de babel, webpack, etc...)
+criar projeto -> create-react-app nomedoprojeto
+executar projeto/script -> npm start
+deletar os arquivos do projeto -> README.md, APP.css, APP.test.js, logo.svg, index.css 

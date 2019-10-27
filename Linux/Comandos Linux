@@ -8,6 +8,7 @@ ls -lt --reverse -> ordena por data e em ordem crescente
 ls -lS -> lista por tamanho, do maior para o menor
 ls -lh -> lista de forma a facilitar a visualização para humanos 
 ls -laSh --reverse -> lista todos os arquivos ocultos, por tamanho do menor para o maior e com o h
+ln -> cria um link entre arquivos/pastas
 pwd -> mostra o caminho do diretório atual
 cd -> altera o diretório (só cd volta para o diretório home do usuário)
 cd . -> diretório atual
@@ -27,6 +28,7 @@ gunzip -> descompacta arquivos compactados pelo gzip
 clear ou ctrl + l -> limpa a tela do terminal
 top -> exibe os processo que estão sendo executados / aferir uso da CPU e memória
 vi -> editor de texto
+nano -> editor de texto
 write -> troca de mensagens entre usuários de um mesmo sistema
 du -> exibe o tamanho de arquivos e/ou diretórios
 file -> identifica o tipo de arquivo indicado pelo usuário
