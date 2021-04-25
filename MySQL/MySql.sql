@@ -612,7 +612,18 @@ Muitos para muitos -> um item de tabela estar relacionado com vários itens da o
 -- FORMATAR DATA ---------------------------------
 DATE_FORMAT(t.data, '%d/%m/%Y %H:%i');
 
+-- Dicas ---------------------------------------------------------------------
+Usar console do MySql no XAMPP -> abra o control painel do XAMPP -> clique em 'Shell' -> na tela de comando digite 'mysql -u root'
+comando 'status' só funciona no terminal
 
+O collation do banco de dados é o responsável pelo case (in)sensitive
+Collation é o termo utilizado para definir o conjunto de regras que o servidor irá utilizar para ordenação e comparação entre textos
 
+% no LIKE -> significa nada ou várias coisas
+
+Engines populares -> MyISAM (Velha), InnoDB (muito usada e padrão), XtraDB (Nova)
+MyISAM não dá suporte às quatros regras de transação (resposta do banco): ACID -> Atomicidade (ou a tarefa é feita totalmente ou não não é feita de jeito nenhum), Consistência (se antes da transação o banco estava 'OK', então depois da transação deverá estar 'OK'), Isolamento (em suma, uma transação não pode interferir na outra, mesmo elas sendo simultâneas), Durabilidade (a transação deve durar o tempo que for necessário) 	
+
+Se não especificar a engine na criação do Database, o MySql entenderá que o banco será criado na engine InnoDB
 
 
