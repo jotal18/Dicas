@@ -1,14 +1,14 @@
-Clique com o bot„o direito do mouse dentro da pasta que queira criar o repositÛrio git -> depois clique em "Git Bash Here" -> ir· aparecer a linha de comando do git
+Clique com o bot√£o direito do mouse dentro da pasta que queira criar o reposit√≥rio git -> depois clique em "Git Bash Here" -> ir√° aparecer a linha de comando do git
 
-git init -> cria o repositÛrio git
+git init -> cria o reposit√≥rio git
 
 git add <"nome do arquivo" ou --all> -> envia o arquivo para stage area
 
-git commit -m  "mensagem"-> confirma as alteraÁıes e inclui uma mensagem obs.: se for somente uma palavra n„o precisa de aspas
+git commit -m  "mensagem"-> confirma as altera√ß√µes e inclui uma mensagem obs.: se for somente uma palavra n√£o precisa de aspas
 
-git remote add origin <link do repositÛrio do github>
+git remote add origin <link do reposit√≥rio do github>
 
-git config --global user.name "<seu nome>" -> Nome que ser· exibido no github
+git config --global user.name "<seu nome>" -> Nome que ser√° exibido no github
 
 git config --global user.email "<o email cadastrado no github>" -> email cadastrado github para acesso
 
@@ -17,7 +17,7 @@ Password for 'https://github.com': -> colocar a mesma senha do github
 
 git push -u origin master
 
-OBS: Pode ser apareÁa a tela de login. Neste caso, basta informar os dados de login do github
+OBS: Pode ser apare√ßa a tela de login. Neste caso, basta informar os dados de login do github
 
 -------- Proxy ------------------
 git config --global http.proxy http://proxyUsername:proxyPassword@proxy.server.com:port
@@ -26,7 +26,7 @@ git config --global http.proxy http://proxyUsername:proxyPassword@proxy.server.c
 Link
 https://stackoverflow.com/questions/37937984/git-refusing-to-merge-unrelated-histories-on-rebase
 
-SoluÁ„o
+Solu√ß√£o
 git pull origin master --allow-unrelated-histories
 
 
