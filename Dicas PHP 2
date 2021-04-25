@@ -1,0 +1,128 @@
+HTTPD.CONF -> NOME DO ARQUIVO DE CONFIGURAÇÃO DO APACHE
+PHP.INI -> NOME DO ARQUIVO DE CONFIGURAÇÃO DO PHP
+
+127.0.0.1 OU LOCALHOST -> página do xampp
+
+C:\xampp\htdocs -> (os arquivos dessa pasta podem ser apagados)
+
+Se o arquivo for totalmente php, não é necessário fechar a tag "?>"
+
+CTRL + U -> exibe o código fonte da página
+
+GIT -> controle de versão
+copiar repositório -> git clone "link http"
+
+github x bitbucket
+
+// -> comentário linha
+/* */ -> comentário em bloco
+
+variavel -> começa com $ e não deve iniciar com número, nem espaço e nem caractere especial, com exceção do "_" 
+
+limpar variável -> unset(variável);
+
+verificar se a variável existe e foi definida -> isset(variavel);
+
+parar a execução em uma linha -> exit;
+
+variável nula -> não existe na memória
+variável vazia -> foi iniciada, existe espaço reservado na memória
+
+Informações de GET e POST sempre virão como "string"
+
+usar variável de forma global, ou seja, dentro e fora de uma função -> global $variavel;
+
+.= concatena o valor da variável anterior com o novo valor atribuido
+
+= -> atribui valor
+== -> compara valor
+=== -> compara o valor e tipo
+
+<=> -> atribui 1, -1 ou 0
+
+?? -> se a varivael for Nula verifica a próxima variável
+
+&& -> todas as condições devem ser verdadeiras
+|| ou ZZ -> somente uma condição precisa ser verdadeira
+
+interpolação de variáveis (string + variável) -> usa-se aspas duplas "". Ex: echo "A rua é $feia." Caso utilize somente string, pode-se usar aspas simples ou duplas.
+
+if -> início;
+else if ou elseif -> sempre no meio
+else -> sempre no final
+
+continue -> pula a parte do código
+break -> para de executar o código
+
+se no <form></form> não for definido o tipo de envio, automaticamente será $_GET; 
+
+print_r()-> visualizar array
+
+gettype($variável) -> verifica o tipo de uma variável
+
+func_get_args() -> utilizado dentro de funções para utilizar vários parâmetros;
+
+rever função anônima e função recursiva;
+
+date("d/m/y H:i:s") -> 
+
+para trabalhar com data é necessário obter o timestamp - > time() ou strtotime();
+
+setlocale(LC_ALL, "pt_BR", "pt_BR.utf-8", "portuguese") -> configuração regional do servidor tanto para Linux, acentuação e Windows;
+
+Nome de classe começa com letra maiúscula -> Ex: DateTime;
+
+Fatal error -> não é erro de sintaxe, ou seja, é algum problema interno do código
+Parse error -> erro de sintaxe
+
+Método Contrutor é igual um método Mágico, mas nem todo método mágico é contrutor;
+
+Public -> todos tem acesso;
+Protected -> a própria classe ou a classe herdada;
+Private -> somente a própria classe;
+
+Classe pai não acessa a classe filho, somente o inverso, ou seja, a classe filho (extends) acessa a classe pai;
+
+Classe herda somente de uma classe abstrata, mas uma classe pode implementar várias interfaces;
+
+Classe abstrata (abstract) não pode ser acessada diretamente, só pode ser acessada por classe herdada (class Nomedaclasse extends Classeabstrata){}
+
+Interface (interface) -> determina quais os métodos que deverão ser utilizados pelas classe implementadas
+
+Nome do arquivo deve ser o mesmo nome da classe -> cada classe deve estar em um arquivo diferente
+
+function __autoload($nomeClasse){} -> carrega as classe para dentro de um arquivo, mas os arquivos devem estar no mesmo diretório;
+
+spl_autoload_register("") ou spl_autoload_register(function(){require_once("local do diretório");}); -> deve-se definir a função com o diretório da classe, para depois chamá-la;   	
+
+CTRL + ENTER -> executa o código no workbench;
+
+existe o método $variável->prepare("instrução mysql") + $variável->bind_param e o método $variável->query("Instrução Mysql");
+
+array() pode ser substituído por [];
+
+commit() -> confirma a transação
+rollback() -> cancela a transação
+
+nome das colunas no mysql equivalem a keys no array do php, enquanto que os valores nas colunas são os values
+
+O método construct pode ser representado das duas maneiras a seguir -> public function __concstruct(){} ou public function "Mesmo nome da classe"(){}
+
+Quando não usar o termo "$this-> " em uma função, pode transformar a função como static -> public static function(){}
+
+is_dir -> verifica se um diretório existe
+
+w+ -> zera as informações do arquivo toda vez que executado
+a+ -> mantém as informações do arquivo
+
+"\r\n" -> quebra de linha para manipulação de arquivo, uma vez que os comandos de manipulação de arquivo não aceitam as tags HTML
+
+unlink() -> delete tanto arquivos quanto diretórios
+
+utf8_decode() -> caso ocorra problemas com acentuação na string
+
+mkdir possui 7 níveis de permissões
+
+@ antes de qualquer suprime o recurso de relatar erros dessa função
+
+
