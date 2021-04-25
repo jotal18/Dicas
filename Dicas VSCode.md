@@ -1,5 +1,17 @@
 ### Teclas de Atalho VSCODE
 
+Teclas | Comando
+------------ | -------------
+CTRL + SHIFT + M | mostra o painel de problemas
+Content column 1 | Content column 2
+Content column 1 | Content column 2
+Content column 1 | Content column 2
+Content column 1 | Content column 2
+Content column 1 | Content column 2
+Content column 1 | Content column 2
+Content column 1 | Content column 2
+Content column 1 | Content column 2
+
 * CTRL + SHIFT + M -> mostra o painel de problemas
 * CTRL + F -> busca
 * CTRL + P -> procura arquivos por nome
