@@ -22,7 +22,7 @@ Atalho | Ação
 `CTRL + SHIFT + 5` | split terminal
 `CTRL + SHIFT + F` | localiza arquivos
 `CTRL + B` | esconde/mostra barra lateral
-
+`CTRL + SHIFT + X` | abre o Extensions
 
 
 
