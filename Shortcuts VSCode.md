@@ -5,11 +5,12 @@ Atalho | Ação
 `CTRL + SHIFT + M` | mostra o painel de problemas
 `CTRL + F` | buscas
 `CTRL + P` | procura arquivos por nome
-`CTRL + SHIFT + P / F1` | Command Palleter
+`CTRL + SHIFT + P / F1` | abre o Command Palette
 `F5` | seleciona a configuração de debug
-`F12` | vai para a definição (clico em cima de uma classe/arquivo e ele redireciona para o local original da classe/arquivo)
+`F12` `CTRL + CLIQUE` | vai para a definição
+`CTRL + ALT + CLIQUE` | vai a definição lado a lado
 `CTRL + dois cliques com botão esquerdo do mouse em cima do arquivo` | abre arquivo lado a lado
-`CTRL + SHIFT + G` | abre explorador
+`CTRL + SHIFT + G` | abre o explorador
 `CTRL + SHIFT + E` | Content column 2
 `CTRL + K Z` | zen mode (tela full; para sai do modo, clique duas vezes o ESC)
 `CTRL + SHIFT + K` | deleta linha
