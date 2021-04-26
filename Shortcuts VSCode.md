@@ -14,7 +14,7 @@ Atalho | Ação
 `CTRL + SHIFT + E` | Content column 2
 `CTRL + K Z` | zen mode (tela full; para sai do modo, clique duas vezes o ESC)
 `CTRL + SHIFT + K` | deleta linha
-`ALT + Seta para cima / Seta para baixo` | move linha
+`ALT + ↑ / ↓` | move linha
 `SHIFT + ALT` | duplica linha
 `SHIFT + ALT + f` | formata o código
 `CTRL + '` | abre o terminal
