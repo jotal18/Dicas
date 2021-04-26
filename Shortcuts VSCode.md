@@ -7,9 +7,9 @@ Atalho | Ação
 `CTRL + P` | procura arquivos por nome
 `CTRL + SHIFT + P / F1` | abre o Command Palette
 `F5` | seleciona a configuração de debug
-`F12` `CTRL + CLIQUE` | vai para a definição
+`F12` ou `CTRL + CLIQUE` | vai para a definição
 `CTRL + ALT + CLIQUE` | vai a definição lado a lado
-`CTRL + dois cliques com botão esquerdo do mouse em cima do arquivo` | abre arquivo lado a lado
+`CTRL + DOIS CLIQUES EM CIMA DO ARQUIVO` | abre arquivo lado a lado
 `CTRL + SHIFT + G` | abre o explorador
 `CTRL + SHIFT + E` | Content column 2
 `CTRL + K Z` | zen mode (tela full; para sai do modo, clique duas vezes o ESC)
