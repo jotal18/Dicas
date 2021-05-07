@@ -1,4 +1,4 @@
-### Comandos importantes GIT
+### Comandos importantes - GIT
 
 
 Comando | Ação
