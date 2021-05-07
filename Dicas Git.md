@@ -21,7 +21,8 @@ Comando | Ação
 `git push -f origin master` / `git push -f` / `git push origin HEAD --force` | força a atualização no repositório remoto após usar git reset no repositório local
 `git remote -v` | seus repositórios remotos
 
-
+#### Conectar-se ao GitHub com SSH
+- https://docs.github.com/pt/github/authenticating-to-github/connecting-to-github-with-ssh
 
 #### Configurar Proxy
 - git config --global http.proxy http://proxyUsername:proxyPassword@proxy.server.com:port
