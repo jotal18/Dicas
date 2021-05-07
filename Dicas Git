@@ -3,7 +3,6 @@
 
 Comando | Ação
 ------------ | -------------
-
 `git init` | `cria o repositório git local`
 `git add <"nome do arquivo" | --all | .>` | envia o arquivo para o stage 
 `git commit -m  "mensagem"` | confirma as alterações e inclui uma mensagem obs.: se for somente uma palavra não precisa de aspas
@@ -22,15 +21,7 @@ Comando | Ação
 `git push -f origin master` / `git push -f` / `git push origin HEAD --force` | força a atualização no repositório remoto após usar git reset no repositório local
 `git remote -v` | seus repositórios remotos
 
--------- Configurar Proxy ------------------
-git config --global http.proxy http://proxyUsername:proxyPassword@proxy.server.com:port
 
-------- Resolver Erro fatal: refusing to merge unrelated histories ------------------
-Link
-https://stackoverflow.com/questions/37937984/git-refusing-to-merge-unrelated-histories-on-rebase
-
-Solução
-git pull origin master --allow-unrelated-histories
 
 
 
